@@ -80,7 +80,9 @@ public class Round {
     /** Scanner to read player's guess */
     private Scanner scnr = new Scanner(System.in);
 
+    private PuzzleFactory puzzleFactory;
     public Round(PuzzleFactory puzzleFactory){
+        this.puzzleFactory=puzzleFactory;
         this.lives = 0;
         this.currentPuzzle = generatePuzzleState();
         this.guessPuzzle = puzzleFactory.getMatrix();
@@ -228,8 +230,57 @@ public class Round {
      * Display current matrix after each turn
      */
     public void displayMatrix() {
+        int col_hint_max = -1,row_hint_max=-1;
+        for (int i = 0 ;i < this.guessPuzzle.length;++i){
+            col_hint_max=Integer.max(col_hint_max,this.colHint[i].size());
+            row_hint_max=Integer.max(row_hint_max,this.rowHint[i].size());
+        }
+
+        // print the column hints
+        //padding to align with the matrix.
+        // Padding will include the length of a separator | and ' ' after each elements
+        String padding ="";
+        for (int i = 0;i<row_hint_max*2;++i)
+            padding=padding+" ";
+
+        String columnHintPrint="";
+        for (int i=col_hint_max-1;i>=0;--i) {
+            // add padding to the current row
+            columnHintPrint+=padding;
+            //checker for the first hint element of the column
+            boolean checker=false;
+            for (ArrayList j:this.colHint){
+                if (j.size()>i){
+                    //if this is the first hint of the row
+                    if (!checker)
+                    {
+                        checker=true;
+                        columnHintPrint+="|";
+                    }
+                    // if the position is presented in the arraylist, print it (but count from the bottom)
+                    columnHintPrint+=j.get(j.size()-i-1).toString()+"|";
+                }
+                else
+                    //if not, simply add a blank
+                    columnHintPrint+=" ";
+            }
+            // next line
+            columnHintPrint+='\n';
+        }
+        System.out.printf(columnHintPrint);
         for (int i = 0; i < this.currentPuzzle.length; ++i) {
-            System.out.println("-".repeat(this.currentPuzzle.length *2 +1));
+            System.out.println("-".repeat(this.currentPuzzle.length *2+1+padding.length()));
+
+            // hint for this row
+            String hintRow = "";
+            for (int j:this.rowHint[i]) {
+                hintRow += j+" ";
+            }
+            //fill in the blank
+            while (hintRow.length()<padding.length()){
+                hintRow= " " + hintRow;
+            }
+            System.out.print(hintRow);
             System.out.print("|");
             for (int j = 0; j < this.currentPuzzle[i].length; ++j) {
                 if (this.currentPuzzle[i][j] == SQUARE_STATE.CORRECTLY_CROSSED || this.currentPuzzle[i][j] == SQUARE_STATE.WRONGLY_CHOSEN) {
@@ -242,7 +293,7 @@ public class Round {
             }
             System.out.println();
         }
-        System.out.println("-".repeat(this.currentPuzzle.length * 2+1));
+        System.out.println("-".repeat(this.currentPuzzle.length *2+1+padding.length()));
     }
 
 
@@ -289,6 +340,12 @@ public class Round {
         }
     }
 
+    /**
+     * Hint the user of the state of the chosen
+     * @param row
+     * @param column
+     * @return
+     */
     public int getHint(int row, int column){
         //update the box
         if (this.guessPuzzle[row][column]==1){
