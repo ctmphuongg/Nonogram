@@ -8,6 +8,8 @@
     -fx-alignment: center;
 }
 .heart-shape {
+
+    /* deo chay dc dm*/
     -fx-background-color: red;
     -fx-shape: "M 10 30 A 20 20 0 0 1 50 30 A 20 20 0 0 1 90 70 L 50 110 L 10 70 A 20 20 0 0 1 10 30 Z";
     -fx-scale-x: 0.8;
