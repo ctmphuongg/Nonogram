@@ -1,0 +1,49 @@
+.root{
+    -fx-padding: 10;
+    -fx-align-items: center;
+}
+
+.hearts{
+    -fx-padding: 10,10,10,10;
+    -fx-alignment: center;
+}
+.heart-shape {
+    /** Why not run*/
+    -fx-background-color: red;
+    -fx-shape: "M50,10 C50,10 10,50 50,90 C90,50 50,10 50,10 Z";
+    -fx-min-height: 50px;
+    -fx-min-width: 50px;
+    -fx-pref-width: 100px;
+    -fx-pref-height: 100px;
+}
+
+.puzzle{
+    -fx-alignment: center;
+    -fx-column-constrains: 100px 1fr;
+}
+
+.number_box{
+    -fx-padding: 10px; /**Notwork*/
+    -fx-stroke: black;
+    -fx-alignment: TOP_RIGHT;
+}
+
+.box{
+    -fx-min-height: 20px;
+    -fx-min-width: 20px;
+}
+
+.choices{
+    -fx-padding: 10;
+    -fx-alignment: center;
+}
+
+.choiceX{
+    -fx-background-radius: 50%;
+}
+
+.choiceColor{
+    -fx-background-radius: 50%;
+    -fx-background-color: black;
+}
+
