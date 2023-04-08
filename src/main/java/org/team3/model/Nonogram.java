@@ -38,8 +38,6 @@ public class Nonogram {
     private Round newRound;
 
 
-
-
     public Nonogram(){
         this.gameState = GAME_STATE.NEW_GAME;
     }

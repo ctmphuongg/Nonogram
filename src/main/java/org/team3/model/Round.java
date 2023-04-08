@@ -27,9 +27,10 @@ enum ROUND_STATE{
     ROUND_OVER
 }
 
-enum SIGN_MODE{
+enum PLAYING_MODE{
     CROSS,
     SQUARE,
+    HINT,
 }
 
 enum SQUARE_STATE{
@@ -42,9 +43,6 @@ enum SQUARE_STATE{
 
 /** A class for a Round in a Monogram game */
 public class Round {
-    /** Maximum number of lives for each round */
-    private final int MAX_LIVES = 3;
-
     /** Puzzle dimension */
     private final int PUZZLE_ROW = 5;
     private final int PUZZLE_COL = 5;
@@ -64,6 +62,9 @@ public class Round {
     /** Number of lives have left */
     private int lives;
 
+    /** Number of hints have left */
+    private int hints;
+
     /** Current puzzle from user's guesses */
     private SQUARE_STATE[][] currentPuzzle;
 
@@ -72,7 +73,7 @@ public class Round {
     private String guessCol;
 
     /** The sign player chooses to play (by default, choose a square) */
-    private SIGN_MODE signMode;
+    private PLAYING_MODE playingMode;
 
     /** Current game state */
     private ROUND_STATE roundState;
@@ -83,7 +84,8 @@ public class Round {
     private PuzzleFactory puzzleFactory;
     public Round(PuzzleFactory puzzleFactory){
         this.puzzleFactory=puzzleFactory;
-        this.lives = 0;
+        this.lives = 3;
+        this.hints = 3;
         this.currentPuzzle = generatePuzzleState();
         this.guessPuzzle = puzzleFactory.getMatrix();
         this.rowHint = puzzleFactory.getRowHint();
@@ -91,7 +93,7 @@ public class Round {
         this.guessRow = null;
         this.guessCol = null;
         this.roundState = ROUND_STATE.NEW_ROUND;
-        this.signMode = SIGN_MODE.SQUARE;
+        this.playingMode = PLAYING_MODE.SQUARE;
         this.paintedSquareNotGuessed = puzzleFactory.getColoredBox();
     }
 
@@ -103,7 +105,7 @@ public class Round {
     private SQUARE_STATE[][] generatePuzzleState() {
         SQUARE_STATE[][] arr = new SQUARE_STATE[PUZZLE_ROW][PUZZLE_COL];
 
-        // Initializing the array with 0
+        // Initializing the array with NOT_CHOSEN state
         for (int i = 0; i < PUZZLE_ROW; i++) {
             for (int j = 0; j < PUZZLE_COL; j++) {
                 arr[i][j] = SQUARE_STATE.NOT_CHOSEN;
@@ -117,14 +119,29 @@ public class Round {
      */
     private void getPlayingMode() {
         while (true) {
-            System.out.println("Cross a square? [Y|N]:");
+            System.out.println("Select a playing mode: ");
+            System.out.println("1. Choose a square");
+            System.out.println("2. Cross a square");
+            System.out.println("3. Get hint");
+            System.out.println("4. Quit");
             String playingMode = scnr.next();
 
-            if (playingMode.strip().equalsIgnoreCase("y")) {
-                this.signMode = SIGN_MODE.CROSS;
+            if (playingMode.strip().equals("1")){
                 break;
-            } else if (playingMode.strip().equalsIgnoreCase("n")){
+            } else if (playingMode.strip().equals("2")) {
+                this.playingMode = PLAYING_MODE.CROSS;
                 break;
+            } else if (playingMode.strip().equals("4")) {
+                this.roundState = ROUND_STATE.ROUND_OVER;
+                break;
+            }else if (playingMode.strip().equals("3")){
+                if (this.hints == 0){
+                    System.out.println("No hints left!");
+                }
+                else {
+                    this.playingMode = PLAYING_MODE.HINT;
+                    break;
+                }
             } else {
                 System.out.println("Please choose an option!");
             }
@@ -159,8 +176,8 @@ public class Round {
             System.out.printf("Invalid square. Please enter numbers from 1 to 5\n", PUZZLE_COL);
             return false;
         }
-        if (this.currentPuzzle[parseInt(this.guessRow)-1][parseInt(this.guessCol)-1]!=SQUARE_STATE.NOT_CHOSEN){
-            System.out.println("The chosen box has been crossed, please try again!");
+        if (this.currentPuzzle[parseInt(this.guessRow)-1][parseInt(this.guessCol)-1]!= SQUARE_STATE.NOT_CHOSEN){
+            System.out.println("The chosen box has been chosen, please try again!");
             return false;
         }
         return true;
@@ -172,7 +189,7 @@ public class Round {
      * @return true if the player uses all the lives -> The round is over
      */
     public boolean isRoundOver(){
-        if (this.lives == MAX_LIVES){
+        if (this.lives == 0){
             this.roundState = ROUND_STATE.ROUND_OVER;
         }
         return (this.roundState == ROUND_STATE.ROUND_OVER);
@@ -195,7 +212,7 @@ public class Round {
      * If the guess is incorrect, increment the number of lives
      */
     public void guessEvaluator() {
-        if (this.signMode == SIGN_MODE.SQUARE) {
+        if (this.playingMode == PLAYING_MODE.SQUARE) {
             if (guessPuzzle[parseInt(this.guessRow)-1][parseInt(this.guessCol)-1] == 1) { //Correctly chosen a square (square = 1)
                 this.currentPuzzle[parseInt(this.guessRow)-1][parseInt(this.guessCol)-1] = SQUARE_STATE.CORRECTLY_CHOSEN;
                 System.out.println("Correctly Chosen!");
@@ -204,11 +221,11 @@ public class Round {
             } else {
                 this.currentPuzzle[parseInt(this.guessRow)-1][parseInt(this.guessCol)-1] = SQUARE_STATE.WRONGLY_CHOSEN;
                 System.out.println("Wrongly Chosen! ");
-                this.lives++;
+                this.lives--;
             }
         }
 
-        else {
+        else if (this.playingMode == PLAYING_MODE.CROSS){
             if (guessPuzzle[parseInt(this.guessCol)-1][parseInt(this.guessCol)-1] == 0){ //Correctly crossed a square (square = 0)
                 this.currentPuzzle[parseInt(this.guessRow)-1][parseInt(this.guessCol)-1] = SQUARE_STATE.CORRECTLY_CROSSED;
                 System.out.println("Correctly Crossed!");
@@ -216,14 +233,18 @@ public class Round {
                 this.paintedSquareNotGuessed--;
             } else {
                 this.currentPuzzle[parseInt(this.guessRow)-1][parseInt(this.guessCol)-1] = SQUARE_STATE.WRONGLY_CROSSED;
-                this.lives++;
+                this.lives--;
                 System.out.println("Wrongly Crossed!");
 
             }
         }
-        System.out.printf("You have %d lives left \n",MAX_LIVES - this.lives);
-
+        else {
+            this.getHint(parseInt(this.guessRow) - 1, parseInt(this.guessCol) - 1);
+            this.hints--;
+        }
+        System.out.printf("You have %d lives and %d hints left \n",this.lives, this.hints);
     }
+
 
 
     /**
@@ -303,7 +324,6 @@ public class Round {
     public void initNewRound() {
         if (this.roundState == ROUND_STATE.NEW_ROUND) {
             this.roundState = ROUND_STATE.ROUND_IN_PROGRESS;
-            System.out.println(this.paintedSquareNotGuessed);
 
             // Generate puzzle
             System.out.println("Ready to play Nonogram! You have 3 lives this round.");
@@ -313,7 +333,6 @@ public class Round {
 
             // Continue asking for guesses if the game is not over or the player doesn't win
             while(!(isRoundOver()) && !(isRoundWinner())) {
-                System.out.println(this.paintedSquareNotGuessed);
                 playNextTurn();
             }
 
@@ -327,16 +346,19 @@ public class Round {
         }
     }
 
+
     /**
      * Play next turn if the round is not over
      * Ask for guess, evaluate guess, and display the matrix after each guesses
      */
     private void playNextTurn() {
         this.getPlayingMode();
-        this.getUserGuess();
-        if (this.checkValidGuess()) {
-            this.guessEvaluator();
-            this.displayMatrix();
+        if (!isRoundOver()) {
+            this.getUserGuess();
+            if (this.checkValidGuess()) {
+                this.guessEvaluator();
+                this.displayMatrix();
+            }
         }
     }
 
@@ -346,15 +368,20 @@ public class Round {
      * @param column
      * @return
      */
-    public int getHint(int row, int column){
-        //update the box
+
+    /**
+     * Change the state of the square that player wants to get hint
+     * @param row - player's guessed row
+     * @param column - player's guessed col
+     */
+    public void getHint(int row, int column){
+        //update the square
         if (this.guessPuzzle[row][column]==1){
             this.currentPuzzle[row][column]=SQUARE_STATE.CORRECTLY_CHOSEN;
         }
         else{
             this.currentPuzzle[row][column]=SQUARE_STATE.CORRECTLY_CROSSED;
         }
-        return this.guessPuzzle[row][column];
     }
 
 }
