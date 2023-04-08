@@ -271,19 +271,18 @@ public class Round {
             //checker for the first hint element of the column
             boolean checker=false;
             for (ArrayList j:this.colHint){
+                // if the position is presented in the arraylist, print it (but count from the bottom)
+                columnHintPrint+="|"+j.get(j.size()-i-1).toString();
                 if (j.size()>i){
                     //if this is the first hint of the row
-                    if (!checker)
-                    {
-                        checker=true;
-                        columnHintPrint+="|";
+                    if (!checker) {
+                        checker = true;
+                        columnHintPrint += "|";
                     }
-                    // if the position is presented in the arraylist, print it (but count from the bottom)
-                    columnHintPrint+=j.get(j.size()-i-1).toString()+"|";
                 }
                 else
                     //if not, simply add a blank
-                    columnHintPrint+=" ";
+                    columnHintPrint+=" |";
             }
             // next line
             columnHintPrint+='\n';
@@ -361,13 +360,6 @@ public class Round {
             }
         }
     }
-
-    /**
-     * Hint the user of the state of the chosen
-     * @param row
-     * @param column
-     * @return
-     */
 
     /**
      * Change the state of the square that player wants to get hint
