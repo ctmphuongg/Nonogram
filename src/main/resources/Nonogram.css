@@ -8,14 +8,13 @@
     -fx-alignment: center;
 }
 .heart-shape {
-    /** Why not run*/
     -fx-background-color: red;
-    -fx-shape: "M50,10 C50,10 10,50 50,90 C90,50 50,10 50,10 Z";
-    -fx-min-height: 50px;
-    -fx-min-width: 50px;
-    -fx-pref-width: 100px;
-    -fx-pref-height: 100px;
+    -fx-shape: "M 10 30 A 20 20 0 0 1 50 30 A 20 20 0 0 1 90 70 L 50 110 L 10 70 A 20 20 0 0 1 10 30 Z";
+    -fx-scale-x: 0.8;
+    -fx-scale-y: 0.8;
 }
+
+
 
 .puzzle{
     -fx-alignment: center;

@@ -46,7 +46,7 @@ public class NonogramView {
         lives.getStyleClass().add("hearts");
 
         for (int i = 0; i<3;i++){
-            Region live = new Region();
+            StackPane live = new StackPane();
             live.getStyleClass().add("heart-shape");
             lives.getChildren().add(live);
         }
