@@ -17,6 +17,7 @@
 
 package org.team3.view;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -60,8 +61,9 @@ public class NonogramView {
         numbers_row = new HBox();
         puzzle.setTop(numbers_row);
 
-        for (int i = 0; i<5; i++){
-            Rectangle numberColorBoxRow = new Rectangle(20,20,Color.BLUE);
+        for (int i = 0; i<6; i++){
+            Rectangle numberColorBoxRow = new Rectangle(30, 30, Color.LIGHTSTEELBLUE);
+            numberColorBoxRow.setStyle("-fx-border-color: black");
             numberColorBoxRow.getStyleClass().add("number_box");
             numbers_row.getChildren().add(numberColorBoxRow);
         }
@@ -70,12 +72,10 @@ public class NonogramView {
         numbers_column = new VBox();
         puzzle.setLeft(numbers_column);
         for (int i = 0; i<5; i++){
-            Rectangle numberColorBoxRow = new Rectangle(20,20,Color.BLUE);
+            Rectangle numberColorBoxRow = new Rectangle(30, 30, Color.LIGHTSTEELBLUE);
             numberColorBoxRow.getStyleClass().add("number_box");
             numbers_column.getChildren().add(numberColorBoxRow);
         }
-
-
 
 
         // Real puzzle matrix
@@ -112,6 +112,13 @@ public class NonogramView {
 
 
     private void initStyling() {
+        root.setAlignment(Pos.CENTER);
+
+        BorderPane.setAlignment(puzzle, Pos.CENTER);
+
+        VBox.setVgrow(puzzle, Priority.ALWAYS);
+
+
 
     }
 
@@ -120,7 +127,9 @@ public class NonogramView {
     }
 
     public NonogramView() {
+
         initScene();
+        initStyling();
     }
 }
     
