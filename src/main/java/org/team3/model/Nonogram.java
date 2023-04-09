@@ -33,9 +33,7 @@ enum GAME_STATE {
 
 /** The main class for a Monogram game */
 public class Nonogram {
-    private final int MAX_ROUNDS = 5;
 
-    private PuzzleFactory puzzleFactory;
     private GAME_STATE gameState;
     private Round newRound;
     /** Number of rounds has been played */
@@ -55,10 +53,12 @@ public class Nonogram {
         if (this.gameState == GAME_STATE.NEW_GAME){
             System.out.println("Welcome to Nonogram!");
             this.gameState = GAME_STATE.GAME_IN_PROGRESS;
+            PuzzleFactory puzzleFactory;
             do{
-                this.puzzleFactory = new PuzzleFactory();
-                this.puzzleFactory.displayMatrix();
-                this.newRound = new Round(this.puzzleFactory);
+                puzzleFactory = new PuzzleFactory();
+                System.out.println("Puzzle to be guessed (demo)");
+                puzzleFactory.displayMatrix();
+                this.newRound = new Round(puzzleFactory);
                 System.out.printf("ROUND %d \n", this.round);
                 newRound.initNewRound();
                 this.round ++;
@@ -66,13 +66,10 @@ public class Nonogram {
             if (isGameWinner()){
                 System.out.println("YOU WIN THE GAME");
             } if(isGameOver()){
-                this.puzzleFactory.displayMatrix();
+                puzzleFactory.displayMatrix();
             }
         }
-
-
     }
-
 
 
 
@@ -87,12 +84,12 @@ public class Nonogram {
 
 
     /**
-     * @return if the player wins the game
+     * @return if the player wins the game if they win all 5 rounds
      */
     public boolean isGameWinner(){
+        int MAX_ROUNDS = 5;
         if (this.round == MAX_ROUNDS){
             this.gameState = GAME_STATE.GAME_WINNER;
-            System.out.println("Winner!");
         }
         return (this.gameState == GAME_STATE.GAME_WINNER);
     }

@@ -17,7 +17,10 @@
 
 package org.team3.view;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
@@ -28,12 +31,9 @@ public class NonogramView {
     private BorderPane puzzle;
     private GridPane matrix;
     private HBox lives;
-
     private HBox numbers_row;
     private VBox numbers_column;
-
     private HBox choices;
-
     public VBox getRoot() { return root;}
 
     private void initScene() {
@@ -46,22 +46,34 @@ public class NonogramView {
         lives.getStyleClass().add("hearts");
 
         for (int i = 0; i<3;i++){
-            Region live = new Region();
-            live.getStyleClass().add("heart-shape");
-            lives.getChildren().add(live);
+            Image live = new Image(getClass().getResource("/pic/heart.png").toExternalForm());
+            ImageView imageView = new ImageView(live);
+            imageView.getStyleClass().add("heart-shape");
+            lives.getChildren().add(imageView);
+
+            // Cannot change to css
+            imageView.setFitHeight(30);
+            imageView.setFitWidth(30);
         }
+
         // Create all the puzzle math
         puzzle = new BorderPane();
-        root.getChildren().add(puzzle);
-        puzzle.getStyleClass().add("puzzle");
+        HBox center = new HBox();
+        VBox center2 = new VBox();
+        center.getChildren().add(center2);
+        center2.getChildren().add(puzzle);
+        center2.getStyleClass().add("puzzle");
+        center.getStyleClass().add("puzzle");
+        root.getChildren().add(center);
 
 
         // Create a row contain numbers that represent number of boxes being colored
         numbers_row = new HBox();
         puzzle.setTop(numbers_row);
 
-        for (int i = 0; i<5; i++){
-            Rectangle numberColorBoxRow = new Rectangle(20,20,Color.BLUE);
+        for (int i = 0; i<6; i++){
+            Rectangle numberColorBoxRow = new Rectangle(30, 30, Color.LIGHTSTEELBLUE);
+            numberColorBoxRow.setStyle("-fx-border-color: black");
             numberColorBoxRow.getStyleClass().add("number_box");
             numbers_row.getChildren().add(numberColorBoxRow);
         }
@@ -70,12 +82,10 @@ public class NonogramView {
         numbers_column = new VBox();
         puzzle.setLeft(numbers_column);
         for (int i = 0; i<5; i++){
-            Rectangle numberColorBoxRow = new Rectangle(20,20,Color.BLUE);
+            Rectangle numberColorBoxRow = new Rectangle(30, 30, Color.LIGHTSTEELBLUE);
             numberColorBoxRow.getStyleClass().add("number_box");
             numbers_column.getChildren().add(numberColorBoxRow);
         }
-
-
 
 
         // Real puzzle matrix
@@ -112,6 +122,10 @@ public class NonogramView {
 
 
     private void initStyling() {
+        root.setAlignment(Pos.CENTER);
+
+
+
 
     }
 
@@ -120,7 +134,9 @@ public class NonogramView {
     }
 
     public NonogramView() {
+
         initScene();
+        initStyling();
     }
 }
     
