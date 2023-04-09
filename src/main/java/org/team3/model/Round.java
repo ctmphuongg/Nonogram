@@ -267,18 +267,15 @@ public class Round {
         String columnHintPrint="";
         for (int i=col_hint_max-1;i>=0;--i) {
             // add padding to the current row
-            columnHintPrint+=padding;
+            columnHintPrint+=padding+"|";
             //checker for the first hint element of the column
             boolean checker=false;
             for (ArrayList j:this.colHint){
                 // if the position is presented in the arraylist, print it (but count from the bottom)
-                columnHintPrint+="|"+j.get(j.size()-i-1).toString();
                 if (j.size()>i){
+                    columnHintPrint+=j.get(j.size()-i-1).toString()+"|";
                     //if this is the first hint of the row
-                    if (!checker) {
-                        checker = true;
-                        columnHintPrint += "|";
-                    }
+
                 }
                 else
                     //if not, simply add a blank
