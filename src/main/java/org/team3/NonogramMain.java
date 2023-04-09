@@ -30,5 +30,4 @@ public class NonogramMain extends Application {
         primaryStage.show();
     }
 
-
 }
