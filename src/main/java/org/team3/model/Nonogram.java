@@ -92,6 +92,7 @@ public class Nonogram {
     public boolean isGameWinner(){
         if (this.round == MAX_ROUNDS){
             this.gameState = GAME_STATE.GAME_WINNER;
+            System.out.println("Winner!");
         }
         return (this.gameState == GAME_STATE.GAME_WINNER);
     }
@@ -103,7 +104,7 @@ public class Nonogram {
         newGame.initNewGame();
         Scanner scnr = new Scanner(System.in);
         while (true) {
-            if (newGame.isGameOver()) {
+            if (newGame.isGameOver() || newGame.isGameWinner()) {
                 System.out.println("Want to play again? [Y|N]");
                 if (scnr.next().strip().equalsIgnoreCase("n")) {
                     break;
