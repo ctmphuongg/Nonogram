@@ -6,17 +6,15 @@
 .hearts{
     -fx-padding: 10,10,10,10;
     -fx-alignment: center;
+    -fx-spacing: 10;
+    -fx-pref-height: 200;
+    -fx-pref-width: 400;
 }
-.heart-shape {
+/*.heart-shape {*/
+/*    -fx-image-height: 10px;*/
+/*    -fx-image-width: 10px;*/
 
-    /* deo chay dc dm*/
-    -fx-background-color: red;
-    -fx-shape: "M 10 30 A 20 20 0 0 1 50 30 A 20 20 0 0 1 90 70 L 50 110 L 10 70 A 20 20 0 0 1 10 30 Z";
-    -fx-scale-x: 0.8;
-    -fx-scale-y: 0.8;
-}
-
-
+/*}*/
 
 .puzzle{
     -fx-alignment: center;

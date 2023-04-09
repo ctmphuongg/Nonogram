@@ -18,6 +18,8 @@
 package org.team3.view;
 
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
@@ -46,9 +48,14 @@ public class NonogramView {
         lives.getStyleClass().add("hearts");
 
         for (int i = 0; i<3;i++){
-            StackPane live = new StackPane();
-            live.getStyleClass().add("heart-shape");
-            lives.getChildren().add(live);
+            Image live = new Image(getClass().getResource("/pic/heart.png").toExternalForm());
+            ImageView imageView = new ImageView(live);
+            imageView.getStyleClass().add("heart-shape");
+            lives.getChildren().add(imageView);
+
+            // Cannot change to css
+            imageView.setFitHeight(30);
+            imageView.setFitWidth(30);
         }
         // Create all the puzzle math
         puzzle = new BorderPane();
