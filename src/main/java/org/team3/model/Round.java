@@ -47,17 +47,17 @@ public class Round {
     private final int PUZZLE_ROW = 5;
     private final int PUZZLE_COL = 5;
 
-    /** Puzzle to be guesses*/
-    private int[][] guessPuzzle;
+    /** Puzzle to be guessed */
+    private final int[][] guessPuzzle;
 
-    /** Number of painted squares that are correctly guessed */
+    /** Number of painted squares that needed to be guessed */
     private int paintedSquareNotGuessed;
 
     /** Row hints of the puzzle*/
-    private ArrayList<Integer>[] rowHint;
+    private final ArrayList<Integer>[] rowHint;
 
     /** Column hints of puzzle*/
-    private ArrayList<Integer>[] colHint;
+    private final ArrayList<Integer>[] colHint;
 
     /** Number of lives have left */
     private int lives;
@@ -66,13 +66,13 @@ public class Round {
     private int hints;
 
     /** Current puzzle from user's guesses */
-    private SQUARE_STATE[][] currentPuzzle;
+    private final SQUARE_STATE[][] currentPuzzle;
 
     /** User's last guess*/
     private String guessRow;
     private String guessCol;
 
-    /** The sign player chooses to play (by default, choose a square) */
+    /** The playing mode player chooses to play (choose a square, cross a square or quit) */
     private PLAYING_MODE playingMode;
 
     /** Current game state */
@@ -81,19 +81,18 @@ public class Round {
     /** Scanner to read player's guess */
     private Scanner scnr = new Scanner(System.in);
 
-    private PuzzleFactory puzzleFactory;
+
+
     public Round(PuzzleFactory puzzleFactory){
-        this.puzzleFactory=puzzleFactory;
-        this.lives = 3;
-        this.hints = 3;
+        this.lives = 3; // Max lives per round is 3
+        this.hints = 3; // Max hints per round is 3
         this.currentPuzzle = generatePuzzleState();
-        this.guessPuzzle = puzzleFactory.getMatrix();
+        this.guessPuzzle = puzzleFactory.getMatrix(); //Get the puzzle matrix to be guessed in puzzleFactory
         this.rowHint = puzzleFactory.getRowHint();
         this.colHint = puzzleFactory.getColumnHint();
         this.guessRow = null;
         this.guessCol = null;
         this.roundState = ROUND_STATE.NEW_ROUND;
-        this.playingMode = PLAYING_MODE.SQUARE;
         this.paintedSquareNotGuessed = puzzleFactory.getColoredBox();
     }
 
@@ -105,7 +104,7 @@ public class Round {
     private SQUARE_STATE[][] generatePuzzleState() {
         SQUARE_STATE[][] arr = new SQUARE_STATE[PUZZLE_ROW][PUZZLE_COL];
 
-        // Initializing the array with NOT_CHOSEN state
+        // Initializing the matrix with all the squares in NOT_CHOSEN states
         for (int i = 0; i < PUZZLE_ROW; i++) {
             for (int j = 0; j < PUZZLE_COL; j++) {
                 arr[i][j] = SQUARE_STATE.NOT_CHOSEN;
@@ -115,7 +114,7 @@ public class Round {
     }
 
     /**
-     * Get player's playing mode each turn: Cross a square or want to quit?
+     * Get player's playing mode each turn: Cross a square, Choose a square, Get hint or Want to quit?
      */
     private void getPlayingMode() {
         while (true) {
@@ -126,7 +125,9 @@ public class Round {
             System.out.println("4. Quit");
             String playingMode = scnr.next();
 
+            // Change playing mode according to user's choices
             if (playingMode.strip().equals("1")){
+                this.playingMode = PLAYING_MODE.SQUARE;
                 break;
             } else if (playingMode.strip().equals("2")) {
                 this.playingMode = PLAYING_MODE.CROSS;
@@ -135,7 +136,7 @@ public class Round {
                 this.roundState = ROUND_STATE.ROUND_OVER;
                 break;
             }else if (playingMode.strip().equals("3")){
-                if (this.hints == 0){
+                if (this.hints == 0){ // Not allowed to get hint if there are no hints left
                     System.out.println("No hints left!");
                 }
                 else {
@@ -148,6 +149,7 @@ public class Round {
         }
 
     }
+
 
     /**
      * Get player's guesses and check if it's valid
@@ -189,7 +191,7 @@ public class Round {
      * @return true if the player uses all the lives -> The round is over
      */
     public boolean isRoundOver(){
-        if (this.lives == 0){
+        if (this.lives == 0){ // The round is over if there are no lives left
             this.roundState = ROUND_STATE.ROUND_OVER;
         }
         return (this.roundState == ROUND_STATE.ROUND_OVER);
@@ -200,7 +202,7 @@ public class Round {
      * @return true if the player correctly guesses all the painted squares -> Win the round -> move to next round
      */
     public boolean isRoundWinner(){
-        if (this.paintedSquareNotGuessed == 0){
+        if (this.paintedSquareNotGuessed == 0){ //If player guesses all the squares, then they win
             this.roundState = ROUND_STATE.ROUND_WINNER;
         }
         return (this.roundState == ROUND_STATE.ROUND_WINNER);
@@ -209,7 +211,8 @@ public class Round {
 
     /**
      * Evaluate if player crossed or chose the correct squares and print appropriate messages
-     * If the guess is incorrect, increment the number of lives
+     * If the guess is incorrect, decrement the number of lives have left
+     * If player chooses to get a hint, decrement the number of hints have left
      */
     public void guessEvaluator() {
         if (this.playingMode == PLAYING_MODE.SQUARE) {
@@ -321,7 +324,6 @@ public class Round {
         if (this.roundState == ROUND_STATE.NEW_ROUND) {
             this.roundState = ROUND_STATE.ROUND_IN_PROGRESS;
 
-            // Generate puzzle
             System.out.println("Ready to play Nonogram! You have 3 lives this round.");
 
             // Display empty puzzle matrix
