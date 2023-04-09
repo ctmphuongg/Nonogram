@@ -1,35 +1,53 @@
 .root{
+    -fx-spacing : 10;
     -fx-padding: 10;
-    -fx-align-items: center;
-}
-
-.hearts{
-    -fx-padding: 10,10,10,10;
     -fx-alignment: center;
-    -fx-spacing: 10;
-    -fx-pref-height: 200;
-    -fx-pref-width: 400;
+    -fx-min-height: 300px;
+    -fx-background-color: linear-gradient(to bottom right, #e09eaa, darkgrey);
 }
-/*.heart-shape {*/
-/*    -fx-image-height: 10px;*/
-/*    -fx-image-width: 10px;*/
 
+/*.hearts{*/
+/*    -fx-padding: 10,10,10,10;*/
+/*    -fx-alignment: center;*/
 /*}*/
+/*.heart-shape {*/
+
+/*    !* deo chay dc dm*!*/
+/*    -fx-background-color: red;*/
+/*    -fx-shape: "M 10 30 A 20 20 0 0 1 50 30 A 20 20 0 0 1 90 70 L 50 110 L 10 70 A 20 20 0 0 1 10 30 Z";*/
+/*    -fx-scale-x: 0.8;*/
+/*    -fx-scale-y: 0.8;*/
+/*}*/
+
+
 
 .puzzle{
     -fx-alignment: center;
-    -fx-column-constrains: 100px 1fr;
 }
 
 .number_box{
-    -fx-padding: 10px; /**Notwork*/
-    -fx-stroke: black;
+    -fx-background-color: #176285;
+    -fx-border-color: #a3b8c2;
+    -fx-border-width: 1px;
+    -fx-min-width: 30px;
+    -fx-min-height: 30px;
+    -fx-max-width: 30px;
+    -fx-max-height: 30px;
+    /*-fx-padding: 10px; !**Notwork*!*/
+    /*-fx-stroke: black;*/
     -fx-alignment: TOP_RIGHT;
 }
 
 .box{
-    -fx-min-height: 20px;
-    -fx-min-width: 20px;
+    -fx-background-color: #effaff;
+    -fx-border-color: #a3b8c2;
+    -fx-border-width: 1px;
+    -fx-min-width: 30px;
+    -fx-min-height: 30px;
+    -fx-max-width: 30px;
+    -fx-max-height: 30px;
+
+
 }
 
 .choices{
