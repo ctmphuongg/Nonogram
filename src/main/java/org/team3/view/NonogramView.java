@@ -51,10 +51,16 @@ public class NonogramView {
             live.getStyleClass().add("heart-shape");
             lives.getChildren().add(live);
         }
+
         // Create all the puzzle math
         puzzle = new BorderPane();
-        root.getChildren().add(puzzle);
-        puzzle.getStyleClass().add("puzzle");
+        HBox center = new HBox();
+        VBox center2 = new VBox();
+        center.getChildren().add(center2);
+        center2.getChildren().add(puzzle);
+        center2.getStyleClass().add("puzzle");
+        center.getStyleClass().add("puzzle");
+        root.getChildren().add(center);
 
 
         // Create a row contain numbers that represent number of boxes being colored
@@ -114,9 +120,6 @@ public class NonogramView {
     private void initStyling() {
         root.setAlignment(Pos.CENTER);
 
-        BorderPane.setAlignment(puzzle, Pos.CENTER);
-
-        VBox.setVgrow(puzzle, Priority.ALWAYS);
 
 
 

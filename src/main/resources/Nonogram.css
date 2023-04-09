@@ -23,7 +23,6 @@
 
 .puzzle{
     -fx-alignment: center;
-    -fx-column-constrains: 100px 1fr;
 }
 
 .number_box{
