@@ -31,12 +31,9 @@ public class NonogramView {
     private BorderPane puzzle;
     private GridPane matrix;
     private HBox lives;
-
     private HBox numbers_row;
     private VBox numbers_column;
-
     private HBox choices;
-
     public VBox getRoot() { return root;}
 
     private void initScene() {
