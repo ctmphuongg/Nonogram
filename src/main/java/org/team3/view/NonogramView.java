@@ -92,8 +92,8 @@ public class NonogramView {
         matrix = new GridPane();
         puzzle.setCenter(matrix);
 
-        for (int row=0; row < 5; row++) {
-            for (int col=0; col < 5; col++) {
+        for (int row = 0; row < 5; row++) {
+            for (int col = 0; col < 5; col++) {
                 Button box = new Button();
                 box.getStyleClass().add("box");
                 matrix.add(box, row, col);

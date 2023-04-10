@@ -214,16 +214,16 @@ public class Round {
      * If the guess is incorrect, decrement the number of lives have left
      * If player chooses to get a hint, decrement the number of hints have left
      */
-    public boolean guessEvaluator() {
+    public boolean guessEvaluator(int row,int column) {
         if (this.playingMode == PLAYING_MODE.SQUARE) {
-            if (guessPuzzle[parseInt(this.guessRow)-1][parseInt(this.guessCol)-1] == 1) { //Correctly chosen a square (square = 1)
-                this.currentPuzzle[parseInt(this.guessRow)-1][parseInt(this.guessCol)-1] = SQUARE_STATE.CORRECTLY_CHOSEN;
+            if (guessPuzzle[row][column] == 1) { //Correctly chosen a square (square = 1)
+                this.currentPuzzle[row][column] = SQUARE_STATE.CORRECTLY_CHOSEN;
                 System.out.println("Correctly Chosen!");
                 this.paintedSquareNotGuessed--;
                 return true;
 
             } else {
-                this.currentPuzzle[parseInt(this.guessRow)-1][parseInt(this.guessCol)-1] = SQUARE_STATE.WRONGLY_CHOSEN;
+                this.currentPuzzle[row][column] = SQUARE_STATE.WRONGLY_CHOSEN;
                 System.out.println("Wrongly Chosen! ");
                 this.lives--;
                 return false;
@@ -231,21 +231,21 @@ public class Round {
         }
 
         else if (this.playingMode == PLAYING_MODE.CROSS){
-            if (guessPuzzle[parseInt(this.guessCol)-1][parseInt(this.guessCol)-1] == 0){ //Correctly crossed a square (square = 0)
-                this.currentPuzzle[parseInt(this.guessRow)-1][parseInt(this.guessCol)-1] = SQUARE_STATE.CORRECTLY_CROSSED;
+            if (guessPuzzle[row][column] == 0){ //Correctly crossed a square (square = 0)
+                this.currentPuzzle[row][column] = SQUARE_STATE.CORRECTLY_CROSSED;
                 System.out.println("Correctly Crossed!");
 
                 this.paintedSquareNotGuessed--;
                 return true;
             } else {
-                this.currentPuzzle[parseInt(this.guessRow)-1][parseInt(this.guessCol)-1] = SQUARE_STATE.WRONGLY_CROSSED;
+                this.currentPuzzle[row][column] = SQUARE_STATE.WRONGLY_CROSSED;
                 this.lives--;
                 System.out.println("Wrongly Crossed!");
                 return false;
             }
         }
         else {
-            this.getHint(parseInt(this.guessRow) - 1, parseInt(this.guessCol) - 1);
+            this.getHint(column, row);
             this.hints--;
         }
         System.out.printf("You have %d lives and %d hints left \n",this.lives, this.hints);
@@ -358,7 +358,7 @@ public class Round {
         if (!isRoundOver()) {
             this.getUserGuess();
             if (this.checkValidGuess()) {
-                this.guessEvaluator();
+                this.guessEvaluator(Integer.parseInt(this.guessCol)-1,Integer.parseInt(this.guessRow)-1);
                 this.displayMatrix();
             }
         }
