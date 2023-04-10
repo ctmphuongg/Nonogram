@@ -96,6 +96,9 @@ public class Round {
         this.paintedSquareNotGuessed = puzzleFactory.getColoredBox();
     }
 
+    public void setPlayingMode(PLAYING_MODE playingMode) {
+        this.playingMode = playingMode;
+    }
 
     /**
      * Create an 5x5 array with all squares are in NOT_CHOSEN state
