@@ -214,17 +214,19 @@ public class Round {
      * If the guess is incorrect, decrement the number of lives have left
      * If player chooses to get a hint, decrement the number of hints have left
      */
-    public void guessEvaluator() {
+    public boolean guessEvaluator() {
         if (this.playingMode == PLAYING_MODE.SQUARE) {
             if (guessPuzzle[parseInt(this.guessRow)-1][parseInt(this.guessCol)-1] == 1) { //Correctly chosen a square (square = 1)
                 this.currentPuzzle[parseInt(this.guessRow)-1][parseInt(this.guessCol)-1] = SQUARE_STATE.CORRECTLY_CHOSEN;
                 System.out.println("Correctly Chosen!");
                 this.paintedSquareNotGuessed--;
+                return true;
 
             } else {
                 this.currentPuzzle[parseInt(this.guessRow)-1][parseInt(this.guessCol)-1] = SQUARE_STATE.WRONGLY_CHOSEN;
                 System.out.println("Wrongly Chosen! ");
                 this.lives--;
+                return false;
             }
         }
 
@@ -234,11 +236,12 @@ public class Round {
                 System.out.println("Correctly Crossed!");
 
                 this.paintedSquareNotGuessed--;
+                return true;
             } else {
                 this.currentPuzzle[parseInt(this.guessRow)-1][parseInt(this.guessCol)-1] = SQUARE_STATE.WRONGLY_CROSSED;
                 this.lives--;
                 System.out.println("Wrongly Crossed!");
-
+                return false;
             }
         }
         else {
@@ -246,6 +249,7 @@ public class Round {
             this.hints--;
         }
         System.out.printf("You have %d lives and %d hints left \n",this.lives, this.hints);
+        return false;
     }
 
 
