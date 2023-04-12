@@ -15,7 +15,7 @@
  * *****************************************/
 package org.team3.model;
 
-import javafx.beans.binding.IntegerBinding;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.ArrayList;
@@ -59,7 +59,9 @@ public class Round {
     private final ArrayList<Integer>[] colHint;
 
     /** Number of lives have left */
-    private SimpleIntegerProperty lives;
+    private int lives;
+    /** Array of lives boolean properties. This would be used for displaying lives */
+    private ArrayList<SimpleBooleanProperty> livesValueArray;
 
     /** Number of hints have left */
     private int hints;
@@ -86,8 +88,11 @@ public class Round {
     }
 
     public Round(PuzzleFactory puzzleFactory){
-        this.lives = new SimpleIntegerProperty(3); // Max lives per round is 3
+        this.livesValueArray = new ArrayList<>();
+        for (int i = 0;i<3;++i)//add the properties to list
+            livesValueArray.add(new SimpleBooleanProperty(true));
         this.hints = 3; // Max hints per round is 3
+        this.lives = 3; // Max lives per round is 3
         this.currentPuzzle = generatePuzzleState();
         this.guessPuzzle = puzzleFactory.getMatrix(); //Get the puzzle matrix to be guessed in puzzleFactory
         this.rowHint = puzzleFactory.getRowHint();
@@ -98,9 +103,18 @@ public class Round {
         this.paintedSquareNotGuessed = puzzleFactory.getColoredBox();
     }
 
-//    public void setPlayingMode(PLAYING_MODE playingMode) {
-//        this.playingMode = playingMode;
-//    }
+    public SimpleBooleanProperty getLivesValueArray(int i) {
+        return this.livesValueArray.get(i);
+    }
+
+    /**
+     * Decrease the current lives and set the value property of the lives box at that position to false
+     */
+    private void decreaseLives(){
+        this.lives--;
+        this.livesValueArray.get(lives).setValue(false);
+    }
+
 
     /**
      * Create an 5x5 array with all squares are in NOT_CHOSEN state
@@ -196,7 +210,7 @@ public class Round {
      * @return true if the player uses all the lives -> The round is over
      */
     public boolean isRoundOver(){
-        if (this.lives.getValue()==0){ // The round is over if there are no lives left
+        if (this.livesValueArray.size()==0){ // The round is over if there are no lives left
             this.roundState = ROUND_STATE.ROUND_OVER;
         }
         return (this.roundState == ROUND_STATE.ROUND_OVER);
@@ -230,7 +244,8 @@ public class Round {
             } else {
                 this.currentPuzzle[row][column] = SQUARE_STATE.WRONGLY_CHOSEN;
                 System.out.println("Wrongly Chosen! ");
-                this.lives.subtract(1);
+                decreaseLives();
+                System.out.println("Lives remained: "+ getLivesValueArray(lives).getValue());
                 return false;
             }
         }
@@ -244,8 +259,9 @@ public class Round {
                 return true;
             } else {
                 this.currentPuzzle[row][column] = SQUARE_STATE.WRONGLY_CROSSED;
-                this.lives.subtract(1);
+                decreaseLives();
                 System.out.println("Wrongly Crossed!");
+                System.out.println("Lives remained: "+ getLivesValueArray(lives).getValue());
                 return false;
             }
         }
@@ -253,7 +269,7 @@ public class Round {
             this.getHint(column, row);
             this.hints--;
         }
-        System.out.printf("You have %d lives and %d hints left \n",this.lives, this.hints);
+        System.out.printf("You have %d lives and %d hints left \n",this.livesValueArray, this.hints);
         return false;
     }
 

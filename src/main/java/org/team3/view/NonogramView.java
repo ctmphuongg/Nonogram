@@ -39,7 +39,7 @@ public class NonogramView {
     private BorderPane puzzle;
     private GridPane matrix;
     private HBox livesBox;
-    private ArrayList<ImageView> lives;
+    private ArrayList<ImageView> livesArray;
     private HBox numbers_row;
     private VBox numbers_column;
     private HBox choices;
@@ -61,18 +61,19 @@ public class NonogramView {
         root.getChildren().add(livesBox);
         livesBox.getStyleClass().add("hearts");
 
+        this.livesArray = new ArrayList<>();
         for (int i = 0; i<3;i++){
             Image live = new Image(getClass().getResource("/pic/heart.png").toExternalForm());
             ImageView imageView = new ImageView(live);
             imageView.getStyleClass().add("heart-shape");
-            this.lives.add(imageView);
+            this.livesArray.add(imageView);
 
             // Cannot change to css
             imageView.setFitHeight(30);
             imageView.setFitWidth(30);
         }
 
-        livesBox.getChildren().addAll(lives);
+        livesBox.getChildren().addAll(livesArray);
 
         // Create all the puzzle math
         puzzle = new BorderPane();
@@ -194,9 +195,14 @@ public class NonogramView {
     }
 
     /**
-     * Bindings for
+     * Bindings for the models
      */
     private void initBindings(){
+        //bindings for lives
+        for (int i = 0; i<livesArray.size(); ++i){
+
+            livesArray.get(i).visibleProperty().bind(theModel.getLivesValueArray(i));
+        }
 
     }
 
@@ -213,6 +219,7 @@ public class NonogramView {
         initScene();
         initStyling();
         initEventHandler();
+        initBindings();
     }
 }
     
