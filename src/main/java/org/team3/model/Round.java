@@ -15,6 +15,9 @@
  * *****************************************/
 package org.team3.model;
 
+import javafx.beans.binding.IntegerBinding;
+import javafx.beans.property.SimpleIntegerProperty;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -56,7 +59,7 @@ public class Round {
     private final ArrayList<Integer>[] colHint;
 
     /** Number of lives have left */
-    private int lives;
+    private SimpleIntegerProperty lives;
 
     /** Number of hints have left */
     private int hints;
@@ -83,7 +86,7 @@ public class Round {
     }
 
     public Round(PuzzleFactory puzzleFactory){
-        this.lives = 3; // Max lives per round is 3
+        this.lives = new SimpleIntegerProperty(3); // Max lives per round is 3
         this.hints = 3; // Max hints per round is 3
         this.currentPuzzle = generatePuzzleState();
         this.guessPuzzle = puzzleFactory.getMatrix(); //Get the puzzle matrix to be guessed in puzzleFactory
@@ -193,7 +196,7 @@ public class Round {
      * @return true if the player uses all the lives -> The round is over
      */
     public boolean isRoundOver(){
-        if (this.lives == 0){ // The round is over if there are no lives left
+        if (this.lives.getValue()==0){ // The round is over if there are no lives left
             this.roundState = ROUND_STATE.ROUND_OVER;
         }
         return (this.roundState == ROUND_STATE.ROUND_OVER);
@@ -227,7 +230,7 @@ public class Round {
             } else {
                 this.currentPuzzle[row][column] = SQUARE_STATE.WRONGLY_CHOSEN;
                 System.out.println("Wrongly Chosen! ");
-                this.lives--;
+                this.lives.subtract(1);
                 return false;
             }
         }
@@ -241,7 +244,7 @@ public class Round {
                 return true;
             } else {
                 this.currentPuzzle[row][column] = SQUARE_STATE.WRONGLY_CROSSED;
-                this.lives--;
+                this.lives.subtract(1);
                 System.out.println("Wrongly Crossed!");
                 return false;
             }

@@ -26,7 +26,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
-import org.team3.model.Nonogram;
 import org.team3.model.PLAYING_MODE;
 import org.team3.model.PuzzleFactory;
 import org.team3.model.Round;
@@ -39,7 +38,8 @@ public class NonogramView {
     private VBox root;
     private BorderPane puzzle;
     private GridPane matrix;
-    private HBox lives;
+    private HBox livesBox;
+    private ArrayList<ImageView> lives;
     private HBox numbers_row;
     private VBox numbers_column;
     private HBox choices;
@@ -55,22 +55,24 @@ public class NonogramView {
     private void initScene() {
         root = new VBox();
 
-        lives = new HBox();
+        livesBox = new HBox();
 
         // create line of three heart represent lives
-        root.getChildren().add(lives);
-        lives.getStyleClass().add("hearts");
+        root.getChildren().add(livesBox);
+        livesBox.getStyleClass().add("hearts");
 
         for (int i = 0; i<3;i++){
             Image live = new Image(getClass().getResource("/pic/heart.png").toExternalForm());
             ImageView imageView = new ImageView(live);
             imageView.getStyleClass().add("heart-shape");
-            lives.getChildren().add(imageView);
+            this.lives.add(imageView);
 
             // Cannot change to css
             imageView.setFitHeight(30);
             imageView.setFitWidth(30);
         }
+
+        livesBox.getChildren().addAll(lives);
 
         // Create all the puzzle math
         puzzle = new BorderPane();
@@ -149,9 +151,6 @@ public class NonogramView {
         toggleGroup.setAlignment(Pos.CENTER);
         toggleGroup.getChildren().addAll(cross,choose);
         root.getChildren().add(toggleGroup);
-
-
-
     }
 
 
@@ -191,6 +190,14 @@ public class NonogramView {
 
             });
         });
+
+    }
+
+    /**
+     * Bindings for
+     */
+    private void initBindings(){
+
     }
 
     public NonogramView() {
