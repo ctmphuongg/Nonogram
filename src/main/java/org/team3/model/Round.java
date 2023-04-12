@@ -330,12 +330,12 @@ public class Round {
             System.out.println("Ready to play Nonogram! You have 3 lives this round.");
 
             // Display empty puzzle matrix
-            this.displayMatrix();
+//            this.displayMatrix();
 
             // Continue asking for guesses if the game is not over or the player doesn't win
-            while(!(isRoundOver()) && !(isRoundWinner())) {
-                playNextTurn();
-            }
+//            while(!(isRoundOver()) && !(isRoundWinner())) {
+//                playNextTurn();
+//            }
 
             if(isRoundWinner()){
                 System.out.println("CONGRATS!! YOU WIN!!");

@@ -96,22 +96,22 @@ public class Nonogram {
 
 
 
-    public static void main(String[] args) {
-        Nonogram newGame = new Nonogram();
-        newGame.initNewGame();
-        Scanner scnr = new Scanner(System.in);
-        while (true) {
-            if (newGame.isGameOver() || newGame.isGameWinner()) {
-                System.out.println("Want to play again? [Y|N]");
-                if (scnr.next().strip().equalsIgnoreCase("n")) {
-                    break;
-                } else {
-                    Nonogram anotherGame = new Nonogram();
-                    anotherGame.initNewGame();
-                }
-            }
-        }
-    }
+//    public static void main(String[] args) {
+//        Nonogram newGame = new Nonogram();
+//        newGame.initNewGame();
+//        Scanner scnr = new Scanner(System.in);
+//        while (true) {
+//            if (newGame.isGameOver() || newGame.isGameWinner()) {
+//                System.out.println("Want to play again? [Y|N]");
+//                if (scnr.next().strip().equalsIgnoreCase("n")) {
+//                    break;
+//                } else {
+//                    Nonogram anotherGame = new Nonogram();
+//                    anotherGame.initNewGame();
+//                }
+//            }
+//        }
+//    }
 
 }
 
