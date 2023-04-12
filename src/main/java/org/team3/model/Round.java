@@ -27,11 +27,7 @@ enum ROUND_STATE{
     ROUND_OVER
 }
 
-enum PLAYING_MODE{
-    CROSS,
-    SQUARE,
-    HINT,
-}
+
 
 enum SQUARE_STATE{
     CORRECTLY_CHOSEN,
@@ -82,6 +78,9 @@ public class Round {
     private Scanner scnr = new Scanner(System.in);
 
 
+    public void setPlayingMode(PLAYING_MODE playingMode) {
+        this.playingMode = playingMode;
+    }
 
     public Round(PuzzleFactory puzzleFactory){
         this.lives = 3; // Max lives per round is 3
@@ -116,7 +115,7 @@ public class Round {
     /**
      * Get player's playing mode each turn: Cross a square, Choose a square, Get hint or Want to quit?
      */
-    private void getPlayingMode() {
+    public void getPlayingMode() {
         while (true) {
             System.out.println("Select a playing mode: ");
             System.out.println("1. Choose a square");

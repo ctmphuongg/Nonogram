@@ -19,11 +19,20 @@ package org.team3.view;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
+import org.team3.model.Nonogram;
+import org.team3.model.PLAYING_MODE;
+import org.team3.model.PuzzleFactory;
+import org.team3.model.Round;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NonogramView {
 
@@ -34,6 +43,13 @@ public class NonogramView {
     private HBox numbers_row;
     private VBox numbers_column;
     private HBox choices;
+    private List<Button> gridButton;
+    private Round theModel;
+    private PuzzleFactory puzzleSpace;
+    private ToggleButton cross;
+    private ToggleButton choose;
+    private ToggleGroup playMode;
+    private HBox toggleGroup;
     public VBox getRoot() { return root;}
 
     private void initScene() {
@@ -72,8 +88,8 @@ public class NonogramView {
         puzzle.setTop(numbers_row);
 
         for (int i = 0; i<6; i++){
-            Rectangle numberColorBoxRow = new Rectangle(30, 30, Color.LIGHTSTEELBLUE);
-            numberColorBoxRow.setStyle("-fx-border-color: black");
+            Rectangle numberColorBoxRow = new Rectangle(29, 29, Color.LIGHTSTEELBLUE);
+            numberColorBoxRow.setStroke(Color.ALICEBLUE);
             numberColorBoxRow.getStyleClass().add("number_box");
             numbers_row.getChildren().add(numberColorBoxRow);
         }
@@ -83,6 +99,7 @@ public class NonogramView {
         puzzle.setLeft(numbers_column);
         for (int i = 0; i<5; i++){
             Rectangle numberColorBoxRow = new Rectangle(30, 30, Color.LIGHTSTEELBLUE);
+            numberColorBoxRow.setStroke(Color.ALICEBLUE);
             numberColorBoxRow.getStyleClass().add("number_box");
             numbers_column.getChildren().add(numberColorBoxRow);
         }
@@ -92,28 +109,46 @@ public class NonogramView {
         matrix = new GridPane();
         puzzle.setCenter(matrix);
 
-        for (int row = 0; row < 5; row++) {
-            for (int col = 0; col < 5; col++) {
+        gridButton = new ArrayList<>();
+
+        for (int row=0; row < 5; row++) {
+            for (int col=0; col < 5; col++) {
                 Button box = new Button();
                 box.getStyleClass().add("box");
                 matrix.add(box, row, col);
+
+                gridButton.add(box);
             }
         }
 
         // User choice of color or X
-        choices = new HBox();
-        root.getChildren().add(choices);
-        choices.getStyleClass().add("choices");
+//        choices = new HBox();
+//        root.getChildren().add(choices);
+//        choices.getStyleClass().add("choices");
+//
+//        Button choiceX = new Button("X");
+//        choiceX.getStyleClass().add("choiceX");
+//
+//        Button choiceColor = new Button("  ");
+//        choiceColor.getStyleClass().add("choiceColor");
 
-        Button choiceX = new Button("X");
-        choiceX.getStyleClass().add("choiceX");
+//        choices.getChildren().add(choiceX);
+//        choices.getChildren().add(choiceColor);
 
-        Button choiceColor = new Button("  ");
-        choiceColor.getStyleClass().add("choiceColor");
-
-
-        choices.getChildren().add(choiceX);
-        choices.getChildren().add(choiceColor);
+        // Playing mode
+        cross = new ToggleButton();
+        cross.setText("X");
+        cross.getStyleClass().add("choiceX");
+        choose = new ToggleButton();
+        choose.setText("  ");
+        choose.getStyleClass().add("choiceColor");
+        playMode = new ToggleGroup();
+        cross.setToggleGroup(playMode);
+        choose.setToggleGroup(playMode);
+        toggleGroup = new HBox();
+        toggleGroup.setAlignment(Pos.CENTER);
+        toggleGroup.getChildren().addAll(cross,choose);
+        root.getChildren().add(toggleGroup);
 
 
 
@@ -124,19 +159,53 @@ public class NonogramView {
     private void initStyling() {
         root.setAlignment(Pos.CENTER);
 
-
-
-
     }
 
     private void initEventHandler() {
+        cross.selectedProperty().addListener(event -> {
+            cross.setStyle("-fx-background-color: #95abc4; -fx-border-color: #185c7a");
+            choose.setStyle(null);
+                }
+        );
 
+        choose.selectedProperty().addListener(event -> {
+                    choose.setStyle("-fx-background-color: #95abc4; -fx-border-color: #185c7a");
+                    cross.setStyle(null);
+                }
+        );
+
+        gridButton.stream().forEach(button -> {
+            button.setOnMouseClicked(event -> {
+                int row = GridPane.getRowIndex(button);
+                int column = GridPane.getColumnIndex(button);
+                theModel.setPlayingMode(PLAYING_MODE.SQUARE);
+                boolean correct= theModel.guessEvaluator(row, column);
+
+                if (correct) {
+                    button.setStyle("-fx-background-color: #185c7a;");
+                    button.applyCss();
+                    button.layout();
+                } else {
+                    button.setText("X");
+                }
+
+            });
+        });
     }
 
     public NonogramView() {
 
+//        theModel = new Nonogram();
+//        theModel.initNewGame();
+        puzzleSpace = new PuzzleFactory();
+        theModel = new Round(puzzleSpace);
+        theModel.initNewRound();
+        theModel.displayMatrix();
+
+
         initScene();
         initStyling();
+        initEventHandler();
     }
 }
     
