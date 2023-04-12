@@ -88,11 +88,11 @@ public class Round {
     }
 
     public Round(PuzzleFactory puzzleFactory){
-        this.livesValueArray = new ArrayList<>();
-        for (int i = 0;i<3;++i)//add the properties to list
-            livesValueArray.add(new SimpleBooleanProperty(true));
         this.hints = 3; // Max hints per round is 3
         this.lives = 3; // Max lives per round is 3
+        this.livesValueArray = new ArrayList<>();
+        for (int i = 0;i<this.lives;++i)//add the properties to list
+            livesValueArray.add(new SimpleBooleanProperty(true));
         this.currentPuzzle = generatePuzzleState();
         this.guessPuzzle = puzzleFactory.getMatrix(); //Get the puzzle matrix to be guessed in puzzleFactory
         this.rowHint = puzzleFactory.getRowHint();
@@ -130,6 +130,10 @@ public class Round {
             }
         }
         return arr;
+    }
+
+    public int getLives() {
+        return lives;
     }
 
     /**

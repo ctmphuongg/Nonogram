@@ -62,7 +62,7 @@ public class NonogramView {
         livesBox.getStyleClass().add("hearts");
 
         this.livesArray = new ArrayList<>();
-        for (int i = 0; i<3;i++){
+        for (int i = 0; i < theModel.getLives();i++){
             Image live = new Image(getClass().getResource("/pic/heart.png").toExternalForm());
             ImageView imageView = new ImageView(live);
             imageView.getStyleClass().add("heart-shape");
@@ -90,7 +90,7 @@ public class NonogramView {
         numbers_row = new HBox();
         puzzle.setTop(numbers_row);
 
-        for (int i = 0; i<6; i++){
+        for (int i = 0; i < 6; i++){
             Rectangle numberColorBoxRow = new Rectangle(29, 29, Color.LIGHTSTEELBLUE);
             numberColorBoxRow.setStroke(Color.ALICEBLUE);
             numberColorBoxRow.getStyleClass().add("number_box");
@@ -100,7 +100,7 @@ public class NonogramView {
         // Create a column contain numbers that represent number of boxes being colored
         numbers_column = new VBox();
         puzzle.setLeft(numbers_column);
-        for (int i = 0; i<5; i++){
+        for (int i = 0; i < 5; i++){
             Rectangle numberColorBoxRow = new Rectangle(30, 30, Color.LIGHTSTEELBLUE);
             numberColorBoxRow.setStroke(Color.ALICEBLUE);
             numberColorBoxRow.getStyleClass().add("number_box");
@@ -200,7 +200,6 @@ public class NonogramView {
     private void initBindings(){
         //bindings for lives
         for (int i = 0; i<livesArray.size(); ++i){
-
             livesArray.get(i).visibleProperty().bind(theModel.getLivesValueArray(i));
         }
 
