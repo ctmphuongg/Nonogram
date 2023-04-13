@@ -179,14 +179,16 @@ public class NonogramView {
                 int row = GridPane.getRowIndex(button);
                 int column = GridPane.getColumnIndex(button);
                 theModel.setPlayingMode(PLAYING_MODE.SQUARE);
-                boolean correct= theModel.guessEvaluator(row, column);
+                if (theModel.checkValidGuess(row,column)) {
+                    boolean correct = theModel.guessEvaluator(row, column);
 
-                if (correct) {
-                    button.setStyle("-fx-background-color: #185c7a;");
-                    button.applyCss();
-                    button.layout();
-                } else {
-                    button.setText("X");
+                    if (correct) {
+                        button.setStyle("-fx-background-color: #185c7a;");
+                        button.applyCss();
+                        button.layout();
+                    } else {
+                        button.setText("X");
+                    }
                 }
 
             });

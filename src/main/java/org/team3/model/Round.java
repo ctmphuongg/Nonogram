@@ -192,16 +192,34 @@ public class Round {
      * A guess is valid if the row and column numbers are from 1 to 5 and only contain digits
      * @return true if it's a valid guess. Otherwise, return false
      */
+    public boolean checkValidGuess(int row,int col){
+        this.guessRow = ""+row;
+        this.guessCol = ""+col;
+        if (this.guessRow.matches(".*\\D.*") || this.guessCol.matches(".*\\D.*")) { //return false if the guess contains non-digit characters
+            System.out.println("Please enter a number!");
+            return false;
+        }
+        if (parseInt(this.guessCol) > PUZZLE_COL || parseInt(this.guessCol) <0 || parseInt(this.guessRow)>=PUZZLE_ROW || parseInt(this.guessRow) <=0 ){
+            System.out.printf("Invalid square. Please enter numbers from 1 to 5\n", PUZZLE_COL);
+            return false;
+        }
+        if (this.currentPuzzle[parseInt(this.guessRow)][parseInt(this.guessCol)]!= SQUARE_STATE.NOT_CHOSEN){
+            System.out.println("The chosen box has been chosen, please try again!");
+            return false;
+        }
+        return true;
+    }
+
     private boolean checkValidGuess(){
         if (this.guessRow.matches(".*\\D.*") || this.guessCol.matches(".*\\D.*")) { //return false if the guess contains non-digit characters
             System.out.println("Please enter a number!");
             return false;
         }
-        if (parseInt(this.guessCol) > PUZZLE_COL || parseInt(this.guessCol) <=0 || parseInt(this.guessRow)> PUZZLE_ROW || parseInt(this.guessRow) <=0 ){
+        if (parseInt(this.guessCol) > PUZZLE_COL || parseInt(this.guessCol) <0 || parseInt(this.guessRow)>=PUZZLE_ROW || parseInt(this.guessRow) <=0 ){
             System.out.printf("Invalid square. Please enter numbers from 1 to 5\n", PUZZLE_COL);
             return false;
         }
-        if (this.currentPuzzle[parseInt(this.guessRow)-1][parseInt(this.guessCol)-1]!= SQUARE_STATE.NOT_CHOSEN){
+        if (this.currentPuzzle[parseInt(this.guessRow)][parseInt(this.guessCol)]!= SQUARE_STATE.NOT_CHOSEN){
             System.out.println("The chosen box has been chosen, please try again!");
             return false;
         }
@@ -238,6 +256,7 @@ public class Round {
      * If player chooses to get a hint, decrement the number of hints have left
      */
     public boolean guessEvaluator(int row,int column) {
+        System.out.println(1);
         if (this.playingMode == PLAYING_MODE.SQUARE) {
             if (guessPuzzle[row][column] == 1) { //Correctly chosen a square (square = 1)
                 this.currentPuzzle[row][column] = SQUARE_STATE.CORRECTLY_CHOSEN;
