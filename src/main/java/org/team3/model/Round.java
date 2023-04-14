@@ -83,6 +83,10 @@ public class Round {
     private Scanner scnr = new Scanner(System.in);
 
 
+    public void setPlayingMode(PLAYING_MODE playingMode) {
+        this.playingMode = playingMode;
+    }
+
     public Round(PuzzleFactory puzzleFactory){
         this.hints = 3; // Max hints per round is 3
         this.lives = 3; // Max lives per round is 3
@@ -99,10 +103,6 @@ public class Round {
         this.paintedSquareNotGuessed = puzzleFactory.getColoredBox();
     }
 
-    public void setPlayingMode(PLAYING_MODE playingMode) {
-        this.playingMode = playingMode;
-    }
-
     public SimpleBooleanProperty getLivesValueArray(int i) {
         return this.livesValueArray.get(i);
     }
@@ -116,12 +116,12 @@ public class Round {
     }
 
     /**
-     * @return number of hints have left
+     * Get the number of hints have left
+     * @return
      */
     public int getHints() {
         return hints;
     }
-
 
     /**
      * Create an 5x5 array with all squares are in NOT_CHOSEN state
@@ -206,7 +206,7 @@ public class Round {
             System.out.println("Please enter a number!");
             return false;
         }
-        if (parseInt(this.guessCol) > PUZZLE_COL || parseInt(this.guessCol) <0 || parseInt(this.guessRow)>=PUZZLE_ROW || parseInt(this.guessRow) <=0 ){
+        if (parseInt(this.guessCol) > PUZZLE_COL || parseInt(this.guessCol) <0 || parseInt(this.guessRow)>PUZZLE_ROW || parseInt(this.guessRow) <0 ){
             System.out.printf("Invalid square. Please enter numbers from 1 to 5\n", PUZZLE_COL);
             return false;
         }
@@ -222,7 +222,7 @@ public class Round {
             System.out.println("Please enter a number!");
             return false;
         }
-        if (parseInt(this.guessCol) > PUZZLE_COL || parseInt(this.guessCol) <0 || parseInt(this.guessRow)>=PUZZLE_ROW || parseInt(this.guessRow) <=0 ){
+        if (parseInt(this.guessCol) > PUZZLE_COL || parseInt(this.guessCol) <0 || parseInt(this.guessRow)>PUZZLE_ROW || parseInt(this.guessRow) <0 ){
             System.out.printf("Invalid square. Please enter numbers from 1 to 5\n", PUZZLE_COL);
             return false;
         }
@@ -295,7 +295,10 @@ public class Round {
                 return false;
             }
         }
-
+        else {
+            this.getHint(column, row);
+            this.hints--;
+        }
         System.out.printf("You have %d lives and %d hints left \n",this.livesValueArray, this.hints);
         return false;
     }
@@ -413,7 +416,6 @@ public class Round {
     }
 
 
-
     /**
      * Check if the square is a colored square
      * @param row - row to get hint
@@ -430,19 +432,19 @@ public class Round {
         return false;
     }
 
-//    /**
-//     * Change the state of the square that player wants to get hint
-//     * @param row - player's guessed row
-//     * @param column - player's guessed col
-//     */
-//    public void getHint(int row, int column){
-//        //update the square
-//        if (this.guessPuzzle[row][column]==1){
-//            this.currentPuzzle[row][column]=SQUARE_STATE.CORRECTLY_CHOSEN;
-//        }
-//        else{
-//            this.currentPuzzle[row][column]=SQUARE_STATE.CORRECTLY_CROSSED;
-//        }
-//    }
+    /**
+     * Change the state of the square that player wants to get hint
+     * @param row - player's guessed row
+     * @param column - player's guessed col
+     */
+    public void getHint(int row, int column){
+        //update the square
+        if (this.guessPuzzle[row][column]==1){
+            this.currentPuzzle[row][column]=SQUARE_STATE.CORRECTLY_CHOSEN;
+        }
+        else{
+            this.currentPuzzle[row][column]=SQUARE_STATE.CORRECTLY_CROSSED;
+        }
+    }
 
 }

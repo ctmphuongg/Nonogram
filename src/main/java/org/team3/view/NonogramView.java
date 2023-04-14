@@ -27,6 +27,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
+import javafx.scene.text.Text;
 import org.team3.model.PLAYING_MODE;
 import org.team3.model.PuzzleFactory;
 import org.team3.model.Round;
@@ -43,19 +44,21 @@ public class NonogramView {
     private ArrayList<ImageView> livesArray;
     private HBox numbers_row;
     private VBox numbers_column;
+    private HBox choices;
     private List<Button> gridButton;
     private Round theModel;
     private PuzzleFactory puzzleSpace;
-
-    private ToggleButton btnCross;
-    private ToggleButton btnChoose;
-    private ToggleButton btnGetHint;
-    private ToggleGroup playModeToggleGroup;
+    private ToggleButton cross;
+    private ToggleButton choose;
+    private ToggleButton getHint;
+    private ToggleGroup playMode;
     private HBox toggleGroup;
     public VBox getRoot() { return root;}
 
     private void initScene() {
         root = new VBox();
+
+        livesBox = new HBox();
 
         // create line of three heart represent lives
         root.getChildren().add(livesBox);
@@ -85,27 +88,74 @@ public class NonogramView {
         center.getStyleClass().add("puzzle");
         root.getChildren().add(center);
 
+        // HINT ON TOP
+        // Get the column hint data
+        ArrayList<Integer>[] column_hint_data = puzzleSpace.getColumnHint();
 
-        // Create a row contain numbers that represent number of boxes being colored
+
+
+        // Create a row contain numbers that represent number of boxes being colored (HINT ON TOP)
         numbers_row = new HBox();
         puzzle.setTop(numbers_row);
 
         for (int i = 0; i < 6; i++){
-            Rectangle numberColorBoxRow = new Rectangle(29, 29, Color.LIGHTSTEELBLUE);
-            numberColorBoxRow.setStroke(Color.ALICEBLUE);
-            numberColorBoxRow.getStyleClass().add("number_box");
-            numbers_row.getChildren().add(numberColorBoxRow);
-        }
+            //Create a StackPane for rectangle and text
+            StackPane stackPane = new StackPane();
 
-        // Create a column contain numbers that represent number of boxes being colored
-        numbers_column = new VBox();
-        puzzle.setLeft(numbers_column);
-        for (int i = 0; i < 5; i++){
+
+            // Create Rectangle object
             Rectangle numberColorBoxRow = new Rectangle(30, 30, Color.LIGHTSTEELBLUE);
             numberColorBoxRow.setStroke(Color.ALICEBLUE);
             numberColorBoxRow.getStyleClass().add("number_box");
-            numbers_column.getChildren().add(numberColorBoxRow);
+
+            // Starting from the second rectangle
+            if (i>0){
+                // Create a Text
+                ArrayList<Integer> text_content = column_hint_data[i-1];
+
+                Text text = new Text(column_hint_data[i-1].toString());
+                // Add Rectangle and Text into the StackPane
+                stackPane.getChildren().addAll(numberColorBoxRow, text);
+
+            }else{
+                // Create a Text
+                Text text = new Text("");
+                // Add Rectangle and Text into the StackPane
+                stackPane.getChildren().addAll(numberColorBoxRow, text);
+            }
+            numbers_row.getChildren().add(stackPane);
+
+
+
         }
+
+        // HINT ON LEFT
+        // Get the row_hint_data
+        ArrayList<Integer>[] row_hint_data = puzzleSpace.getRowHint();
+        // Create a column contain numbers that represent number of boxes being colored (HINT
+        numbers_column = new VBox();
+        puzzle.setLeft(numbers_column);
+        for (int i = 0; i < 5; i++){
+
+            //Create a StackPane for rectangle and text
+            StackPane stackPane = new StackPane();
+
+            // Create Rectangle
+            Rectangle numberColorBoxRow = new Rectangle(30, 30, Color.LIGHTSTEELBLUE);
+            numberColorBoxRow.setStroke(Color.ALICEBLUE);
+            numberColorBoxRow.getStyleClass().add("number_box");
+
+
+            // Create a Text
+            Text text = new Text(row_hint_data[i].toString());
+            // Add Rectangle and Text into the StackPane
+            stackPane.getChildren().addAll(numberColorBoxRow, text);
+
+
+            numbers_column.getChildren().add(stackPane);
+        }
+
+
 
 
         // Real puzzle matrix
@@ -139,30 +189,39 @@ public class NonogramView {
 //        choices.getChildren().add(choiceColor);
 
         // Playing mode
-        btnCross = new ToggleButton();
-        btnCross.setText("X");
-        btnCross.getStyleClass().add("choiceX");
 
-        btnChoose = new ToggleButton();
-        btnChoose.setText("  ");
-        btnChoose.getStyleClass().add("choiceColor");
+
+        // Playing mode
+        cross = new ToggleButton();
+        cross.setText("X");
+        cross.getStyleClass().add("choiceX");
+
+
+        choose = new ToggleButton();
+        choose.setText("  ");
+        choose.getStyleClass().add("choiceColor");
+
 
         ImageView btnGetHintImage = new ImageView(new Image(getClass().getResourceAsStream("/pic/lightbulb.png")));
         btnGetHintImage.setFitHeight(30);
         btnGetHintImage.setFitWidth(30);
-        btnGetHint = new ToggleButton(Integer.toString(theModel.getHints()),btnGetHintImage);
+        getHint = new ToggleButton(Integer.toString(theModel.getHints()),btnGetHintImage);
 
-        playModeToggleGroup = new ToggleGroup();
-        btnCross.setToggleGroup(playModeToggleGroup);
-        btnChoose.setToggleGroup(playModeToggleGroup);
-        btnGetHint.setToggleGroup(playModeToggleGroup);
+
+        playMode = new ToggleGroup();
+        cross.setToggleGroup(playMode);
+        choose.setToggleGroup(playMode);
+        getHint.setToggleGroup(playMode);
+
 
         toggleGroup = new HBox();
         toggleGroup.setAlignment(Pos.CENTER);
         toggleGroup.getStyleClass().add("button-group");
 
-        toggleGroup.getChildren().addAll(btnCross,btnChoose,btnGetHint);
+
+        toggleGroup.getChildren().addAll(cross,choose,getHint);
         root.getChildren().add(toggleGroup);
+
     }
 
 
@@ -173,85 +232,83 @@ public class NonogramView {
     }
 
     private void initEventHandler() {
-        btnCross.selectedProperty().addListener(event -> {
-            btnCross.setStyle("-fx-background-color: #95abc4; -fx-border-color: #185c7a");
-            btnChoose.setStyle(null);
-            btnGetHint.setStyle(null);
-
+        cross.selectedProperty().addListener(event -> {
+            cross.setStyle("-fx-background-color: #95abc4; -fx-border-color: #185c7a");
+            choose.setStyle(null);
                 }
         );
 
-        btnChoose.selectedProperty().addListener(event -> {
-            btnChoose.setStyle("-fx-background-color: #95abc4; -fx-border-color: #185c7a");
-            btnCross.setStyle(null);
-            btnGetHint.setStyle(null);
+        choose.selectedProperty().addListener(event -> {
+                    choose.setStyle("-fx-background-color: #95abc4; -fx-border-color: #185c7a");
+                    cross.setStyle(null);
                 }
         );
-
-        btnGetHint.selectedProperty().addListener(event -> {
-            btnGetHint.setStyle("-fx-background-color: #95abc4; -fx-border-color: #185c7a");
-            btnCross.setStyle(null);
-            btnChoose.setStyle(null);
-                }
-        );
-
 
         gridButton.stream().forEach(button -> {
             button.setOnMouseClicked(event -> {
                 int row = GridPane.getRowIndex(button);
                 int column = GridPane.getColumnIndex(button);
-
-                Toggle selectedButton = playModeToggleGroup.getSelectedToggle();
-
-                if (selectedButton == btnChoose) {
-                    theModel.setPlayingMode(PLAYING_MODE.SQUARE);
-                    boolean correct = theModel.guessEvaluator(row, column);
+                theModel.setPlayingMode(PLAYING_MODE.SQUARE);
+                if (theModel.checkValidGuess(row,column)) {
+                    Toggle selectedButton = playMode.getSelectedToggle();
 
 
-                    if (correct) {
-                        button.setStyle("-fx-background-color: #185c7a;");
-                        button.applyCss();
-                        button.layout();
-                    } else {
-                        button.setText("X");
+                    if (selectedButton == choose) {
+                        theModel.setPlayingMode(PLAYING_MODE.SQUARE);
+                        boolean correct = theModel.guessEvaluator(row, column);
+
+
+
+
+                        if (correct) {
+                            button.setStyle("-fx-background-color: #185c7a;");
+                            button.applyCss();
+                            button.layout();
+                        } else {
+                            button.setText("X");
+                        }
+
+
+                    } else if (selectedButton == cross) {
+                        theModel.setPlayingMode(PLAYING_MODE.CROSS);
+                        boolean correct = theModel.guessEvaluator(row, column);
+
+                        if (correct) {
+                            button.setText("X");
+                        } else {
+                            button.setStyle("-fx-background-color: #185c7a;");
+                            button.applyCss();
+                            button.layout();
+                        }
+                    } else if ((selectedButton == getHint) && (theModel.getHints() >0)) {
+                        theModel.setPlayingMode(PLAYING_MODE.HINT);
+                        boolean isColoredSquare = theModel.isColored(row,column);
+                        if (isColoredSquare){
+                            button.setStyle("-fx-background-color: #185c7a;");
+                            button.applyCss();
+                            button.layout();
+                        } else {
+                            button.setText("X");
+                        }
+
+
+                        if (theModel.getHints() <0) {
+                            getHint.setSelected(false);
+                            getHint.disabledProperty();
+                        } else {
+                            getHint.setText(Integer.toString(theModel.getHints()));
+                        }
+
+
                     }
 
-                } else if (selectedButton == btnCross) {
-                    theModel.setPlayingMode(PLAYING_MODE.CROSS);
-                    boolean correct = theModel.guessEvaluator(row, column);
-
-
-                    if (correct) {
-                        button.setText("X");
-                    } else {
-                        button.setStyle("-fx-background-color: #185c7a;");
-                        button.applyCss();
-                        button.layout();
-                    }
-                } else if ((selectedButton == btnGetHint) && (theModel.getHints() >0)) {
-                    theModel.setPlayingMode(PLAYING_MODE.HINT);
-                    boolean isColoredSquare = theModel.isColored(row,column);
-                    if (isColoredSquare){
-                        button.setStyle("-fx-background-color: #185c7a;");
-                        button.applyCss();
-                        button.layout();
-                    } else {
-                        button.setText("X");
-                    }
-
-                    if (theModel.getHints() <0) {
-                        btnGetHint.setSelected(false);
-                        btnGetHint.disabledProperty();
-                    } else {
-                        btnGetHint.setText(Integer.toString(theModel.getHints()));
-                    }
 
                 }
-
             });
         });
-
     }
+
+
 
     /**
      * Bindings for the models
