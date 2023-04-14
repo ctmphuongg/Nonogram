@@ -58,7 +58,6 @@ public class NonogramView {
         root = new VBox();
 
         // create line of three heart represent lives
-        livesBox = new HBox();
         root.getChildren().add(livesBox);
         livesBox.getStyleClass().add("hearts");
 
