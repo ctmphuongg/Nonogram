@@ -20,7 +20,6 @@
 /*}*/
 
 
-
 .puzzle{
     -fx-alignment: center;
 }
@@ -59,8 +58,17 @@
     -fx-background-radius: 50%;
 }
 
+.choiceGetHint{
+    -fx-background-radius: 50%;
+}
+
 .choiceColor{
     -fx-background-radius: 50%;
     -fx-background-color: black;
+}
+
+.button-group{
+    -fx-spacing : 10;
+    -fx-padding: 10;
 }
 

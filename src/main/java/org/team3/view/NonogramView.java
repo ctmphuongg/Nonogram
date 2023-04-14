@@ -46,6 +46,7 @@ public class NonogramView {
     private List<Button> gridButton;
     private Round theModel;
     private PuzzleFactory puzzleSpace;
+
     private ToggleButton btnCross;
     private ToggleButton btnChoose;
     private ToggleButton btnGetHint;
@@ -56,9 +57,8 @@ public class NonogramView {
     private void initScene() {
         root = new VBox();
 
-        livesBox = new HBox();
-
         // create line of three heart represent lives
+        livesBox = new HBox();
         root.getChildren().add(livesBox);
         livesBox.getStyleClass().add("hearts");
 
@@ -148,9 +148,10 @@ public class NonogramView {
         btnChoose.setText("  ");
         btnChoose.getStyleClass().add("choiceColor");
 
-        btnGetHint = new ToggleButton();
-        btnGetHint.setText(Integer.toString(theModel.getHints()));
-        btnGetHint.getStyleClass().add("choiceGetHint");
+        ImageView btnGetHintImage = new ImageView(new Image(getClass().getResourceAsStream("/pic/lightbulb.png")));
+        btnGetHintImage.setFitHeight(30);
+        btnGetHintImage.setFitWidth(30);
+        btnGetHint = new ToggleButton(Integer.toString(theModel.getHints()),btnGetHintImage);
 
         playModeToggleGroup = new ToggleGroup();
         btnCross.setToggleGroup(playModeToggleGroup);
@@ -159,6 +160,8 @@ public class NonogramView {
 
         toggleGroup = new HBox();
         toggleGroup.setAlignment(Pos.CENTER);
+        toggleGroup.getStyleClass().add("button-group");
+
         toggleGroup.getChildren().addAll(btnCross,btnChoose,btnGetHint);
         root.getChildren().add(toggleGroup);
     }
