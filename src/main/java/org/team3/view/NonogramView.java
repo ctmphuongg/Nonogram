@@ -19,6 +19,7 @@ package org.team3.view;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
@@ -49,6 +50,7 @@ public class NonogramView {
     private PuzzleFactory puzzleSpace;
     private ToggleButton cross;
     private ToggleButton choose;
+    private ToggleButton getHint;
     private ToggleGroup playMode;
     private HBox toggleGroup;
     public VBox getRoot() { return root;}
@@ -187,19 +189,39 @@ public class NonogramView {
 //        choices.getChildren().add(choiceColor);
 
         // Playing mode
+
+
+        // Playing mode
         cross = new ToggleButton();
         cross.setText("X");
         cross.getStyleClass().add("choiceX");
+
+
         choose = new ToggleButton();
         choose.setText("  ");
         choose.getStyleClass().add("choiceColor");
+
+
+        ImageView btnGetHintImage = new ImageView(new Image(getClass().getResourceAsStream("/pic/lightbulb.png")));
+        btnGetHintImage.setFitHeight(30);
+        btnGetHintImage.setFitWidth(30);
+        getHint = new ToggleButton(Integer.toString(theModel.getHints()),btnGetHintImage);
+
+
         playMode = new ToggleGroup();
         cross.setToggleGroup(playMode);
         choose.setToggleGroup(playMode);
+        getHint.setToggleGroup(playMode);
+
+
         toggleGroup = new HBox();
         toggleGroup.setAlignment(Pos.CENTER);
-        toggleGroup.getChildren().addAll(cross,choose);
+        toggleGroup.getStyleClass().add("button-group");
+
+
+        toggleGroup.getChildren().addAll(cross,choose,getHint);
         root.getChildren().add(toggleGroup);
+
     }
 
 
@@ -228,24 +250,65 @@ public class NonogramView {
                 int column = GridPane.getColumnIndex(button);
                 theModel.setPlayingMode(PLAYING_MODE.SQUARE);
                 if (theModel.checkValidGuess(row,column)) {
-                    boolean correct = theModel.guessEvaluator(row, column);
+                    Toggle selectedButton = playMode.getSelectedToggle();
 
-                    if (correct) {
-                        button.setStyle("-fx-background-color: #185c7a;");
-                        button.applyCss();
-                        button.layout();
-                    } else {
-                        button.setText("X");
+
+                    if (selectedButton == choose) {
+                        theModel.setPlayingMode(PLAYING_MODE.SQUARE);
+                        boolean correct = theModel.guessEvaluator(row, column);
+
+
+
+
+                        if (correct) {
+                            button.setStyle("-fx-background-color: #185c7a;");
+                            button.applyCss();
+                            button.layout();
+                        } else {
+                            button.setText("X");
+                        }
+
+
+                    } else if (selectedButton == cross) {
+                        theModel.setPlayingMode(PLAYING_MODE.CROSS);
+                        boolean correct = theModel.guessEvaluator(row, column);
+
+                        if (correct) {
+                            button.setText("X");
+                        } else {
+                            button.setStyle("-fx-background-color: #185c7a;");
+                            button.applyCss();
+                            button.layout();
+                        }
+                    } else if ((selectedButton == getHint) && (theModel.getHints() >0)) {
+                        theModel.setPlayingMode(PLAYING_MODE.HINT);
+                        boolean isColoredSquare = theModel.isColored(row,column);
+                        if (isColoredSquare){
+                            button.setStyle("-fx-background-color: #185c7a;");
+                            button.applyCss();
+                            button.layout();
+                        } else {
+                            button.setText("X");
+                        }
+
+
+                        if (theModel.getHints() <0) {
+                            getHint.setSelected(false);
+                            getHint.disabledProperty();
+                        } else {
+                            getHint.setText(Integer.toString(theModel.getHints()));
+                        }
+
+
                     }
-                }
 
+
+                }
             });
         });
-
-
-
-
     }
+
+
 
     /**
      * Bindings for the models

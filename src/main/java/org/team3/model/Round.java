@@ -115,6 +115,13 @@ public class Round {
         this.livesValueArray.get(lives).setValue(false);
     }
 
+    /**
+     * Get the number of hints have left
+     * @return
+     */
+    public int getHints() {
+        return hints;
+    }
 
     /**
      * Create an 5x5 array with all squares are in NOT_CHOSEN state
@@ -406,6 +413,23 @@ public class Round {
                 this.displayMatrix();
             }
         }
+    }
+
+
+    /**
+     * Check if the square is a colored square
+     * @param row - row to get hint
+     * @param col - col to get hint
+     * @return true if the square is a colored square
+     */
+    public boolean isColored(int row, int col){
+        this.hints --;
+        if (this.guessPuzzle[row][col]==1){
+            this.currentPuzzle[row][col]=SQUARE_STATE.CORRECTLY_CHOSEN;
+            return true;
+        }
+        this.currentPuzzle[row][col]=SQUARE_STATE.CORRECTLY_CROSSED;
+        return false;
     }
 
     /**
