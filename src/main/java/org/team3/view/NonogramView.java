@@ -26,6 +26,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
+import javafx.scene.text.Text;
 import org.team3.model.PLAYING_MODE;
 import org.team3.model.PuzzleFactory;
 import org.team3.model.Round;
@@ -85,27 +86,74 @@ public class NonogramView {
         center.getStyleClass().add("puzzle");
         root.getChildren().add(center);
 
+        // HINT ON TOP
+        // Get the column hint data
+        ArrayList<Integer>[] column_hint_data = puzzleSpace.getColumnHint();
 
-        // Create a row contain numbers that represent number of boxes being colored
+
+
+        // Create a row contain numbers that represent number of boxes being colored (HINT ON TOP)
         numbers_row = new HBox();
         puzzle.setTop(numbers_row);
 
         for (int i = 0; i < 6; i++){
-            Rectangle numberColorBoxRow = new Rectangle(29, 29, Color.LIGHTSTEELBLUE);
-            numberColorBoxRow.setStroke(Color.ALICEBLUE);
-            numberColorBoxRow.getStyleClass().add("number_box");
-            numbers_row.getChildren().add(numberColorBoxRow);
-        }
+            //Create a StackPane for rectangle and text
+            StackPane stackPane = new StackPane();
 
-        // Create a column contain numbers that represent number of boxes being colored
-        numbers_column = new VBox();
-        puzzle.setLeft(numbers_column);
-        for (int i = 0; i < 5; i++){
+
+            // Create Rectangle object
             Rectangle numberColorBoxRow = new Rectangle(30, 30, Color.LIGHTSTEELBLUE);
             numberColorBoxRow.setStroke(Color.ALICEBLUE);
             numberColorBoxRow.getStyleClass().add("number_box");
-            numbers_column.getChildren().add(numberColorBoxRow);
+
+            // Starting from the second rectangle
+            if (i>0){
+                // Create a Text
+                ArrayList<Integer> text_content = column_hint_data[i-1];
+
+                Text text = new Text(column_hint_data[i-1].toString());
+                // Add Rectangle and Text into the StackPane
+                stackPane.getChildren().addAll(numberColorBoxRow, text);
+
+            }else{
+                // Create a Text
+                Text text = new Text("");
+                // Add Rectangle and Text into the StackPane
+                stackPane.getChildren().addAll(numberColorBoxRow, text);
+            }
+            numbers_row.getChildren().add(stackPane);
+
+
+
         }
+
+        // HINT ON LEFT
+        // Get the row_hint_data
+        ArrayList<Integer>[] row_hint_data = puzzleSpace.getRowHint();
+        // Create a column contain numbers that represent number of boxes being colored (HINT
+        numbers_column = new VBox();
+        puzzle.setLeft(numbers_column);
+        for (int i = 0; i < 5; i++){
+
+            //Create a StackPane for rectangle and text
+            StackPane stackPane = new StackPane();
+
+            // Create Rectangle
+            Rectangle numberColorBoxRow = new Rectangle(30, 30, Color.LIGHTSTEELBLUE);
+            numberColorBoxRow.setStroke(Color.ALICEBLUE);
+            numberColorBoxRow.getStyleClass().add("number_box");
+
+
+            // Create a Text
+            Text text = new Text(row_hint_data[i].toString());
+            // Add Rectangle and Text into the StackPane
+            stackPane.getChildren().addAll(numberColorBoxRow, text);
+
+
+            numbers_column.getChildren().add(stackPane);
+        }
+
+
 
 
         // Real puzzle matrix
@@ -191,6 +239,9 @@ public class NonogramView {
 
             });
         });
+
+
+
 
     }
 
