@@ -199,7 +199,7 @@ public class Round {
             System.out.println("Please enter a number!");
             return false;
         }
-        if (parseInt(this.guessCol) > PUZZLE_COL || parseInt(this.guessCol) <0 || parseInt(this.guessRow)>=PUZZLE_ROW || parseInt(this.guessRow) <=0 ){
+        if (parseInt(this.guessCol) > PUZZLE_COL || parseInt(this.guessCol) <0 || parseInt(this.guessRow)>PUZZLE_ROW || parseInt(this.guessRow) <0 ){
             System.out.printf("Invalid square. Please enter numbers from 1 to 5\n", PUZZLE_COL);
             return false;
         }
@@ -215,7 +215,7 @@ public class Round {
             System.out.println("Please enter a number!");
             return false;
         }
-        if (parseInt(this.guessCol) > PUZZLE_COL || parseInt(this.guessCol) <0 || parseInt(this.guessRow)>=PUZZLE_ROW || parseInt(this.guessRow) <=0 ){
+        if (parseInt(this.guessCol) > PUZZLE_COL || parseInt(this.guessCol) <0 || parseInt(this.guessRow)>PUZZLE_ROW || parseInt(this.guessRow) <0 ){
             System.out.printf("Invalid square. Please enter numbers from 1 to 5\n", PUZZLE_COL);
             return false;
         }
