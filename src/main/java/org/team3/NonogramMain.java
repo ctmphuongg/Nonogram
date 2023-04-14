@@ -17,6 +17,7 @@ public class NonogramMain extends Application {
         super.init();
         this.theView = new NonogramView();
     }
+
     @Override
     public void start(Stage primaryStage) {
         Scene scene = new Scene(theView.getRoot());
