@@ -106,14 +106,25 @@ public class NonogramView {
             numberColorBoxRow.setStroke(Color.ALICEBLUE);
             numberColorBoxRow.getStyleClass().add("number_box");
 
+
             // Starting from the second rectangle
             if (i>0){
+                stackPane.getChildren().add(numberColorBoxRow);
                 // Create a Text
                 ArrayList<Integer> text_content = column_hint_data[i-1];
+                for (Integer num : text_content) {
+                    Text text = new Text(num.toString());
+                    Rectangle smallHint = new Rectangle(30, 10, Color.YELLOW);
+                    StackPane hintBox = new StackPane();
+                    hintBox.getChildren().addAll(smallHint, text);
+//                    HBox hintBox = new HBox(smallHint, text);
+//                    stackPane.getChildren().add(hintBox);
+                    stackPane.getChildren().add(hintBox);
+                }
 
-                Text text = new Text(column_hint_data[i-1].toString());
-                // Add Rectangle and Text into the StackPane
-                stackPane.getChildren().addAll(numberColorBoxRow, text);
+
+
+
 
             }else{
                 // Create a Text
@@ -241,8 +252,6 @@ public class NonogramView {
 
             });
         });
-
-
 
 
     }
