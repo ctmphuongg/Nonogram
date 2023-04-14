@@ -46,9 +46,9 @@ public class NonogramView {
     private List<Button> gridButton;
     private Round theModel;
     private PuzzleFactory puzzleSpace;
-    private ToggleButton cross;
-    private ToggleButton choose;
-    private ToggleGroup playMode;
+    private ToggleButton btnCross;
+    private ToggleButton btnChoose;
+    private ToggleGroup playModeToggleGroup;
     private HBox toggleGroup;
     public VBox getRoot() { return root;}
 
@@ -139,18 +139,18 @@ public class NonogramView {
 //        choices.getChildren().add(choiceColor);
 
         // Playing mode
-        cross = new ToggleButton();
-        cross.setText("X");
-        cross.getStyleClass().add("choiceX");
-        choose = new ToggleButton();
-        choose.setText("  ");
-        choose.getStyleClass().add("choiceColor");
-        playMode = new ToggleGroup();
-        cross.setToggleGroup(playMode);
-        choose.setToggleGroup(playMode);
+        btnCross = new ToggleButton();
+        btnCross.setText("X");
+        btnCross.getStyleClass().add("choiceX");
+        btnChoose = new ToggleButton();
+        btnChoose.setText("  ");
+        btnChoose.getStyleClass().add("choiceColor");
+        playModeToggleGroup = new ToggleGroup();
+        btnCross.setToggleGroup(playModeToggleGroup);
+        btnChoose.setToggleGroup(playModeToggleGroup);
         toggleGroup = new HBox();
         toggleGroup.setAlignment(Pos.CENTER);
-        toggleGroup.getChildren().addAll(cross,choose);
+        toggleGroup.getChildren().addAll(btnCross,btnChoose);
         root.getChildren().add(toggleGroup);
     }
 
@@ -162,15 +162,15 @@ public class NonogramView {
     }
 
     private void initEventHandler() {
-        cross.selectedProperty().addListener(event -> {
-            cross.setStyle("-fx-background-color: #95abc4; -fx-border-color: #185c7a");
-            choose.setStyle(null);
+        btnCross.selectedProperty().addListener(event -> {
+            btnCross.setStyle("-fx-background-color: #95abc4; -fx-border-color: #185c7a");
+            btnChoose.setStyle(null);
                 }
         );
 
-        choose.selectedProperty().addListener(event -> {
-                    choose.setStyle("-fx-background-color: #95abc4; -fx-border-color: #185c7a");
-                    cross.setStyle(null);
+        btnChoose.selectedProperty().addListener(event -> {
+                    btnChoose.setStyle("-fx-background-color: #95abc4; -fx-border-color: #185c7a");
+                    btnCross.setStyle(null);
                 }
         );
 
