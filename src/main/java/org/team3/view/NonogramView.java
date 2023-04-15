@@ -100,48 +100,28 @@ public class NonogramView {
 
         for (int i = 0; i < 6; i++){
             //Create a StackPane for rectangle and text
-//            StackPane stackPaneSquare = new StackPane();
             VBox hintContainerVBox = new VBox();
             hintContainerVBox.setPrefSize(30, 30);
             hintContainerVBox.setStyle("-fx-background-color: LIGHTSTEELBLUE; -fx-border-color: ALICEBLUE");
             hintContainerVBox.getStyleClass().add("number_box");
-//            stackPaneSquare.getChildren().add(hintContainerVBox);
-
-
-            // Create Rectangle object
-//            Rectangle hintSquareContainer = new Rectangle(30, 30, Color.LIGHTSTEELBLUE);
-//            hintSquareContainer.setStroke(Color.ALICEBLUE);
 
 
 
             // Starting from the second rectangle
             if (i>0){
-//                hintContainerVBox.getChildren().add(hintSquareContainer);
-                // Create a Text
-//                Text text = new Text(column_hint_data[i-1].toString());
                 ArrayList<Integer> text_content = column_hint_data[i-1];
                 for (Integer num : text_content) {
                     Text text = new Text(num.toString());
-                    Rectangle smallHint = new Rectangle(30, 10, Color.YELLOW);
+                    text.setFill(Color.WHITE);
+                    Rectangle smallHint = new Rectangle(30, 10);
+                    smallHint.setStyle("-fx-fill: #176285");
                     StackPane hintBox = new StackPane();
                     hintBox.getChildren().addAll(smallHint, text);
                     hintContainerVBox.getChildren().add(hintBox);
 
-//                    if (i > 0) {
-//                        // Set the alignment of the previous small StackPane to position it below the current one
-//                        StackPane.setAlignment(stackPane.getChildren().get(i-1), Pos.BOTTOM_CENTER);
-//                    }
                 }
-//                stackPane.getChildren().addAll(hintSquareContainer, text);
 
 
-
-
-            }else{
-                // Create a Text
-                Text text = new Text("");
-                // Add Rectangle and Text into the StackPane
-//                hintContainerVBox.getChildren().addAll(hintSquareContainer, text);
             }
             numbers_row.getChildren().add(hintContainerVBox);
 
@@ -157,27 +137,23 @@ public class NonogramView {
         puzzle.setLeft(numbers_column);
         for (int i = 0; i < 5; i++){
 
+            HBox hintContainerHBox = new HBox();
+            hintContainerHBox.setPrefSize(30, 30);
+            hintContainerHBox.setStyle("-fx-background-color: LIGHTSTEELBLUE; -fx-border-color: ALICEBLUE");
+            hintContainerHBox.getStyleClass().add("number_box");
+
             //Create a StackPane for rectangle and text
             StackPane stackPane = new StackPane();
 
-            // Create Rectangle
-            Rectangle numberColorBoxRow = new Rectangle(30, 30, Color.LIGHTSTEELBLUE);
-            numberColorBoxRow.setStroke(Color.ALICEBLUE);
-            numberColorBoxRow.getStyleClass().add("number_box");
-            stackPane.getChildren().add(numberColorBoxRow);
-
-            // Create a Text
-//            Text text = new Text(row_hint_data[i].toString());
-
             ArrayList<Integer> text_content = row_hint_data[i];
-            System.out.println(row_hint_data[i]);
             for (Integer num : text_content) {
-                System.out.println(num);
                 Text text = new Text(num.toString());
-                Rectangle smallHint = new Rectangle(10, 30, Color.YELLOW);
+                text.setFill(Color.WHITE);
+                Rectangle smallHint = new Rectangle(10, 30);
+                smallHint.setStyle("-fx-fill: #176285");
                 StackPane hintBox = new StackPane();
                 hintBox.getChildren().addAll(smallHint, text);
-                stackPane.getChildren().add(hintBox);
+                hintContainerHBox.getChildren().add(hintBox);
 
 
             }
@@ -187,11 +163,8 @@ public class NonogramView {
 //            stackPane.getChildren().addAll(numberColorBoxRow, text);
 
 
-            numbers_column.getChildren().add(stackPane);
+            numbers_column.getChildren().add(hintContainerHBox);
         }
-
-
-
 
         // Real puzzle matrix
         matrix = new GridPane();
@@ -208,20 +181,6 @@ public class NonogramView {
                 gridButton.add(box);
             }
         }
-
-        // User choice of color or X
-//        choices = new HBox();
-//        root.getChildren().add(choices);
-//        choices.getStyleClass().add("choices");
-//
-//        Button choiceX = new Button("X");
-//        choiceX.getStyleClass().add("choiceX");
-//
-//        Button choiceColor = new Button("  ");
-//        choiceColor.getStyleClass().add("choiceColor");
-
-//        choices.getChildren().add(choiceX);
-//        choices.getChildren().add(choiceColor);
 
         // Playing mode
 
@@ -291,9 +250,6 @@ public class NonogramView {
                     if (selectedButton == choose) {
                         theModel.setPlayingMode(PLAYING_MODE.SQUARE);
                         boolean correct = theModel.guessEvaluator(row, column);
-
-
-
 
                         if (correct) {
                             button.setStyle("-fx-background-color: #185c7a;");
