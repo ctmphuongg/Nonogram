@@ -100,30 +100,50 @@ public class NonogramView {
 
         for (int i = 0; i < 6; i++){
             //Create a StackPane for rectangle and text
-            StackPane stackPane = new StackPane();
+//            StackPane stackPaneSquare = new StackPane();
+            VBox hintContainerVBox = new VBox();
+            hintContainerVBox.setPrefSize(30, 30);
+            hintContainerVBox.setStyle("-fx-background-color: LIGHTSTEELBLUE; -fx-border-color: ALICEBLUE");
+            hintContainerVBox.getStyleClass().add("number_box");
+//            stackPaneSquare.getChildren().add(hintContainerVBox);
 
 
             // Create Rectangle object
-            Rectangle numberColorBoxRow = new Rectangle(30, 30, Color.LIGHTSTEELBLUE);
-            numberColorBoxRow.setStroke(Color.ALICEBLUE);
-            numberColorBoxRow.getStyleClass().add("number_box");
+//            Rectangle hintSquareContainer = new Rectangle(30, 30, Color.LIGHTSTEELBLUE);
+//            hintSquareContainer.setStroke(Color.ALICEBLUE);
+
+
 
             // Starting from the second rectangle
             if (i>0){
+//                hintContainerVBox.getChildren().add(hintSquareContainer);
                 // Create a Text
+//                Text text = new Text(column_hint_data[i-1].toString());
                 ArrayList<Integer> text_content = column_hint_data[i-1];
+                for (Integer num : text_content) {
+                    Text text = new Text(num.toString());
+                    Rectangle smallHint = new Rectangle(30, 10, Color.YELLOW);
+                    StackPane hintBox = new StackPane();
+                    hintBox.getChildren().addAll(smallHint, text);
+                    hintContainerVBox.getChildren().add(hintBox);
 
-                Text text = new Text(column_hint_data[i-1].toString());
-                // Add Rectangle and Text into the StackPane
-                stackPane.getChildren().addAll(numberColorBoxRow, text);
+//                    if (i > 0) {
+//                        // Set the alignment of the previous small StackPane to position it below the current one
+//                        StackPane.setAlignment(stackPane.getChildren().get(i-1), Pos.BOTTOM_CENTER);
+//                    }
+                }
+//                stackPane.getChildren().addAll(hintSquareContainer, text);
+
+
+
 
             }else{
                 // Create a Text
                 Text text = new Text("");
                 // Add Rectangle and Text into the StackPane
-                stackPane.getChildren().addAll(numberColorBoxRow, text);
+//                hintContainerVBox.getChildren().addAll(hintSquareContainer, text);
             }
-            numbers_row.getChildren().add(stackPane);
+            numbers_row.getChildren().add(hintContainerVBox);
 
 
 
@@ -144,12 +164,27 @@ public class NonogramView {
             Rectangle numberColorBoxRow = new Rectangle(30, 30, Color.LIGHTSTEELBLUE);
             numberColorBoxRow.setStroke(Color.ALICEBLUE);
             numberColorBoxRow.getStyleClass().add("number_box");
-
+            stackPane.getChildren().add(numberColorBoxRow);
 
             // Create a Text
-            Text text = new Text(row_hint_data[i].toString());
-            // Add Rectangle and Text into the StackPane
-            stackPane.getChildren().addAll(numberColorBoxRow, text);
+//            Text text = new Text(row_hint_data[i].toString());
+
+            ArrayList<Integer> text_content = row_hint_data[i];
+            System.out.println(row_hint_data[i]);
+            for (Integer num : text_content) {
+                System.out.println(num);
+                Text text = new Text(num.toString());
+                Rectangle smallHint = new Rectangle(10, 30, Color.YELLOW);
+                StackPane hintBox = new StackPane();
+                hintBox.getChildren().addAll(smallHint, text);
+                stackPane.getChildren().add(hintBox);
+
+
+            }
+
+
+//            // Add Rectangle and Text into the StackPane
+//            stackPane.getChildren().addAll(numberColorBoxRow, text);
 
 
             numbers_column.getChildren().add(stackPane);
