@@ -21,7 +21,6 @@ public class NonogramMain extends Application {
     @Override
     public void start(Stage primaryStage) {
         Scene scene = new Scene(theView.getRoot());
-
         scene.getStylesheets().add(
                 getClass().getResource("/Nonogram.css").toExternalForm());
 
