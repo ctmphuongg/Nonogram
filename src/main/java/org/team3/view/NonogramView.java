@@ -17,6 +17,7 @@
 
 package org.team3.view;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Toggle;
@@ -28,6 +29,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.scene.text.Text;
+import org.team3.controller.NonogramController;
 import org.team3.model.PLAYING_MODE;
 import org.team3.model.PuzzleFactory;
 import org.team3.model.Round;
@@ -37,6 +39,8 @@ import java.util.List;
 
 public class NonogramView {
 
+    private Round theModel;
+    private NonogramController theController;
     private VBox root;
     private BorderPane puzzle;
     private GridPane matrix;
@@ -46,7 +50,7 @@ public class NonogramView {
     private VBox numbers_column;
     private HBox choices;
     private List<Button> gridButton;
-    private Round theModel;
+
     private PuzzleFactory puzzleSpace;
     private ToggleButton cross;
     private ToggleButton choose;
@@ -54,6 +58,30 @@ public class NonogramView {
     private ToggleGroup playMode;
     private HBox toggleGroup;
     public VBox getRoot() { return root;}
+
+    public List<Button> getGridButton() {
+        return gridButton;
+    }
+
+    public ToggleButton getCross() {
+        return cross;
+    }
+
+    public ToggleButton getChoose() {
+        return choose;
+    }
+
+    public ToggleButton getGetHint() {
+        return getHint;
+    }
+
+    public ToggleGroup getPlayMode() {
+        return playMode;
+    }
+
+    public ArrayList<ImageView> getLivesArray() {
+        return livesArray;
+    }
 
     private void initScene() {
         root = new VBox();
@@ -225,107 +253,29 @@ public class NonogramView {
 
     }
 
-    private void initEventHandler() {
-        cross.selectedProperty().addListener(event -> {
-            cross.setStyle("-fx-background-color: #95abc4; -fx-border-color: #185c7a");
-            choose.setStyle(null);
-                }
-        );
+    public BooleanProperty isChoose() {
+        return choose.selectedProperty();
+    }
 
-        choose.selectedProperty().addListener(event -> {
-                    choose.setStyle("-fx-background-color: #95abc4; -fx-border-color: #185c7a");
-                    cross.setStyle(null);
-                }
-        );
-
-        gridButton.stream().forEach(button -> {
-            button.setOnMouseClicked(event -> {
-                int row = GridPane.getRowIndex(button);
-                int column = GridPane.getColumnIndex(button);
-                theModel.setPlayingMode(PLAYING_MODE.SQUARE);
-                if (theModel.checkValidGuess(row,column)) {
-                    Toggle selectedButton = playMode.getSelectedToggle();
-
-
-                    if (selectedButton == choose) {
-                        theModel.setPlayingMode(PLAYING_MODE.SQUARE);
-                        boolean correct = theModel.guessEvaluator(row, column);
-
-                        if (correct) {
-                            button.setStyle("-fx-background-color: #185c7a;");
-                            button.applyCss();
-                            button.layout();
-                        } else {
-                            button.setText("X");
-                        }
-
-
-                    } else if (selectedButton == cross) {
-                        theModel.setPlayingMode(PLAYING_MODE.CROSS);
-                        boolean correct = theModel.guessEvaluator(row, column);
-
-                        if (correct) {
-                            button.setText("X");
-                        } else {
-                            button.setStyle("-fx-background-color: #185c7a;");
-                            button.applyCss();
-                            button.layout();
-                        }
-                    } else if ((selectedButton == getHint) && (theModel.getHints() >0)) {
-                        theModel.setPlayingMode(PLAYING_MODE.HINT);
-                        boolean isColoredSquare = theModel.isColored(row,column);
-                        if (isColoredSquare){
-                            button.setStyle("-fx-background-color: #185c7a;");
-                            button.applyCss();
-                            button.layout();
-                        } else {
-                            button.setText("X");
-                        }
-
-
-                        if (theModel.getHints() <0) {
-                            getHint.setSelected(false);
-                            getHint.disabledProperty();
-                        } else {
-                            getHint.setText(Integer.toString(theModel.getHints()));
-                        }
-
-
-                    }
-
-
-                }
-            });
-        });
+    public BooleanProperty isCross() {
+        return cross.selectedProperty();
     }
 
 
-
-    /**
-     * Bindings for the models
-     */
-    private void initBindings(){
-        //bindings for lives
-        for (int i = 0; i<livesArray.size(); ++i){
-            livesArray.get(i).visibleProperty().bind(theModel.getLivesValueArray(i));
-        }
-
-    }
-
-    public NonogramView() {
+    public NonogramView(Round theModel) {
 
 //        theModel = new Nonogram();
 //        theModel.initNewGame();
-        puzzleSpace = new PuzzleFactory();
-        theModel = new Round(puzzleSpace);
-        theModel.initNewRound();
-        theModel.displayMatrix();
-
+//        puzzleSpace = new PuzzleFactory();
+        this.theModel = theModel;
+        puzzleSpace = theModel.getPuzzleFactory();
+//        theModel.initNewRound();
+//        theModel.displayMatrix();
 
         initScene();
         initStyling();
-        initEventHandler();
-        initBindings();
+//        theController.initEventHandler();
+//        initBindings();
     }
 }
     
