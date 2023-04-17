@@ -15,6 +15,7 @@
  * *****************************************/
 package org.team3.gameMenu;
 
+import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import org.team3.model.PuzzleFactory;
 import org.team3.model.Round;
@@ -25,6 +26,7 @@ public class MainMenuView {
     }
 
     private VBox root;
+    private Button newGameButton;
 
     private void initScene() {
         root = new VBox();
@@ -32,6 +34,11 @@ public class MainMenuView {
 
     public MainMenuView() {
         initScene();
+        newGameButton = new Button("New game");
+        root.getChildren().add(newGameButton);
     }
 
+    public Button getNewGameButton() {
+        return newGameButton;
+    }
 }

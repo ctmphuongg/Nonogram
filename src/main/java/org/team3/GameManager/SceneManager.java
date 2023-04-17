@@ -13,6 +13,8 @@ package org.team3.GameManager;
 
 
 import javafx.scene.Parent;
+import org.team3.NonogramMain;
+import org.team3.gameMenu.MainMenuMain;
 
 import java.util.HashMap;
 
@@ -23,10 +25,7 @@ import java.util.HashMap;
 public class SceneManager {
     // holds the names of the Roots that will be put onto the GameManager scene
     public static final String GAME_MENU = "game menu";
-    public static final String LEVEL_MENU = "level menu";
-    public static final String INSTRUCTIONS = "instructions";
-    public static final String GAMEPLAY = "gameplay";
-    public static final String SETTINGS = "settings";
+    public static final String GAME_SCREEN = "game screen";
 
     // place to store roots
     private static HashMap<String, Parent> roots = new HashMap<>();
@@ -35,8 +34,8 @@ public class SceneManager {
      * Instantiates the first root- the game menu
      */
     public SceneManager(){
-//        Parent GameMenuRoot = GameMenuMain.getRoot();
-//        addSceneRoots(GAME_MENU, GameMenuRoot);
+        Parent GameMenuRoot = MainMenuMain.getRoot();
+        addSceneRoots(GAME_MENU, GameMenuRoot);
     }
 
 
@@ -44,17 +43,9 @@ public class SceneManager {
      * Populate all the other scenes (level menu, instructions, ...)
      */
     public static void populateOtherScenes(){
-//        Parent LevelMenuRoot = LevelMenuMain.getRoot();
-//        addSceneRoots(LEVEL_MENU, LevelMenuRoot);
-//
-//        Parent InstructionRoot = InstructionsMain.getRoot();
-//        addSceneRoots(INSTRUCTIONS, InstructionRoot);
-//
-//        Parent GameplayRoot = BabaIsYouGameGUIMain.getRoot();
-//        addSceneRoots(GAMEPLAY, GameplayRoot);
-//
-//        Parent SettingsRoot = SettingsMain.getRoot();
-//        addSceneRoots(SETTINGS, SettingsRoot);
+        Parent LevelMenuRoot = NonogramMain.getRoot();
+        addSceneRoots(GAME_SCREEN , LevelMenuRoot);
+
     }
 
     /**

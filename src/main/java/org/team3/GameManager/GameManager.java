@@ -46,7 +46,6 @@ public class GameManager extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        System.out.println("javafx.runtime.version: " + System.getProperties().get("javafx.runtime.version"));
         // instantiate the gamePrimaryStage for other scenes to access
         gamePrimaryStage = primaryStage;
 
@@ -54,8 +53,8 @@ public class GameManager extends Application {
         scene = new Scene(SceneManager.getSceneRoot("game menu"));
 
         // add styling for this scene
-        styleSheet = getClass().getResource("/style.css").toExternalForm();
-        scene.getStylesheets().add(styleSheet);
+        scene.getStylesheets().add(
+                getClass().getResource("/Nonogram.css").toExternalForm());
 
         // populate the other scenes before user clicks
         SceneManager.populateOtherScenes();
@@ -63,7 +62,7 @@ public class GameManager extends Application {
         // set scene to stage
         primaryStage.setScene(scene);
         primaryStage.sizeToScene();
-        primaryStage.setTitle("Rule.Baba is Us");
+        primaryStage.setTitle("Nonogram");
         primaryStage.show();
 
     }

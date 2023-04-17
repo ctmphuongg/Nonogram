@@ -1,13 +1,12 @@
 package org.team3.gameMenu;
 
 import javafx.application.Application;
-import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import org.team3.view.NonogramView;
 
-public class gameMenuMain extends Application {
+public class MainMenuMain extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -22,8 +21,8 @@ public class gameMenuMain extends Application {
     @Override
     public void start(Stage primaryStage) {
         Scene scene = new Scene(theView.getRoot());
-//        scene.getStylesheets().add(
-//                getClass().getResource("/Nonogram.css").toExternalForm());
+        scene.getStylesheets().add(
+                getClass().getResource("/Nonogram.css").toExternalForm());
 
         primaryStage.setTitle("Nonogram Main Menu");
         primaryStage.setScene(scene);
@@ -31,4 +30,11 @@ public class gameMenuMain extends Application {
         primaryStage.show();
 
     }
+
+    public static Parent getRoot(){
+        MainMenuView theView = new MainMenuView();
+        MainMenuController theController = new MainMenuController(theView);
+        return theView.getRoot();
+    }
+
 }
