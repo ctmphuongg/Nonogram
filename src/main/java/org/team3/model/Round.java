@@ -81,6 +81,7 @@ public class Round {
 
     /** Scanner to read player's guess */
     private Scanner scnr = new Scanner(System.in);
+    private SimpleBooleanProperty isWin;
 
 
     public void setPlayingMode(PLAYING_MODE playingMode) {
@@ -101,6 +102,7 @@ public class Round {
         this.guessCol = null;
         this.roundState = ROUND_STATE.NEW_ROUND;
         this.paintedSquareNotGuessed = puzzleFactory.getColoredBox();
+        this.isWin = new SimpleBooleanProperty(false);
     }
 
     public SimpleBooleanProperty getLivesValueArray(int i) {
@@ -121,6 +123,14 @@ public class Round {
      */
     public int getHints() {
         return hints;
+    }
+
+    public boolean isIsWin() {
+        return isWin.get();
+    }
+
+    public SimpleBooleanProperty isWinProperty() {
+        return isWin;
     }
 
     /**
@@ -263,12 +273,15 @@ public class Round {
      * If player chooses to get a hint, decrement the number of hints have left
      */
     public boolean guessEvaluator(int row,int column) {
-        System.out.println(1);
         if (this.playingMode == PLAYING_MODE.SQUARE) {
             if (guessPuzzle[row][column] == 1) { //Correctly chosen a square (square = 1)
                 this.currentPuzzle[row][column] = SQUARE_STATE.CORRECTLY_CHOSEN;
                 System.out.println("Correctly Chosen!");
                 this.paintedSquareNotGuessed--;
+                if (isRoundWinner()) {
+                    isWin.setValue(true);
+                    System.out.println(1);
+                }
                 return true;
 
             } else {
@@ -285,7 +298,6 @@ public class Round {
                 this.currentPuzzle[row][column] = SQUARE_STATE.CORRECTLY_CROSSED;
                 System.out.println("Correctly Crossed!");
 
-                this.paintedSquareNotGuessed--;
                 return true;
             } else {
                 this.currentPuzzle[row][column] = SQUARE_STATE.WRONGLY_CROSSED;

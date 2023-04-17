@@ -10,6 +10,8 @@
  * * *****************************************/
 package org.team3.gameMenu;
 
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import org.team3.GameManager.SceneManager;
 
@@ -24,7 +26,10 @@ public class MainMenuController {
     public void initEventHandler(){
         Button button = theView.getNewGameButton();
         button.setOnAction(e->{
-            button.getScene().setRoot(SceneManager.getSceneRoot(SceneManager.GAME_SCREEN));
+            Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_SCREEN);
+            scene.getStylesheets().add(
+                    getClass().getResource("/Nonogram.css").toExternalForm());
+            button.getScene().setRoot(scene);
         });
     }
 }

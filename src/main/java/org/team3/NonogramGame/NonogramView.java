@@ -17,7 +17,9 @@
 
 package org.team3.NonogramGame;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
@@ -27,13 +29,18 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import org.team3.GameManager.SceneManager;
 import org.team3.model.PLAYING_MODE;
 import org.team3.model.PuzzleFactory;
 import org.team3.model.Round;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 public class NonogramView {
 
@@ -56,6 +63,8 @@ public class NonogramView {
     public VBox getRoot() { return root;}
 
     private void initScene() {
+
+
         root = new VBox();
 
         livesBox = new HBox();
@@ -124,9 +133,6 @@ public class NonogramView {
 
             }
             numbers_row.getChildren().add(hintContainerVBox);
-
-
-
         }
 
         // HINT ON LEFT
@@ -158,9 +164,6 @@ public class NonogramView {
 
             }
 
-
-//            // Add Rectangle and Text into the StackPane
-//            stackPane.getChildren().addAll(numberColorBoxRow, text);
 
 
             numbers_column.getChildren().add(hintContainerHBox);
@@ -297,6 +300,25 @@ public class NonogramView {
                 }
             });
         });
+
+        // check if the game has been won
+        theModel.isWinProperty().addListener(((observable, oldValue, newValue) ->{
+            System.out.println(2);
+            Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_MENU);
+            scene.getStylesheets().add(
+                    getClass().getResource("/Nonogram.css").toExternalForm());
+            // uses choose to get the scene
+            choose.getScene().setRoot(scene);
+        } ));
+
+        // check if the game has been lost (the live value at index 0 = false)
+        theModel.getLivesValueArray(0).addListener(((observable, oldValue, newValue) ->{
+            Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_MENU);
+            scene.getStylesheets().add(
+                    getClass().getResource("/Nonogram.css").toExternalForm());
+            // uses choose to get the scene
+            choose.getScene().setRoot(scene);
+        } ));
     }
 
 
