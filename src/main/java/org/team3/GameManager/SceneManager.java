@@ -13,7 +13,7 @@ package org.team3.GameManager;
 
 
 import javafx.scene.Parent;
-import org.team3.NonogramMain;
+import org.team3.NonogramGame.NonogramMain;
 import org.team3.gameMenu.MainMenuMain;
 
 import java.util.HashMap;

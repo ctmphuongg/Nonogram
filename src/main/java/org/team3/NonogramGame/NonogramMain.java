@@ -1,10 +1,10 @@
-package org.team3;
+package org.team3.NonogramGame;
 
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.team3.view.NonogramView;
+import org.team3.NonogramGame.NonogramView;
 
 public class NonogramMain extends Application {
 

@@ -15,7 +15,7 @@
  *
  * *****************************************/
 
-package org.team3.view;
+package org.team3.NonogramGame;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;

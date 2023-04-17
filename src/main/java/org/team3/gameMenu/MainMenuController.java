@@ -12,7 +12,6 @@ package org.team3.gameMenu;
 
 import javafx.scene.control.Button;
 import org.team3.GameManager.SceneManager;
-import org.team3.NonogramMain;
 
 public class MainMenuController {
     private MainMenuView theView;
