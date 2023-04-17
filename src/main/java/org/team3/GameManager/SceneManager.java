@@ -43,9 +43,7 @@ public class SceneManager {
      * Populate all the other scenes (level menu, instructions, ...)
      */
     public static void populateOtherScenes(){
-        Parent LevelMenuRoot = NonogramMain.getRoot();
-        addSceneRoots(GAME_SCREEN , LevelMenuRoot);
-
+        addNewGame();
     }
 
     /**
@@ -65,5 +63,10 @@ public class SceneManager {
      */
     public static Parent getSceneRoot(String rootName){
         return roots.get(rootName);
+    }
+
+    public static void addNewGame(){
+        Parent LevelMenuRoot = NonogramMain.getRoot();
+        addSceneRoots(GAME_SCREEN , LevelMenuRoot);
     }
 }
