@@ -76,6 +76,7 @@ public class Round {
     /** The playing mode player chooses to play (choose a square, cross a square or quit) */
     private PLAYING_MODE playingMode;
 
+
     /** Current game state */
     private ROUND_STATE roundState;
 
@@ -457,6 +458,14 @@ public class Round {
         else{
             this.currentPuzzle[row][column]=SQUARE_STATE.CORRECTLY_CROSSED;
         }
+    }
+
+    /**
+     *
+     * @return current Round state
+     */
+    public ROUND_STATE getRoundState() {
+        return roundState;
     }
 
 }
