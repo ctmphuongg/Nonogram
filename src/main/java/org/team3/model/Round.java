@@ -281,7 +281,6 @@ public class Round {
                 this.paintedSquareNotGuessed--;
                 if (isRoundWinner()) {
                     isWin.setValue(true);
-                    System.out.println(1);
                 }
                 return true;
 

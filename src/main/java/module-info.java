@@ -6,8 +6,9 @@ module csci205_final_project{
     requires javafx.controls;
     requires javafx.fxml;
 
-    exports org.team3;
     exports org.team3.model;
-    exports org.team3.view;
+    exports org.team3.gameMenu;
+    exports org.team3.NonogramGame;
+    exports org.team3.GameManager;
     exports org.team3.GameOver;
 }

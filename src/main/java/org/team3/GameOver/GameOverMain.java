@@ -1,8 +1,11 @@
 package org.team3.GameOver;
 
 import javafx.application.Application;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.team3.gameMenu.MainMenuController;
+import org.team3.gameMenu.MainMenuView;
 import org.team3.model.Round;
 
 public class GameOverMain extends Application {
@@ -34,7 +37,11 @@ public class GameOverMain extends Application {
         primaryStage.setScene(scene);
         primaryStage.sizeToScene();
         primaryStage.show();
+    }
 
-
+    public static Parent getRoot(){
+        GameOverView theView = new GameOverView();
+        GameOverController theController = new GameOverController(theView);
+        return theView.getRoot();
     }
 }

@@ -29,7 +29,6 @@ public class MainMenuController {
             Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_SCREEN);
             scene.getStylesheets().add(
                     getClass().getResource("/Nonogram.css").toExternalForm());
-            SceneManager.addNewGame();
             button.getScene().setRoot(scene);
         });
     }

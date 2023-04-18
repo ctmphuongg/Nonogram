@@ -54,6 +54,14 @@ public class GameOverView {
 
     }
 
+    public Button getBtnYes() {
+        return btnYes;
+    }
+
+    public Button getBtnNo() {
+        return btnNo;
+    }
+
     public GameOverView(){
         this.initScene();
     }

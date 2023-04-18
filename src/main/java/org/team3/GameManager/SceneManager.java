@@ -13,6 +13,7 @@ package org.team3.GameManager;
 
 
 import javafx.scene.Parent;
+import org.team3.GameOver.GameOverMain;
 import org.team3.NonogramGame.NonogramMain;
 import org.team3.gameMenu.MainMenuMain;
 
@@ -27,6 +28,7 @@ public class SceneManager {
     public static final String GAME_MENU = "game menu";
     public static final String GAME_SCREEN = "game screen";
 
+    public static final String GAME_OVER = "gameover screen";
     // place to store roots
     private static HashMap<String, Parent> roots = new HashMap<>();
 
@@ -44,6 +46,8 @@ public class SceneManager {
      */
     public static void populateOtherScenes(){
         addNewGame();
+        Parent GameOverRoot = GameOverMain.getRoot();
+        addSceneRoots(GAME_OVER, GameOverRoot);
     }
 
     /**
