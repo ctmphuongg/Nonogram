@@ -1,13 +1,13 @@
-package org.team3.GameResult;
+package org.team3.GameOver;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.team3.model.Round;
 
-public class GameResultMain extends Application {
-    private GameResultView theView;
-    private GameResultController theController;
+public class GameOverMain extends Application {
+    private GameOverView theView;
+    private GameOverController theController;
     private Round theModel;
 
     /**
@@ -18,7 +18,7 @@ public class GameResultMain extends Application {
     @Override
     public void init() throws Exception {
         super.init();
-        this.theView = new GameResultView();
+        this.theView = new GameOverView();
 //        this.theController = new TempConverterController(theModel, theView);
     }
 
@@ -30,7 +30,7 @@ public class GameResultMain extends Application {
     public void start(Stage primaryStage) {
         Scene scene = new Scene(this.theView.getRoot());
 //        scene.getStylesheets().add(getClass().getResource("/lab10/tempconvertermvc.css").toExternalForm());
-        primaryStage.setTitle("Game Result");
+        primaryStage.setTitle("Game Over");
         primaryStage.setScene(scene);
         primaryStage.sizeToScene();
         primaryStage.show();

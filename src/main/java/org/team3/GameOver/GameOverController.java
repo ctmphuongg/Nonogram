@@ -13,7 +13,7 @@
  * Description:
  *
  * *****************************************/
-package org.team3.GameResult;
+package org.team3.GameOver;
 
-public class GameResultController {
+public class GameOverController {
 }
