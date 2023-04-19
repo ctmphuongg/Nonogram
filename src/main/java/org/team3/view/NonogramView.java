@@ -164,31 +164,39 @@ public class NonogramView {
         // HINT ON LEFT
         // Get the row_hint_data
         ArrayList<Integer>[] row_hint_data = puzzleSpace.getRowHint();
+
         // Create a column contain numbers that represent number of boxes being colored (HINT
         numbers_column = new VBox();
         puzzle.setLeft(numbers_column);
-        for (int i = 0; i < 5; i++){
 
+        for (int i = 0; i < 5; i++){
+            // Create HBox covering each square of hints
             HBox hintContainerHBox = new HBox();
             hintContainerHBox.setPrefSize(30, 30);
             hintContainerHBox.setStyle("-fx-background-color: LIGHTSTEELBLUE; -fx-border-color: ALICEBLUE");
             hintContainerHBox.getStyleClass().add("number_box");
 
-            //Create a StackPane for rectangle and text
-            StackPane stackPane = new StackPane();
-
+            // Take row hint data for the row we are dealing with at index i
             ArrayList<Integer> text_content = row_hint_data[i];
+
+            // Add a hintBox including each number of a hint data
             for (Integer num : text_content) {
+                // Set text to hint data
                 Text text = new Text(num.toString());
                 text.setFill(Color.WHITE);
+
+                // Format the square
                 Rectangle smallHint = new Rectangle(10, 30);
                 smallHint.setStyle("-fx-fill: #176285");
+
+                // Add hint to scene
                 StackPane hintBox = new StackPane();
                 hintBox.getChildren().addAll(smallHint, text);
                 hintContainerHBox.getChildren().add(hintBox);
 
-
             }
+
+            // Add whole hint container to puzzle
             numbers_column.getChildren().add(hintContainerHBox);
         }
     }
@@ -205,29 +213,32 @@ public class NonogramView {
         numbers_row = new HBox();
         puzzle.setTop(numbers_row);
 
+
         for (int i = 0; i < 6; i++){
-            //Create a StackPane for rectangle and text
+            // Create VBox covering each square of hints
             VBox hintContainerVBox = new VBox();
             hintContainerVBox.setPrefSize(30, 30);
             hintContainerVBox.setStyle("-fx-background-color: LIGHTSTEELBLUE; -fx-border-color: ALICEBLUE");
             hintContainerVBox.getStyleClass().add("number_box");
 
-
-
             // Starting from the second rectangle
             if (i>0){
                 ArrayList<Integer> text_content = column_hint_data[i-1];
                 for (Integer num : text_content) {
+                    // Set text to hint data
                     Text text = new Text(num.toString());
                     text.setFill(Color.WHITE);
+
+                    // Format the square
                     Rectangle smallHint = new Rectangle(30, 10);
                     smallHint.setStyle("-fx-fill: #176285");
+
+                    // Add hint to scene
                     StackPane hintBox = new StackPane();
                     hintBox.getChildren().addAll(smallHint, text);
                     hintContainerVBox.getChildren().add(hintBox);
 
                 }
-
 
             }
             numbers_row.getChildren().add(hintContainerVBox);
