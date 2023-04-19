@@ -82,11 +82,16 @@ public class Round {
 
     /** Scanner to read player's guess */
     private Scanner scnr = new Scanner(System.in);
+    private PuzzleFactory puzzleFactory;
     private SimpleBooleanProperty isWin;
 
 
     public void setPlayingMode(PLAYING_MODE playingMode) {
         this.playingMode = playingMode;
+    }
+
+    public PuzzleFactory getPuzzleFactory() {
+        return puzzleFactory;
     }
 
     public Round(PuzzleFactory puzzleFactory){
@@ -103,6 +108,7 @@ public class Round {
         this.guessCol = null;
         this.roundState = ROUND_STATE.NEW_ROUND;
         this.paintedSquareNotGuessed = puzzleFactory.getColoredBox();
+        this.puzzleFactory = puzzleFactory;
         this.isWin = new SimpleBooleanProperty(false);
     }
 
