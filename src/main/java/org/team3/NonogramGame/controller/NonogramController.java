@@ -15,7 +15,7 @@
  *
  * *****************************************/
 
-package org.team3.controller;
+package org.team3.NonogramGame.controller;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Toggle;
@@ -23,7 +23,7 @@ import javafx.scene.layout.GridPane;
 import org.team3.model.Nonogram;
 import org.team3.model.PLAYING_MODE;
 import org.team3.model.Round;
-import org.team3.view.NonogramView;
+import org.team3.NonogramGame.NonogramView;
 
 public class NonogramController {
     private NonogramView theView;
