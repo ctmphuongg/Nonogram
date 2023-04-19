@@ -86,41 +86,120 @@ public class NonogramView {
     private void initScene() {
         root = new VBox();
 
-        livesBox = new HBox();
+        initLives();
 
-        // create line of three heart represent lives
-        root.getChildren().add(livesBox);
-        livesBox.getStyleClass().add("hearts");
+        initPuzzle();
 
-        this.livesArray = new ArrayList<>();
-        for (int i = 0; i < theModel.getLives();i++){
-            Image live = new Image(getClass().getResource("/pic/heart.png").toExternalForm());
-            ImageView imageView = new ImageView(live);
-            imageView.getStyleClass().add("heart-shape");
-            this.livesArray.add(imageView);
+        createColumnHint();
 
-            // Cannot change to css
-            imageView.setFitHeight(30);
-            imageView.setFitWidth(30);
+        createRowHint();
+
+        initPuzzleContent();
+
+        setPlayingMode();
+
+    }
+
+    /**
+     * Set Playing mode when click to each cell
+     */
+    private void setPlayingMode() {
+        // Playing mode cross
+        cross = new ToggleButton();
+        cross.setText("X");
+        cross.getStyleClass().add("choiceX");
+
+        // Playing mode choose
+        choose = new ToggleButton();
+        choose.setText("  ");
+        choose.getStyleClass().add("choiceColor");
+
+        // Mode get hint
+        ImageView btnGetHintImage = new ImageView(new Image(getClass().getResourceAsStream("/pic/lightbulb.png")));
+        btnGetHintImage.setFitHeight(30);
+        btnGetHintImage.setFitWidth(30);
+        getHint = new ToggleButton(Integer.toString(theModel.getHints()),btnGetHintImage);
+
+        // Add all to toggle group
+        playMode = new ToggleGroup();
+        cross.setToggleGroup(playMode);
+        choose.setToggleGroup(playMode);
+        getHint.setToggleGroup(playMode);
+
+        // Add Toggle group to scene
+        toggleGroup = new HBox();
+        toggleGroup.setAlignment(Pos.CENTER);
+        toggleGroup.getStyleClass().add("button-group");
+
+
+        toggleGroup.getChildren().addAll(cross, choose, getHint);
+        root.getChildren().add(toggleGroup);
+    }
+
+    /**
+     * Initiate the content of the puzzle space
+     */
+    private void initPuzzleContent() {
+        // Real puzzle matrix
+        matrix = new GridPane();
+        puzzle.setCenter(matrix);
+
+        gridButton = new ArrayList<>();
+
+        for (int row=0; row < 5; row++) {
+            for (int col=0; col < 5; col++) {
+                Button box = new Button();
+                box.getStyleClass().add("box");
+                matrix.add(box, row, col);
+
+                gridButton.add(box);
+            }
         }
+    }
 
-        livesBox.getChildren().addAll(livesArray);
+    /**
+     * Create hint for the rows
+     */
+    private void createRowHint() {
+        // HINT ON LEFT
+        // Get the row_hint_data
+        ArrayList<Integer>[] row_hint_data = puzzleSpace.getRowHint();
+        // Create a column contain numbers that represent number of boxes being colored (HINT
+        numbers_column = new VBox();
+        puzzle.setLeft(numbers_column);
+        for (int i = 0; i < 5; i++){
 
-        // Create all the puzzle math
-        puzzle = new BorderPane();
-        HBox center = new HBox();
-        VBox center2 = new VBox();
-        center.getChildren().add(center2);
-        center2.getChildren().add(puzzle);
-        center2.getStyleClass().add("puzzle");
-        center.getStyleClass().add("puzzle");
-        root.getChildren().add(center);
+            HBox hintContainerHBox = new HBox();
+            hintContainerHBox.setPrefSize(30, 30);
+            hintContainerHBox.setStyle("-fx-background-color: LIGHTSTEELBLUE; -fx-border-color: ALICEBLUE");
+            hintContainerHBox.getStyleClass().add("number_box");
 
+            //Create a StackPane for rectangle and text
+            StackPane stackPane = new StackPane();
+
+            ArrayList<Integer> text_content = row_hint_data[i];
+            for (Integer num : text_content) {
+                Text text = new Text(num.toString());
+                text.setFill(Color.WHITE);
+                Rectangle smallHint = new Rectangle(10, 30);
+                smallHint.setStyle("-fx-fill: #176285");
+                StackPane hintBox = new StackPane();
+                hintBox.getChildren().addAll(smallHint, text);
+                hintContainerHBox.getChildren().add(hintBox);
+
+
+            }
+            numbers_column.getChildren().add(hintContainerHBox);
+        }
+    }
+
+    /**
+     * Create hint for the column
+     */
+    private void createColumnHint() {
         // HINT ON TOP
         // Get the column hint data
         ArrayList<Integer>[] column_hint_data = puzzleSpace.getColumnHint();
-
-
 
         // Create a row contain numbers that represent number of boxes being colored (HINT ON TOP)
         numbers_row = new HBox();
@@ -153,99 +232,49 @@ public class NonogramView {
             }
             numbers_row.getChildren().add(hintContainerVBox);
 
-
-
         }
-
-        // HINT ON LEFT
-        // Get the row_hint_data
-        ArrayList<Integer>[] row_hint_data = puzzleSpace.getRowHint();
-        // Create a column contain numbers that represent number of boxes being colored (HINT
-        numbers_column = new VBox();
-        puzzle.setLeft(numbers_column);
-        for (int i = 0; i < 5; i++){
-
-            HBox hintContainerHBox = new HBox();
-            hintContainerHBox.setPrefSize(30, 30);
-            hintContainerHBox.setStyle("-fx-background-color: LIGHTSTEELBLUE; -fx-border-color: ALICEBLUE");
-            hintContainerHBox.getStyleClass().add("number_box");
-
-            //Create a StackPane for rectangle and text
-            StackPane stackPane = new StackPane();
-
-            ArrayList<Integer> text_content = row_hint_data[i];
-            for (Integer num : text_content) {
-                Text text = new Text(num.toString());
-                text.setFill(Color.WHITE);
-                Rectangle smallHint = new Rectangle(10, 30);
-                smallHint.setStyle("-fx-fill: #176285");
-                StackPane hintBox = new StackPane();
-                hintBox.getChildren().addAll(smallHint, text);
-                hintContainerHBox.getChildren().add(hintBox);
-
-
-            }
-
-
-//            // Add Rectangle and Text into the StackPane
-//            stackPane.getChildren().addAll(numberColorBoxRow, text);
-
-
-            numbers_column.getChildren().add(hintContainerHBox);
-        }
-
-        // Real puzzle matrix
-        matrix = new GridPane();
-        puzzle.setCenter(matrix);
-
-        gridButton = new ArrayList<>();
-
-        for (int row=0; row < 5; row++) {
-            for (int col=0; col < 5; col++) {
-                Button box = new Button();
-                box.getStyleClass().add("box");
-                matrix.add(box, row, col);
-
-                gridButton.add(box);
-            }
-        }
-
-        // Playing mode
-
-
-        // Playing mode
-        cross = new ToggleButton();
-        cross.setText("X");
-        cross.getStyleClass().add("choiceX");
-
-
-        choose = new ToggleButton();
-        choose.setText("  ");
-        choose.getStyleClass().add("choiceColor");
-
-
-        ImageView btnGetHintImage = new ImageView(new Image(getClass().getResourceAsStream("/pic/lightbulb.png")));
-        btnGetHintImage.setFitHeight(30);
-        btnGetHintImage.setFitWidth(30);
-        getHint = new ToggleButton(Integer.toString(theModel.getHints()),btnGetHintImage);
-
-
-        playMode = new ToggleGroup();
-        cross.setToggleGroup(playMode);
-        choose.setToggleGroup(playMode);
-        getHint.setToggleGroup(playMode);
-
-
-        toggleGroup = new HBox();
-        toggleGroup.setAlignment(Pos.CENTER);
-        toggleGroup.getStyleClass().add("button-group");
-
-
-        toggleGroup.getChildren().addAll(cross,choose,getHint);
-        root.getChildren().add(toggleGroup);
-
     }
 
+    /**
+     * Initiate the wrapper of puzzle
+     */
+    private void initPuzzle() {
+        // Create all the puzzle math
+        puzzle = new BorderPane();
+        HBox center = new HBox();
+        VBox center2 = new VBox();
+        center.getChildren().add(center2);
+        center2.getChildren().add(puzzle);
+        center2.getStyleClass().add("puzzle");
+        center.getStyleClass().add("puzzle");
+        root.getChildren().add(center);
+    }
+
+    /**
+     * Initiate 3 lives for the round
+     */
+    private void initLives() {
+        livesBox = new HBox();
+
+        // create line of three heart represent lives
+        root.getChildren().add(livesBox);
+        livesBox.getStyleClass().add("hearts");
+
+        // Add 3 hearts as lives
+        this.livesArray = new ArrayList<>();
+        for (int i = 0; i < theModel.getLives();i++){
+            Image live = new Image(getClass().getResource("/pic/heart.png").toExternalForm());
+            ImageView imageView = new ImageView(live);
+            imageView.getStyleClass().add("heart-shape");
+            this.livesArray.add(imageView);
+
+            // Cannot change to css
+            imageView.setFitHeight(30);
+            imageView.setFitWidth(30);
+        }
+
+        livesBox.getChildren().addAll(livesArray);
+    }
 
 
     private void initStyling() {
