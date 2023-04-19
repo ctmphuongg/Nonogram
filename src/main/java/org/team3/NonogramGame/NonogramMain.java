@@ -7,7 +7,6 @@ import javafx.stage.Stage;
 import org.team3.NonogramGame.controller.NonogramController;
 import org.team3.model.PuzzleFactory;
 import org.team3.model.Round;
-import org.team3.NonogramGame.NonogramView;
 
 public class NonogramMain extends Application {
 
@@ -15,8 +14,8 @@ public class NonogramMain extends Application {
         launch(args);
     }
     private static Round theModel;
-    private NonogramView theView;
-    private NonogramController theController;
+    private static NonogramView theView;
+    private static NonogramController theController;
     private PuzzleFactory puzzleSpace;
 
     @Override
@@ -47,7 +46,14 @@ public class NonogramMain extends Application {
 
 
     public static Parent getRoot(){
-        NonogramView rootScene = new NonogramView(theModel);
-        return rootScene.getRoot();
+
+        PuzzleFactory puzzleSpace = new PuzzleFactory();
+        theModel = new Round(puzzleSpace);
+        theModel.initNewRound();
+        theModel.displayMatrix();
+
+        theView = new NonogramView(theModel);
+        theController = new NonogramController(theModel, theView);
+        return theView.getRoot();
     }
 }
