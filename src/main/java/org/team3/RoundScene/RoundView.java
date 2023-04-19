@@ -67,12 +67,6 @@ public class RoundView {
     private void initStyling(){
         root.setAlignment(Pos.TOP_LEFT);
         root.setPadding(new Insets(10));
-
-
-
-
-
-
     }
 
     private void initEventHandler(){

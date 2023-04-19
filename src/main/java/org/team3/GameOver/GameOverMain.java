@@ -21,7 +21,7 @@ public class GameOverMain extends Application {
     @Override
     public void init() throws Exception {
         super.init();
-        this.theView = new GameOverView();
+//        this.theView = new GameOverView();
 //        this.theController = new TempConverterController(theModel, theView);
     }
 
@@ -32,15 +32,14 @@ public class GameOverMain extends Application {
     @Override
     public void start(Stage primaryStage) {
         Scene scene = new Scene(this.theView.getRoot());
-//        scene.getStylesheets().add(getClass().getResource("/lab10/tempconvertermvc.css").toExternalForm());
         primaryStage.setTitle("Game Over");
         primaryStage.setScene(scene);
         primaryStage.sizeToScene();
         primaryStage.show();
     }
 
-    public static Parent getRoot(){
-        GameOverView theView = new GameOverView();
+    public static Parent getRoot(String message){
+        GameOverView theView = new GameOverView(message);
         GameOverController theController = new GameOverController(theView);
         return theView.getRoot();
     }

@@ -304,7 +304,7 @@ public class NonogramView {
         // check if the game has been won
         theModel.isWinProperty().addListener(((observable, oldValue, newValue) ->{
             System.out.println(2);
-            Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_OVER);
+            Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_WINNER);
             scene.getStylesheets().add(
                     getClass().getResource("/Nonogram.css").toExternalForm());
             // uses choose to get the scene
@@ -313,7 +313,7 @@ public class NonogramView {
 
         // check if the game has been lost (the live value at index 0 = false)
         theModel.getLivesValueArray(0).addListener(((observable, oldValue, newValue) ->{
-            Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_OVER);
+            Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_LOSER);
             scene.getStylesheets().add(
                     getClass().getResource("/Nonogram.css").toExternalForm());
             // uses choose to get the scene

@@ -15,6 +15,7 @@ package org.team3.GameManager;
 import javafx.scene.Parent;
 import org.team3.GameOver.GameOverMain;
 import org.team3.NonogramGame.NonogramMain;
+import org.team3.RoundScene.RoundMain;
 import org.team3.gameMenu.MainMenuMain;
 
 import java.util.HashMap;
@@ -28,7 +29,10 @@ public class SceneManager {
     public static final String GAME_MENU = "game menu";
     public static final String GAME_SCREEN = "game screen";
 
-    public static final String GAME_OVER = "gameover screen";
+    public static final String GAME_LOSER = "game loser screen";
+    public static final String GAME_WINNER= "game winner screen";
+
+    public static final String GAME_ROUND= "game round screen";
     // place to store roots
     private static HashMap<String, Parent> roots = new HashMap<>();
 
@@ -46,8 +50,12 @@ public class SceneManager {
      */
     public static void populateOtherScenes(){
         addNewGame();
-        Parent GameOverRoot = GameOverMain.getRoot();
-        addSceneRoots(GAME_OVER, GameOverRoot);
+        Parent gameOverRoot = GameOverMain.getRoot("You Lost");
+        addSceneRoots(GAME_LOSER, gameOverRoot);
+        gameOverRoot = GameOverMain.getRoot("You Win");
+        addSceneRoots(GAME_WINNER, gameOverRoot);
+        Parent roundRoot = RoundMain.getRoot();
+        addSceneRoots(GAME_ROUND, roundRoot);
     }
 
     /**

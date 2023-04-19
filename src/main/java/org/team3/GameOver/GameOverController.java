@@ -30,9 +30,9 @@ public class GameOverController {
     private void initEventHandler(){
         Button btnYes = theView.getBtnYes();
         Button btnNo = theView.getBtnNo();
-
+        Button btnRound = theView.getBtnRound();
         btnYes.setOnAction(e->{
-            Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_SCREEN);
+            Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_MENU);
             scene.getStylesheets().add(
                     getClass().getResource("/Nonogram.css").toExternalForm());
             SceneManager.addNewGame();
@@ -40,7 +40,14 @@ public class GameOverController {
         });
 
         btnNo.setOnAction(e->{
-            Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_MENU);
+            Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_SCREEN);
+            scene.getStylesheets().add(
+                    getClass().getResource("/Nonogram.css").toExternalForm());
+            btnNo.getScene().setRoot(scene);
+        });
+
+        btnRound.setOnAction(e->{
+            Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_ROUND);
             scene.getStylesheets().add(
                     getClass().getResource("/Nonogram.css").toExternalForm());
             btnNo.getScene().setRoot(scene);

@@ -1,8 +1,10 @@
 package org.team3.RoundScene;
 
 import javafx.application.Application;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.team3.GameOver.GameOverController;
 import org.team3.GameOver.GameOverView;
 import org.team3.model.Round;
 
@@ -33,4 +35,9 @@ public class RoundMain extends Application {
 //        this.theController = new TempConverterController(theModel, theView);
     }
 
+    public static Parent getRoot(){
+        RoundView theView = new RoundView();
+        RoundController theController = new RoundController(theView);
+        return theView.getRoot();
+    }
 }

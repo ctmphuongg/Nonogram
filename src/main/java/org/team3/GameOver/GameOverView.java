@@ -32,6 +32,7 @@ public class GameOverView {
 
     private Button btnYes;
     private Button btnNo;
+    private Button btnRound;
 
 
 
@@ -39,19 +40,23 @@ public class GameOverView {
         return root;
     }
 
-    private void initScene(){
+    private void initScene(String gameMessage){
         this.root = new VBox();
-        this.lblRoundState = new Label("GAME OVER");
+        this.lblRoundState = new Label(gameMessage);
         this.lblPlayAgain = new Label("Play Again?");
         this.btnYes = new Button("Yes");
         this.btnNo = new Button("No");
-        this.lblRoundState = new Label("GAME WINNER");
         this.lblPlayAgain = new Label("Play Next Round?");
         this.btnYes = new Button("Yes");
         this.btnNo = new Button("No");
+        this.btnRound = new Button("Back to round list");
 
-        this.root.getChildren().addAll(this.lblRoundState,this.lblPlayAgain, this.btnYes,this.btnNo);
+        this.root.getChildren().addAll(this.lblRoundState,this.lblPlayAgain, this.btnYes,this.btnNo,btnRound);
 
+    }
+
+    public Button getBtnRound() {
+        return btnRound;
     }
 
     public Button getBtnYes() {
@@ -62,11 +67,9 @@ public class GameOverView {
         return btnNo;
     }
 
-    public GameOverView(){
-        this.initScene();
+    public GameOverView(String gameMessage){
+        this.initScene(gameMessage);
     }
-
-
 
 
 }
