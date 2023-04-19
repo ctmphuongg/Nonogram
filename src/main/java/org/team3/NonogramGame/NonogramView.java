@@ -15,10 +15,12 @@
  *
  * *****************************************/
 
-package org.team3.view;
+package org.team3.NonogramGame;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.BooleanProperty;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
@@ -28,14 +30,19 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import org.team3.controller.NonogramController;
+import org.team3.GameManager.SceneManager;
 import org.team3.model.PLAYING_MODE;
 import org.team3.model.PuzzleFactory;
 import org.team3.model.Round;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 public class NonogramView {
 
@@ -84,6 +91,8 @@ public class NonogramView {
     }
 
     private void initScene() {
+
+
         root = new VBox();
 
         initLives();

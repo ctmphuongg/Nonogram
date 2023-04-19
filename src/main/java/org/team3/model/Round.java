@@ -76,12 +76,14 @@ public class Round {
     /** The playing mode player chooses to play (choose a square, cross a square or quit) */
     private PLAYING_MODE playingMode;
 
+
     /** Current game state */
     private ROUND_STATE roundState;
 
     /** Scanner to read player's guess */
     private Scanner scnr = new Scanner(System.in);
     private PuzzleFactory puzzleFactory;
+    private SimpleBooleanProperty isWin;
 
 
     public void setPlayingMode(PLAYING_MODE playingMode) {
@@ -107,6 +109,7 @@ public class Round {
         this.roundState = ROUND_STATE.NEW_ROUND;
         this.paintedSquareNotGuessed = puzzleFactory.getColoredBox();
         this.puzzleFactory = puzzleFactory;
+        this.isWin = new SimpleBooleanProperty(false);
     }
 
     public SimpleBooleanProperty getLivesValueArray(int i) {
@@ -127,6 +130,14 @@ public class Round {
      */
     public int getHints() {
         return hints;
+    }
+
+    public boolean isIsWin() {
+        return isWin.get();
+    }
+
+    public SimpleBooleanProperty isWinProperty() {
+        return isWin;
     }
 
     /**
@@ -269,12 +280,14 @@ public class Round {
      * If player chooses to get a hint, decrement the number of hints have left
      */
     public boolean guessEvaluator(int row,int column) {
-        System.out.println(1);
         if (this.playingMode == PLAYING_MODE.SQUARE) {
             if (guessPuzzle[row][column] == 1) { //Correctly chosen a square (square = 1)
                 this.currentPuzzle[row][column] = SQUARE_STATE.CORRECTLY_CHOSEN;
                 System.out.println("Correctly Chosen!");
                 this.paintedSquareNotGuessed--;
+                if (isRoundWinner()) {
+                    isWin.setValue(true);
+                }
                 return true;
 
             } else {
@@ -291,7 +304,6 @@ public class Round {
                 this.currentPuzzle[row][column] = SQUARE_STATE.CORRECTLY_CROSSED;
                 System.out.println("Correctly Crossed!");
 
-                this.paintedSquareNotGuessed--;
                 return true;
             } else {
                 this.currentPuzzle[row][column] = SQUARE_STATE.WRONGLY_CROSSED;
@@ -451,6 +463,14 @@ public class Round {
         else{
             this.currentPuzzle[row][column]=SQUARE_STATE.CORRECTLY_CROSSED;
         }
+    }
+
+    /**
+     *
+     * @return current Round state
+     */
+    public ROUND_STATE getRoundState() {
+        return roundState;
     }
 
 }

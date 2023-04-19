@@ -1,12 +1,14 @@
-package org.team3;
+package org.team3.NonogramGame;
 
 import javafx.application.Application;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.team3.controller.NonogramController;
 import org.team3.model.PuzzleFactory;
 import org.team3.model.Round;
 import org.team3.view.NonogramView;
+import org.team3.NonogramGame.NonogramView;
 
 public class NonogramMain extends Application {
 
@@ -32,7 +34,6 @@ public class NonogramMain extends Application {
     @Override
     public void start(Stage primaryStage) {
         Scene scene = new Scene(theView.getRoot());
-
         scene.getStylesheets().add(
                 getClass().getResource("/Nonogram.css").toExternalForm());
 
@@ -44,4 +45,9 @@ public class NonogramMain extends Application {
         primaryStage.show();
     }
 
+
+    public static Parent getRoot(){
+        NonogramView rootScene = new NonogramView();
+        return rootScene.getRoot();
+    }
 }
