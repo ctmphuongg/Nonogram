@@ -25,7 +25,7 @@ import java.util.*;
  */
 public class PuzzleFactory {
     /**The current game round*/
-    private static int round = 0;
+    public static int round = 1;
 
     /**The matrix puzzle*/
     private int [][] matrix;
@@ -36,7 +36,6 @@ public class PuzzleFactory {
     private ArrayList<Integer> [] columnHint;
 
     public PuzzleFactory() {
-        this.round++;
         this.matrix = convertCSVtoArray(getPuzzleFileName());
         this.rowHint = new ArrayList[this.matrix.length];
         this.columnHint = new ArrayList[this.matrix.length];
@@ -228,5 +227,23 @@ public class PuzzleFactory {
             fileName = "src/main/resources/datasets/"+ puzzleFileNameList.get((round-1) % puzzleFileNameList.size());
         }catch (Exception e){}
         return fileName;
+    }
+
+    /**
+     * Get the number of puzzle in the csv file
+     * @return  the number of puzzle
+     */
+    public static int getPuzzleNumber(){
+        int numPuzzle = 0;
+        try{
+            List<String> puzzleFileNameList = Files.list(Paths.get("src/main/resources/datasets/")).
+                    map(Path::getFileName).map(Path::toString).toList();
+           numPuzzle=puzzleFileNameList.size();
+        }catch (Exception e){}
+        return numPuzzle;
+    }
+
+    public static void setRound(int round) {
+        PuzzleFactory.round = round;
     }
 }

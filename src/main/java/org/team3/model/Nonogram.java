@@ -87,7 +87,7 @@ public class Nonogram {
      * @return if the player wins the game if they win all 5 rounds
      */
     public boolean isGameWinner(){
-        int MAX_ROUNDS = 5;
+        int MAX_ROUNDS = PuzzleFactory.getPuzzleNumber();
         if (this.round == MAX_ROUNDS){
             this.gameState = GAME_STATE.GAME_WINNER;
         }

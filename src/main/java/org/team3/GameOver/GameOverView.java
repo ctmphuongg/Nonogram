@@ -51,7 +51,7 @@ public class GameOverView {
         this.btnNo = new Button("No");
         this.btnRound = new Button("Back to round list");
 
-        this.root.getChildren().addAll(this.lblRoundState,this.lblPlayAgain, this.btnYes,this.btnNo,btnRound);
+        this.root.getChildren().addAll(this.lblRoundState,this.lblPlayAgain, this.btnYes,this.btnNo,this.btnRound);
 
     }
 
