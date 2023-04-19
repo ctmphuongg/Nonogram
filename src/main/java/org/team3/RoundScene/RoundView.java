@@ -22,47 +22,37 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import org.team3.model.PuzzleFactory;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 
 
 public class RoundView {
     private FlowPane root;
+    private ArrayList<Button> listRoundButtons;
 
     public FlowPane getRoot() { return root;}
 
     private void initScene (){
         root = new FlowPane(80,30);
-
+        listRoundButtons = new ArrayList<>();
         root.setAlignment(Pos.CENTER_LEFT);
         root.setPrefWrapLength(300); // set the preferred width of the pane
 
 
-        for (int i = 0; i<5; i++){
+        for (int i = 0; i < PuzzleFactory.getPuzzleNumber(); i++){
             Button round = new Button("Round " + (i+1));
+            this.listRoundButtons.add(round);
             root.getChildren().add(round);
-
         }
-        // Get the number of file in the dataset folder
-//        URL resourceUrl = RoundView.class.getResource("/datasets");
-//
-//
-//        // create a File object for the folder
-//        File folder = new File(resourceUrl.getPath());
-//
-//        // get the list of files in the folder
-//        File[] files = folder.listFiles();
-//
-//        // count the number of files
-//        int numFiles = files.length;
-//
-//        System.out.println("Number of files in folder: " + numFiles);
-
-
-
-
     }
+
+    public Button buttonRoundAtIndex(int index){
+        return listRoundButtons.get(index);
+    }
+
 
     private void initStyling(){
         root.setAlignment(Pos.TOP_LEFT);
