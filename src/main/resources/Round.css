@@ -1,0 +1,14 @@
+.root{
+    -fx-spacing: 30;
+    -fx-min-height: 300px;
+    -fx-min-width: 300px;
+    -fx-background-color: linear-gradient(to bottom right, #e09eaa, darkgrey);
+}
+
+.button {
+    -fx-pref-width: 80;
+    -fx-pref-height: 40;
+
+}
+
+

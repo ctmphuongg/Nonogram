@@ -22,7 +22,7 @@ public class MainMenuMain extends Application {
     public void start(Stage primaryStage) {
         Scene scene = new Scene(theView.getRoot());
         scene.getStylesheets().add(
-                getClass().getResource("/Nonogram.css").toExternalForm());
+                getClass().getResource("/MainMenu.css").toExternalForm());
 
         primaryStage.setTitle("Nonogram Main Menu");
         primaryStage.setScene(scene);
