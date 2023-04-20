@@ -17,9 +17,11 @@
 
 package org.team3.NonogramGame.controller;
 
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Toggle;
 import javafx.scene.layout.GridPane;
+import org.team3.GameManager.SceneManager;
 import org.team3.model.Nonogram;
 import org.team3.model.PLAYING_MODE;
 import org.team3.model.Round;
@@ -73,6 +75,24 @@ public class NonogramController {
                 }
             });
         });
+
+        // check if the game has been won
+        theModel.isWinProperty().addListener(((observable, oldValue, newValue) ->{
+            System.out.println(2);
+            Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_WINNER);
+            scene.getStylesheets().add(getClass().getResource("/Nonogram.css").toExternalForm());
+            // uses choose to get the scene
+            theView.getChoose().getScene().setRoot(scene);
+        } ));
+
+        // check if the game has been lost (the live value at index 0 = false)
+        theModel.getLivesValueArray(0).addListener(((observable, oldValue, newValue) ->{
+            Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_LOSER);
+            scene.getStylesheets().add(getClass().getResource("/Nonogram.css").toExternalForm());
+            // uses choose to get the scene
+            theView.getChoose().getScene().setRoot(scene);
+        } ));
+
     }
 
     /**

@@ -21,8 +21,8 @@ public class GameOverMain extends Application {
     @Override
     public void init() throws Exception {
         super.init();
-//        this.theView = new GameOverView();
-//        this.theController = new TempConverterController(theModel, theView);
+//        this.theView = new GameOverView("dsafgdf");
+//        this.theController = new GameOverController(theView);
     }
 
     public static void main(String[] args) {

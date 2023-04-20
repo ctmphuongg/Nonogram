@@ -25,11 +25,10 @@ public class MainMenuController {
 
     public void initEventHandler(){
         Button button = theView.getNewGameButton();
-        button.setOnAction(e->{
-            Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_SCREEN);
+        button.setOnAction(e-> {
+            Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_ROUND);
             scene.getStylesheets().add(
                     getClass().getResource("/Nonogram.css").toExternalForm());
-            SceneManager.addNewGame();
             button.getScene().setRoot(scene);
         });
     }

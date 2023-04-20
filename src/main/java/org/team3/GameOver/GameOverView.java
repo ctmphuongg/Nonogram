@@ -34,8 +34,6 @@ public class GameOverView {
     private Button btnNo;
     private Button btnRound;
 
-
-
     public VBox getRoot() {
         return root;
     }

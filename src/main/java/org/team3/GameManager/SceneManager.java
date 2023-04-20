@@ -28,7 +28,6 @@ public class SceneManager {
     // holds the names of the Roots that will be put onto the GameManager scene
     public static final String GAME_MENU = "game menu";
     public static final String GAME_SCREEN = "game screen";
-
     public static final String GAME_LOSER = "game loser screen";
     public static final String GAME_WINNER= "game winner screen";
 
@@ -37,7 +36,7 @@ public class SceneManager {
     private static HashMap<String, Parent> roots = new HashMap<>();
 
     /**
-     * Instantiates the first root- the game menu
+     * Instantiates the first root - the game menu
      */
     public SceneManager(){
         Parent GameMenuRoot = MainMenuMain.getRoot();
@@ -66,7 +65,6 @@ public class SceneManager {
     public static void addSceneRoots(String sceneName, Parent sceneRoot){
         roots.put(sceneName, sceneRoot);
     }
-
 
     /**
      * Gets a scene root based on the name
