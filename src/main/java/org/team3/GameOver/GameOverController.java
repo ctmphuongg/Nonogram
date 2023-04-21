@@ -18,6 +18,7 @@ package org.team3.GameOver;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import org.team3.GameManager.SceneManager;
+import org.team3.model.PuzzleFactory;
 
 public class GameOverController {
     GameOverView theView;
@@ -32,6 +33,8 @@ public class GameOverController {
         Button btnNo = theView.getBtnNo();
         Button btnRound = theView.getBtnRound();
         btnYes.setOnAction(e->{
+            PuzzleFactory.increaseRound();
+            SceneManager.addNewGame();
             Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_MENU);
             scene.getStylesheets().add(
                     getClass().getResource("/Nonogram.css").toExternalForm());

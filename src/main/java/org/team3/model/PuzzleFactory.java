@@ -244,7 +244,12 @@ public class PuzzleFactory {
     }
 
     public static void setRound(int round) {
-        if (round>=5)round = 0;
+        if (round>=getPuzzleNumber())round = 0;
         PuzzleFactory.round = round;
+    }
+
+    public static void increaseRound() {
+        PuzzleFactory.round+=1;
+        PuzzleFactory.round%=getPuzzleNumber();
     }
 }
