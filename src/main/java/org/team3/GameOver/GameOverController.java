@@ -29,32 +29,32 @@ public class GameOverController {
     }
 
     private void initEventHandler(){
-        Button btnYes = theView.getBtnYes();
-        Button btnNo = theView.getBtnNo();
+        Button btnAgain = theView.getBtnAgain();
+        Button btnNextRound = theView.getBtnNextRound();
         Button btnRound = theView.getBtnRound();
-        btnYes.setOnAction(e->{
+        btnNextRound.setOnAction(e->{
             PuzzleFactory.increaseRound();
             SceneManager.addNewGame();
             Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_MENU);
             scene.getStylesheets().add(
                     getClass().getResource("/Nonogram.css").toExternalForm());
             SceneManager.addNewGame();
-            btnYes.getScene().setRoot(scene);
+            btnNextRound.getScene().setRoot(scene);
         });
 
-        btnNo.setOnAction(e->{
+        btnAgain.setOnAction(e->{
             SceneManager.addNewGame();
             Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_SCREEN);
             scene.getStylesheets().add(
                     getClass().getResource("/Nonogram.css").toExternalForm());
-            btnNo.getScene().setRoot(scene);
+            btnAgain.getScene().setRoot(scene);
         });
 
         btnRound.setOnAction(e->{
             Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_ROUND);
             scene.getStylesheets().add(
                     getClass().getResource("/Nonogram.css").toExternalForm());
-            btnNo.getScene().setRoot(scene);
+            btnRound.getScene().setRoot(scene);
         });
     }
 }

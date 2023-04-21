@@ -49,9 +49,9 @@ public class SceneManager {
      */
     public static void populateOtherScenes(){
         addNewGame();
-        Parent gameOverRoot = GameOverMain.getRoot("You Lost");
+        Parent gameOverRoot = GameOverMain.getRoot("You Lost",false);
         addSceneRoots(GAME_LOSER, gameOverRoot);
-        gameOverRoot = GameOverMain.getRoot("You Win");
+        gameOverRoot = GameOverMain.getRoot("You Win",true);
         addSceneRoots(GAME_WINNER, gameOverRoot);
         Parent roundRoot = RoundMain.getRoot();
         addSceneRoots(GAME_ROUND, roundRoot);
