@@ -172,7 +172,7 @@ public class NonogramView {
         for (int i = 0; i < 5; i++){
             // Create HBox covering each square of hints
             HBox hintContainerHBox = new HBox();
-            hintContainerHBox.setPrefSize(30, 30);
+            hintContainerHBox.setPrefSize(31, 31);
             hintContainerHBox.setStyle("-fx-background-color: LIGHTSTEELBLUE; -fx-border-color: ALICEBLUE");
             hintContainerHBox.getStyleClass().add("number_box");
 

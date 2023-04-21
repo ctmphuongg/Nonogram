@@ -44,7 +44,7 @@ public class NonogramMain extends Application {
         primaryStage.show();
     }
 
-
+    //
     public static Parent getRoot(){
 
         PuzzleFactory puzzleSpace = new PuzzleFactory();
