@@ -18,6 +18,7 @@
 package org.team3.NonogramGame;
 
 import javafx.beans.property.BooleanProperty;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
@@ -27,6 +28,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import org.team3.NonogramGame.controller.NonogramController;
 import org.team3.model.PuzzleFactory;
@@ -174,7 +176,7 @@ public class NonogramView {
             HBox hintContainerHBox = new HBox();
             hintContainerHBox.setPrefSize(31, 31);
             hintContainerHBox.setStyle("-fx-background-color: LIGHTSTEELBLUE; -fx-border-color: ALICEBLUE");
-            hintContainerHBox.getStyleClass().add("number_box");
+            hintContainerHBox.getStyleClass().add("number_box_left");
 
             // Take row hint data for the row we are dealing with at index i
             ArrayList<Integer> text_content = row_hint_data[i];
@@ -186,14 +188,8 @@ public class NonogramView {
                 text.setFill(Color.WHITE);
 
                 // Format the square
-                StackPane smallHint = new StackPane();
-                smallHint.setStyle("-fx-fill: #176285");
-                smallHint.prefWidthProperty().bind(new Button().prefWidthProperty());
-                smallHint.prefHeightProperty().bind(new Button().prefHeightProperty());
-
-                // Add hint to scene
-                StackPane hintBox = new StackPane();
-                hintBox.getChildren().addAll(smallHint, text);
+                Rectangle smallHint = new Rectangle(10, 29);
+                StackPane hintBox = getHintBox(text, smallHint);
                 hintContainerHBox.getChildren().add(hintBox);
 
             }
@@ -201,6 +197,30 @@ public class NonogramView {
             // Add whole hint container to puzzle
             numbers_column.getChildren().add(hintContainerHBox);
         }
+    }
+
+    /**
+     * Design the hint box
+     * @param text - the hint number
+     * @param smallHint - the square for the hint number
+     * @return hintBox - a Stackpane containing the square and the hint number
+     */
+    private static StackPane getHintBox(Text text, Rectangle smallHint) {
+        smallHint.setStyle("-fx-fill: #176285");
+
+        // Add a border to the square
+        smallHint.setStroke(Color.WHITE);
+        smallHint.setStrokeWidth(1);
+
+
+        // Set the font size dynamically based on the size of the rectangle
+        double fontSize = Math.min(smallHint.getWidth() / text.getText().length(), smallHint.getHeight());
+        text.setFont(Font.font(fontSize));
+
+        // Add hint to scene
+        StackPane hintBox = new StackPane();
+        hintBox.getChildren().addAll(smallHint, text);
+        return hintBox;
     }
 
     /**
@@ -221,7 +241,10 @@ public class NonogramView {
             VBox hintContainerVBox = new VBox();
             hintContainerVBox.setPrefSize(30, 30);
             hintContainerVBox.setStyle("-fx-background-color: LIGHTSTEELBLUE; -fx-border-color: ALICEBLUE");
-            hintContainerVBox.getStyleClass().add("number_box");
+            hintContainerVBox.getStyleClass().add("number_box_top");
+            hintContainerVBox.setSpacing(-3);
+            hintContainerVBox.setPadding(new Insets(0, 0, 0, 0));
+            hintContainerVBox.setAlignment(Pos.CENTER);
 
             // Starting from the second rectangle
             if (i>0){
@@ -232,12 +255,9 @@ public class NonogramView {
                     text.setFill(Color.WHITE);
 
                     // Format the square
-                    Rectangle smallHint = new Rectangle(30, 10);
-                    smallHint.setStyle("-fx-fill: #176285");
-
-                    // Add hint to scene
-                    StackPane hintBox = new StackPane();
-                    hintBox.getChildren().addAll(smallHint, text);
+                    Rectangle smallHint = new Rectangle(29,10);
+                    StackPane hintBox = getHintBox(text, smallHint);
+                    hintBox.setAlignment(Pos.BOTTOM_CENTER);
                     hintContainerVBox.getChildren().add(hintBox);
 
                 }
