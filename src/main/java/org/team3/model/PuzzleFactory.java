@@ -25,7 +25,7 @@ import java.util.*;
  */
 public class PuzzleFactory {
     /**The current game round*/
-    public static int round = 1;
+    public static int round = 0;
 
     /**The matrix puzzle*/
     private int [][] matrix;
@@ -224,7 +224,7 @@ public class PuzzleFactory {
         try{
             List<String> puzzleFileNameList = Files.list(Paths.get("src/main/resources/datasets/")).
                     map(Path::getFileName).map(Path::toString).toList();
-            fileName = "src/main/resources/datasets/"+ puzzleFileNameList.get((round-1) % puzzleFileNameList.size());
+            fileName = "src/main/resources/datasets/"+ puzzleFileNameList.get((round) % puzzleFileNameList.size());
         }catch (Exception e){}
         return fileName;
     }
@@ -244,6 +244,7 @@ public class PuzzleFactory {
     }
 
     public static void setRound(int round) {
+        if (round>=5)round = 0;
         PuzzleFactory.round = round;
     }
 }
