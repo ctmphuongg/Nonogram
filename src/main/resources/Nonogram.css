@@ -20,7 +20,7 @@
     -fx-alignment: center;
 }
 
-.number_box{
+.number_box_left{
     -fx-background-color: #176285;
     -fx-border-color: #a3b8c2;
     -fx-border-width: 1px;
@@ -29,6 +29,17 @@
     -fx-max-width: 31px;
     -fx-max-height: 31px;
     -fx-alignment: TOP_RIGHT;
+}
+
+.number_box_top{
+    -fx-background-color: #176285;
+    -fx-border-color: #a3b8c2;
+    -fx-border-width: 1px;
+    -fx-min-width: 31px;
+    -fx-min-height: 31px;
+    -fx-max-width: 31px;
+    -fx-max-height: 31px;
+    -fx-alignment: BOTTOM_RIGHT;
 }
 
 .box{
