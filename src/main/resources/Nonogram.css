@@ -31,6 +31,7 @@
     -fx-alignment: TOP_RIGHT;
 }
 
+/*hint on the top*/
 .number_box_top{
     -fx-background-color: #176285;
     -fx-border-color: #a3b8c2;
