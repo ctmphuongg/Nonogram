@@ -33,6 +33,8 @@ public class RoundView {
     private FlowPane root;
     private ArrayList<Button> listRoundButtons;
 
+    private Button backToMainMenuBtn;
+
     public FlowPane getRoot() { return root;}
 
     private void initScene (){
@@ -47,10 +49,17 @@ public class RoundView {
             this.listRoundButtons.add(round);
             root.getChildren().add(round);
         }
+
+        backToMainMenuBtn = new Button("Back to Main Menu");
+        root.getChildren().add(backToMainMenuBtn);
     }
 
     public Button buttonRoundAtIndex(int index){
         return listRoundButtons.get(index);
+    }
+
+    public Button getBackToMainMenuBtn() {
+        return backToMainMenuBtn;
     }
 
 
