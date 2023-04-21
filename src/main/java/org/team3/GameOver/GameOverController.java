@@ -40,6 +40,7 @@ public class GameOverController {
         });
 
         btnNo.setOnAction(e->{
+            SceneManager.addNewGame();
             Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_SCREEN);
             scene.getStylesheets().add(
                     getClass().getResource("/Nonogram.css").toExternalForm());
