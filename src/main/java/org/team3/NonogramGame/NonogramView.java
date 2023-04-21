@@ -186,8 +186,10 @@ public class NonogramView {
                 text.setFill(Color.WHITE);
 
                 // Format the square
-                Rectangle smallHint = new Rectangle(10, 30);
+                StackPane smallHint = new StackPane();
                 smallHint.setStyle("-fx-fill: #176285");
+                smallHint.prefWidthProperty().bind(new Button().prefWidthProperty());
+                smallHint.prefHeightProperty().bind(new Button().prefHeightProperty());
 
                 // Add hint to scene
                 StackPane hintBox = new StackPane();
