@@ -30,28 +30,35 @@ import java.util.ArrayList;
 
 
 public class RoundView {
-    private FlowPane root;
+    private VBox root;
+    private FlowPane roundButtons;
     private ArrayList<Button> listRoundButtons;
 
     private Button backToMainMenuBtn;
 
-    public FlowPane getRoot() { return root;}
+    public VBox getRoot() { return root;}
 
     private void initScene (){
-        root = new FlowPane(80,30);
+        root = new VBox();
+        root.setAlignment(Pos.CENTER);
+
+        roundButtons = new FlowPane(80,30);
+        roundButtons.setAlignment(Pos.CENTER);
         listRoundButtons = new ArrayList<>();
-        root.setAlignment(Pos.CENTER_LEFT);
-        root.setPrefWrapLength(300); // set the preferred width of the pane
+        roundButtons.setPrefWrapLength(300); // set the preferred width of the pane
 
 
         for (int i = 0; i < PuzzleFactory.getPuzzleNumber(); i++){
             Button round = new Button("Round " + (i+1));
             this.listRoundButtons.add(round);
-            root.getChildren().add(round);
+            roundButtons.getChildren().add(round);
         }
+
+        root.getChildren().add(roundButtons);
 
         backToMainMenuBtn = new Button("Back to Main Menu");
         root.getChildren().add(backToMainMenuBtn);
+
     }
 
     public Button buttonRoundAtIndex(int index){
