@@ -14,6 +14,8 @@ import javafx.scene.Parent;
 import org.team3.GameManager.SceneManager;
 import org.team3.model.PuzzleFactory;
 
+import java.net.URISyntaxException;
+
 public class RoundController {
     RoundView theView;
 
@@ -27,7 +29,11 @@ public class RoundController {
             int k = i;
             theView.buttonRoundAtIndex(i).setOnAction(event -> {
                 PuzzleFactory.setRound(k);
-                SceneManager.addNewGame();
+                try {
+                    SceneManager.addNewGame();
+                } catch (URISyntaxException e) {
+                    throw new RuntimeException(e);
+                }
                 Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_SCREEN);
                 scene.getStylesheets().add(
                         getClass().getResource("/Nonogram.css").toExternalForm());

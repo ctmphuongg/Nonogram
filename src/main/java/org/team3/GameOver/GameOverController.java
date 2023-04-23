@@ -20,6 +20,8 @@ import javafx.scene.control.Button;
 import org.team3.GameManager.SceneManager;
 import org.team3.model.PuzzleFactory;
 
+import java.net.URISyntaxException;
+
 public class GameOverController {
     GameOverView theView;
 
@@ -34,16 +36,28 @@ public class GameOverController {
         Button btnRound = theView.getBtnRound();
         btnYes.setOnAction(e->{
             PuzzleFactory.increaseRound();
-            SceneManager.addNewGame();
+            try {
+                SceneManager.addNewGame();
+            } catch (URISyntaxException ex) {
+                throw new RuntimeException(ex);
+            }
             Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_MENU);
             scene.getStylesheets().add(
                     getClass().getResource("/Nonogram.css").toExternalForm());
-            SceneManager.addNewGame();
+            try {
+                SceneManager.addNewGame();
+            } catch (URISyntaxException ex) {
+                throw new RuntimeException(ex);
+            }
             btnYes.getScene().setRoot(scene);
         });
 
         btnNo.setOnAction(e->{
-            SceneManager.addNewGame();
+            try {
+                SceneManager.addNewGame();
+            } catch (URISyntaxException ex) {
+                throw new RuntimeException(ex);
+            }
             Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_SCREEN);
             scene.getStylesheets().add(
                     getClass().getResource("/Nonogram.css").toExternalForm());
