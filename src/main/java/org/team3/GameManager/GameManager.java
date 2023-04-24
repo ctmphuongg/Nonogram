@@ -1,9 +1,14 @@
 package org.team3.GameManager;
 
 import javafx.application.Application;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Scene;
 import javafx.scene.control.Slider;
 import javafx.stage.Stage;
+import org.team3.model.PuzzleFactory;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -16,6 +21,8 @@ import java.net.URISyntaxException;
  * loads the user in the way the game is intended to be played.
  */
 public class GameManager extends Application {
+    //Map for controlling rounds
+    public static HashMap<Integer, SimpleBooleanProperty> ROUNDMAP;
     /**
      * Global game width, game height
      */
@@ -42,9 +49,15 @@ public class GameManager extends Application {
     @Override
     public void init() throws Exception {
         super.init();
+        ROUNDMAP = new HashMap<>();
+        //populate the round map
+        for (int i=0;i<PuzzleFactory.getPuzzleNumber();++i) {
+            ROUNDMAP.put(i, new SimpleBooleanProperty(false));
+        }
         // creates the default scene
         manager = new SceneManager();
         musicPlayer = new MusicPlayer();
+
     }
 
     /**

@@ -21,10 +21,12 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Toggle;
 import javafx.scene.layout.GridPane;
+import org.team3.GameManager.GameManager;
 import org.team3.GameManager.SceneManager;
 import org.team3.MusicPlayer;
 import org.team3.model.Nonogram;
 import org.team3.model.PLAYING_MODE;
+import org.team3.model.PuzzleFactory;
 import org.team3.model.Round;
 import org.team3.NonogramGame.NonogramView;
 
@@ -85,6 +87,8 @@ public class NonogramController {
 
         // check if the game has been won
         theModel.isWinProperty().addListener(((observable, oldValue, newValue) ->{
+            GameManager.ROUNDMAP.get(PuzzleFactory.round).set(true);
+            System.out.println(GameManager.ROUNDMAP.get(PuzzleFactory.round).getValue());
             Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_WINNER);
             scene.getStylesheets().add(getClass().getResource("/Nonogram.css").toExternalForm());
             // uses choose to get the scene

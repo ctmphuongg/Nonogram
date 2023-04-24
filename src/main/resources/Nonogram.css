@@ -111,7 +111,7 @@
     -fx-pref-width: 80;
     -fx-pref-height: 40;
     -fx-font-family: 'Montserrat';
-
+    -fx-background-color: grey;
 }
 
 .white-text{
