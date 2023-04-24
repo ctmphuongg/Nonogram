@@ -44,7 +44,11 @@ public class GameOverController {
             Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_MENU);
             scene.getStylesheets().add(
                     getClass().getResource("/Nonogram.css").toExternalForm());
-            SceneManager.addNewGame();
+            try {
+                SceneManager.addNewGame();
+            } catch (URISyntaxException ex) {
+                throw new RuntimeException(ex);
+            }
             btnNextRound.getScene().setRoot(scene);
             try {
                 SceneManager.addNewGame();

@@ -78,7 +78,7 @@ public class SceneManager {
 
 //    public static void addNewGame() throws URISyntaxException {
 
-    public static void addNewGame(){
+    public static void addNewGame() throws URISyntaxException {
         Parent LevelMenuRoot = NonogramMain.getRoot();
         addSceneRoots(GAME_SCREEN , LevelMenuRoot);
     }
