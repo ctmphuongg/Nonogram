@@ -50,6 +50,7 @@ public class RoundView {
 
         for (int i = 0; i < PuzzleFactory.getPuzzleNumber(); i++){
             Button round = new Button("Round " + (i+1));
+            round.getStyleClass().add("round_chosen_btn");
             this.listRoundButtons.add(round);
             roundButtons.getChildren().add(round);
         }

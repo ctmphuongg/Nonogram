@@ -1,7 +1,0 @@
-.root{
-    -fx-spacing : 10;
-    -fx-padding: 10;
-    -fx-alignment: center;
-    -fx-min-height: 300px;
-    -fx-background-color: linear-gradient(to bottom right, #e09eaa, darkgrey);
-}

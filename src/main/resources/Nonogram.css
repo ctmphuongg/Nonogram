@@ -1,3 +1,29 @@
+@font-face {
+    -fx-font-family: 'Montserrat';
+    src: url("/font/Montserrat/Montserrat-Medium.ttf");
+}
+
+/* greeting in main menu */
+.greeting{
+    -fx-font-size: 20pt;
+    -fx-font-family: 'Montserrat';
+    -fx-text-fill: white;
+    -fx-padding: 50px 20px 20px 20px;
+}
+
+/* options in main menu */
+.wide-blue-text{
+    -fx-background-color: rgba(59,130,240,0.6);
+    -fx-accent: rgba(96,165,250,0.6);
+    -fx-border-radius: 0;
+    -fx-border-color: rgba(147,197,253,1);
+    -fx-alignment: center;
+    -fx-padding: 1px 0 1px 0;
+    -fx-min-width: 350px;
+    -fx-text-fill: white;
+    -fx-font-family: 'Montserrat';
+
+}
 
 /*root is a VBOX*/
 .root{
@@ -29,6 +55,7 @@
     -fx-max-width: 31px;
     -fx-max-height: 31px;
     -fx-alignment: TOP_RIGHT;
+    -fx-font-family: 'Montserrat';
 }
 
 .number_box_top{
@@ -40,6 +67,7 @@
     -fx-max-width: 31px;
     -fx-max-height: 31px;
     -fx-alignment: BOTTOM_RIGHT;
+    -fx-font-family: 'Montserrat';
 }
 
 .box{
@@ -75,5 +103,18 @@
 .button-group{
     -fx-spacing : 10;
     -fx-padding: 10;
+}
+
+/* button in round chosen scene*/
+.round_chosen_btn{
+    -fx-pref-width: 80;
+    -fx-pref-height: 40;
+    -fx-font-family: 'Montserrat';
+
+}
+
+.white-text{
+    -fx-font-family: 'Montserrat';
+    -fx-text-fill: white;
 }
 

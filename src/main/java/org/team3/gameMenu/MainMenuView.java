@@ -34,7 +34,10 @@ public class MainMenuView {
     private VBox root;
     private Button newGameButton;
 
-    private Label newGamelbl, instructionslbl, exitlbl;
+    private Label newGamelbl;
+    private Label instructionslbl;
+
+    private Label exitlbl;
 
     private VBox options;
 
@@ -45,12 +48,9 @@ public class MainMenuView {
         greeting.getStyleClass().add("greeting");
 
 
-//        root.getChildren().add(greeting);
-//        newGameButton = new Button("New game");
-//        root.getChildren().add(newGameButton);
         options = new VBox();
-        newGamelbl = new Label("START GAME");
-        instructionslbl = new Label("GAME INSTRUCTIONS");
+        newGamelbl = new Label("PLAY");
+        instructionslbl = new Label("HOW TO PLAY");
         exitlbl = new Label("EXIT");
         options.getChildren().addAll(newGamelbl,instructionslbl,exitlbl);
         options.setAlignment(Pos.CENTER);
@@ -65,12 +65,22 @@ public class MainMenuView {
 
     }
 
+    public Label getNewGamelbl() {
+        return newGamelbl;
+    }
+
+    public Label getInstructionslbl() {
+        return instructionslbl;
+    }
+
+    public Label getExitlbl() {
+        return exitlbl;
+    }
+
+
     public MainMenuView() {
         initScene();
 
     }
 
-    public Button getNewGameButton() {
-        return newGameButton;
-    }
 }

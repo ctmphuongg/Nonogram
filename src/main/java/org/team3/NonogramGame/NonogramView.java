@@ -208,11 +208,6 @@ public class NonogramView {
     private static StackPane getHintBox(Text text, Rectangle smallHint) {
         smallHint.setStyle("-fx-fill: #176285");
 
-        // Add a border to the square
-        smallHint.setStroke(Color.WHITE);
-        smallHint.setStrokeWidth(1);
-
-
         // Set the font size dynamically based on the size of the rectangle
         double fontSize = Math.min(smallHint.getWidth() / text.getText().length(), smallHint.getHeight());
         text.setFont(Font.font(fontSize));
