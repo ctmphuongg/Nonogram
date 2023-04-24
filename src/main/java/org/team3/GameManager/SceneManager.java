@@ -75,6 +75,7 @@ public class SceneManager {
         return roots.get(rootName);
     }
 
+
     public static void addNewGame(){
         Parent LevelMenuRoot = NonogramMain.getRoot();
         addSceneRoots(GAME_SCREEN , LevelMenuRoot);
