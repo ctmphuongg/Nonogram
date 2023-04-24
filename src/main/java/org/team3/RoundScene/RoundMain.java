@@ -20,7 +20,7 @@ public class RoundMain extends Application {
     @Override
     public void start(Stage primaryStage) {
         Scene scene = new Scene(this.theView.getRoot());
-        scene.getStylesheets().add(getClass().getResource("/Round.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/Nonogram.css").toExternalForm());
         primaryStage.setTitle("Round view");
         primaryStage.setScene(scene);
         primaryStage.sizeToScene();
