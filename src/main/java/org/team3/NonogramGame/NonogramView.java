@@ -230,7 +230,6 @@ public class NonogramView {
         numbers_row = new HBox();
         puzzle.setTop(numbers_row);
 
-
         for (int i = 0; i < 6; i++){
             // Create VBox covering each square of hints
             VBox hintContainerVBox = new VBox();
