@@ -18,6 +18,7 @@ import org.team3.NonogramGame.NonogramMain;
 import org.team3.RoundScene.RoundMain;
 import org.team3.gameMenu.MainMenuMain;
 
+import java.net.URISyntaxException;
 import java.util.HashMap;
 
 /**
@@ -47,7 +48,7 @@ public class SceneManager {
     /**
      * Populate all the other scenes (level menu, instructions, ...)
      */
-    public static void populateOtherScenes(){
+    public static void populateOtherScenes() throws URISyntaxException {
         addNewGame();
         Parent gameOverRoot = GameOverMain.getRoot("You Lost",false);
         addSceneRoots(GAME_LOSER, gameOverRoot);
@@ -75,6 +76,7 @@ public class SceneManager {
         return roots.get(rootName);
     }
 
+//    public static void addNewGame() throws URISyntaxException {
 
     public static void addNewGame(){
         Parent LevelMenuRoot = NonogramMain.getRoot();
