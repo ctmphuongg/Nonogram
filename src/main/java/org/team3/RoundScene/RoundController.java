@@ -12,6 +12,7 @@ package org.team3.RoundScene;
 
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import org.team3.GameManager.GameManager;
 import org.team3.GameManager.SceneManager;
 import org.team3.model.PuzzleFactory;
 
@@ -33,8 +34,10 @@ public class RoundController {
                 scene.getStylesheets().add(
                         getClass().getResource("/Nonogram.css").toExternalForm());
                 theView.buttonRoundAtIndex(k).getScene().setRoot(scene);
-
             });
+            GameManager.ROUNDMAP.get(i).addListener(((observable, oldValue, newValue) -> {
+                theView.buttonRoundAtIndex(k).setStyle("-fx-background-color: white");
+            }));
         }
 
         Button getBackToMainbtn = theView.getBackToMainMenuBtn();

@@ -18,6 +18,9 @@ package org.team3.GameOver;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import org.team3.GameManager.GameManager;
+import org.team3.GameManager.SceneManager;
+import org.team3.model.PuzzleFactory;
 
 public class GameOverView {
 
@@ -46,6 +49,7 @@ public class GameOverView {
         if (gameStatus==true){
             //the game state is win
             this.root.getChildren().addAll(btnNextRound);
+            // set the round value to true - have played
         }
     }
 

@@ -444,6 +444,10 @@ public class Round {
         this.hints --;
         if (this.guessPuzzle[row][col]==1){
             this.currentPuzzle[row][col]=SQUARE_STATE.CORRECTLY_CHOSEN;
+            this.paintedSquareNotGuessed--;
+            if (isRoundWinner()) {
+                isWin.setValue(true);
+            }
             return true;
         }
         this.currentPuzzle[row][col]=SQUARE_STATE.CORRECTLY_CROSSED;
@@ -459,6 +463,9 @@ public class Round {
         //update the square
         if (this.guessPuzzle[row][column]==1){
             this.currentPuzzle[row][column]=SQUARE_STATE.CORRECTLY_CHOSEN;
+            if (isRoundWinner()) {
+                isWin.setValue(true);
+            }
         }
         else{
             this.currentPuzzle[row][column]=SQUARE_STATE.CORRECTLY_CROSSED;
