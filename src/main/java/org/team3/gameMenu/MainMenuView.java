@@ -32,7 +32,6 @@ public class MainMenuView {
     }
 
     private VBox root;
-    private Button newGameButton;
 
     private Label newGamelbl;
     private Label instructionslbl;
@@ -42,7 +41,6 @@ public class MainMenuView {
     private VBox options;
 
     private void initScene() {
-
         root = new VBox();
         Label greeting = new Label("Welcome to Nonogram");
         greeting.getStyleClass().add("greeting");

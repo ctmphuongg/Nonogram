@@ -21,6 +21,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
@@ -82,7 +83,6 @@ public class NonogramView {
     public ArrayList<ImageView> getLivesArray() {
         return livesArray;
     }
-
     private void initScene() {
 
 
@@ -99,7 +99,6 @@ public class NonogramView {
         initPuzzleContent();
 
         setPlayingMode();
-
     }
 
     /**

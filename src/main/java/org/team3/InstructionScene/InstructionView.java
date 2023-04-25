@@ -40,6 +40,8 @@ public class InstructionView {
 
     private ToggleButton getHintbtn, crossbtn, choosebtn;
 
+    private Label backToMainlbl;
+
 
 
     private void initScene() {
@@ -89,12 +91,23 @@ public class InstructionView {
         rule3.setAlignment(Pos.CENTER_LEFT);
         rule3.setSpacing(20);
 
+        ImageView imageView = new ImageView(new Image("/pic/back.png"));
+        backToMainlbl = new Label();
+        // Set the size of the image view to fit within the label
+        imageView.setFitWidth(30);
+        imageView.setFitHeight(30);
+        // Set the image view as the label's graphic
+        backToMainlbl.setGraphic(imageView);
 
-        root.getChildren().addAll(playingModelbl,rule1,rule2,rule3);
+        root.getChildren().addAll(playingModelbl,rule1,rule2,rule3,backToMainlbl);
 
     }
 
     public InstructionView(){
         initScene();
+    }
+
+    public Label getBackToMainlbl() {
+        return backToMainlbl;
     }
 }

@@ -107,6 +107,7 @@
 
 /* button in round chosen scene*/
 .round_chosen_btn{
+    -fx-background-color: grey;
     -fx-pref-width: 80;
     -fx-pref-height: 40;
     -fx-font-family: 'Montserrat';

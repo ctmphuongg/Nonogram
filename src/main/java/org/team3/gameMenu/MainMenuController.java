@@ -33,12 +33,12 @@ public class MainMenuController {
             newGamelbl.getScene().setRoot(SceneManager.getSceneRoot(SceneManager.GAME_ROUND));
         });
 
-        // get view label and attach root transition event
-//        Label instructionlbl = theView.getInstructionslbl();
-//
-//        instructionlbl.setOnMouseClicked(e->{
-//            instructionlbl.getScene().setRoot(SceneManager.getSceneRoot(SceneManager.INSTRUCTIONS));
-//        });
+//         get view label and attach root transition event
+        Label instructionlbl = theView.getInstructionslbl();
+
+        instructionlbl.setOnMouseClicked(e->{
+            instructionlbl.getScene().setRoot(SceneManager.getSceneRoot(SceneManager.GAME_RULE));
+        });
 
 
         // get exit label , and exit when clicked
@@ -48,15 +48,5 @@ public class MainMenuController {
             Platform.exit();
         });
 
-
-//        Button button = theView.getNewGameButton();
-//
-//
-//        button.setOnAction(e-> {
-//            Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_ROUND);
-//            scene.getStylesheets().add(
-//                    getClass().getResource("/Nonogram.css").toExternalForm());
-//            button.getScene().setRoot(scene);
-//        });
     }
 }

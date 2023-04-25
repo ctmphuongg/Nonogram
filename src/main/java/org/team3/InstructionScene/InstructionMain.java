@@ -1,8 +1,12 @@
 package org.team3.InstructionScene;
 
 import javafx.application.Application;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import org.team3.GameOver.GameOverController;
+import org.team3.GameOver.GameOverView;
 import org.team3.gameMenu.MainMenuView;
 
 public class InstructionMain extends Application {
@@ -28,5 +32,11 @@ public class InstructionMain extends Application {
         primaryStage.sizeToScene();
         primaryStage.show();
 
+    }
+
+    public static Parent getRoot(){
+        InstructionView theView = new InstructionView();
+        InstructionController theController = new InstructionController(theView);
+        return theView.getRoot();
     }
 }
