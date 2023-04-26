@@ -101,7 +101,7 @@ public class MainMenuView {
         musicSetting.setAlignment(Pos.CENTER);
 
         // add to root
-        root.getChildren().addAll(greetingPane,options);
+        root.getChildren().addAll(greetingPane,options,musicSetting);
 
     }
 
