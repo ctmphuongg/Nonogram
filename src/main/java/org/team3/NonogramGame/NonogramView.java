@@ -87,6 +87,13 @@ public class NonogramView {
 
         root = new VBox();
 
+        HBox roundLabel = new HBox();
+        Label roundIndex = new Label("Round " + (puzzleSpace.getRound() + 1));
+        roundIndex.setStyle("-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 20px; -fx-text-fill: white;");
+        roundLabel.getChildren().add(roundIndex);
+        roundLabel.setAlignment(Pos.CENTER);
+        root.getChildren().add(roundLabel);
+
         initLives();
 
         initPuzzle();

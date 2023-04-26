@@ -36,6 +36,7 @@ public class RoundController {
         for (int i=0;i<PuzzleFactory.getPuzzleNumber();++i) {
             int k = i;
             theView.buttonRoundAtIndex(i).setOnAction(event -> {
+                // Attention here
                 PuzzleFactory.setRound(k);
                 try {
                     SceneManager.addNewGame();
