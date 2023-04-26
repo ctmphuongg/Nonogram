@@ -19,8 +19,12 @@ package org.team3.RoundScene;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.team3.model.PuzzleFactory;
 
@@ -49,8 +53,22 @@ public class RoundView {
 
 
         for (int i = 0; i < PuzzleFactory.getPuzzleNumber(); i++){
-            Button round = new Button("Round " + (i+1));
+            Button round = new Button();
             round.getStyleClass().add("round_chosen_btn");
+
+            // Make the button to have star shape
+            StackPane roundBtnImage = new StackPane();
+            Label roundBtnLbl = new Label("Round " + (i+1));
+            roundBtnLbl.setPrefWidth(60);
+            roundBtnLbl.setPrefHeight(40);
+            roundBtnLbl.getStyleClass().add("white-text");
+            ImageView imageView = new ImageView(new Image("pic/star.png"));
+            imageView.setFitWidth(80);
+            imageView.setFitHeight(80);
+            roundBtnImage.getChildren().addAll(imageView,roundBtnLbl);
+
+            round.setStyle("-fx-background-color: transparent;");
+            round.setGraphic(roundBtnImage);
             this.listRoundButtons.add(round);
             roundButtons.getChildren().add(round);
         }

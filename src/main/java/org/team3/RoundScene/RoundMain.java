@@ -32,7 +32,6 @@ public class RoundMain extends Application {
     public void init() throws Exception {
         super.init();
         this.theView = new RoundView();
-//        this.theController = new TempConverterController(theModel, theView);
     }
 
     public static Parent getRoot(){

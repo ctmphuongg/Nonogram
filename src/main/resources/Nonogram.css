@@ -122,16 +122,4 @@
     -fx-text-fill: white;
 }
 
-.win_lose{
-    -fx-font-family: 'Montserrat';
-    -fx-text-fill: white;
-    -fx-font-size: 20;
-}
-
-.music-slider{
-    -fx-font-family: 'Montserrat';
-    -fx-text-fill: white;
-    -fx-font-size: 12;
-
-}
 
