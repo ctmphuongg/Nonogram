@@ -22,6 +22,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import org.w3c.dom.Text;
 
@@ -48,10 +49,13 @@ public class InstructionView {
         root = new VBox();
         rule1 = new HBox();
         rule1.setPrefSize(100,50);
+        rule1.setMaxSize(500,50);
         rule2 = new HBox();
         rule2.setPrefSize(100,50);
+        rule2.setMaxSize(500,50);
         rule3 = new HBox();
         rule3.setPrefSize(100,50);
+        rule3.setMaxSize(500,50);
 
         playingModelbl = new Label("Playing Mode");
         playingModelbl.getStyleClass().add("greeting");
@@ -87,9 +91,11 @@ public class InstructionView {
         getHintText = new Label("Select this button and a square to get a hint. You have 3 hints each round");
         getHintText.getStyleClass().add("white-text");
         rule3.getStyleClass().add("wide-blue-text");
+        rule3.setHgrow(getHintText, Priority.ALWAYS);
         rule3.getChildren().addAll(getHintbtn,getHintText);
         rule3.setAlignment(Pos.CENTER_LEFT);
         rule3.setSpacing(20);
+
 
         ImageView imageView = new ImageView(new Image("/pic/back.png"));
         backToMainlbl = new Label();
