@@ -38,7 +38,7 @@ public class RoundView {
     private FlowPane roundButtons;
     private ArrayList<Button> listRoundButtons;
 
-    private Button backToMainMenuBtn;
+    private Label backToMainMenuLbl;
 
     public VBox getRoot() { return root;}
 
@@ -59,7 +59,7 @@ public class RoundView {
             // Make the button to have star shape
             StackPane roundBtnImage = new StackPane();
             Label roundBtnLbl = new Label("Round " + (i+1));
-            roundBtnLbl.setPrefWidth(60);
+            roundBtnLbl.setPrefWidth(50);
             roundBtnLbl.setPrefHeight(40);
             roundBtnLbl.getStyleClass().add("white-text");
             ImageView imageView = new ImageView(new Image("pic/star.png"));
@@ -75,8 +75,14 @@ public class RoundView {
 
         root.getChildren().add(roundButtons);
 
-        backToMainMenuBtn = new Button("Back to Main Menu");
-        root.getChildren().add(backToMainMenuBtn);
+        ImageView imageView = new ImageView(new Image("/pic/back.png"));
+        backToMainMenuLbl = new Label();
+        // Set the size of the image view to fit within the label
+        imageView.setFitWidth(30);
+        imageView.setFitHeight(30);
+        // Set the image view as the label's graphic
+        backToMainMenuLbl.setGraphic(imageView);
+        root.getChildren().add(backToMainMenuLbl);
 
     }
 
@@ -84,8 +90,8 @@ public class RoundView {
         return listRoundButtons.get(index);
     }
 
-    public Button getBackToMainMenuBtn() {
-        return backToMainMenuBtn;
+    public Label getBackToMainMenuLbl() {
+        return backToMainMenuLbl;
     }
 
 

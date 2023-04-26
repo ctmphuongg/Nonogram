@@ -12,6 +12,7 @@ package org.team3.RoundScene;
 
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import org.team3.GameManager.GameManager;
 import org.team3.GameManager.SceneManager;
 import org.team3.model.PuzzleFactory;
@@ -46,12 +47,12 @@ public class RoundController {
             }));
         }
 
-        Button getBackToMainbtn = theView.getBackToMainMenuBtn();
-        getBackToMainbtn.setOnAction(event -> {
+        Label backToMainMenuLbl = theView.getBackToMainMenuLbl();
+        backToMainMenuLbl.setOnMouseClicked(event -> {
             Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_MENU);
             scene.getStylesheets().add(
                     getClass().getResource("/Nonogram.css").toExternalForm());
-            getBackToMainbtn.getScene().setRoot(scene);
+            backToMainMenuLbl.getScene().setRoot(scene);
         });
 
     }
