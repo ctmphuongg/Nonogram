@@ -1,14 +1,28 @@
 package org.team3.GameManager;
 
 import javafx.application.Application;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Scene;
+import javafx.scene.control.Slider;
 import javafx.stage.Stage;
+import org.team3.model.PuzzleFactory;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import org.team3.MusicPlayer;
+
+import java.net.URISyntaxException;
 
 /**
  * Master application for the entire game itself, running this class begins the game and
  * loads the user in the way the game is intended to be played.
  */
 public class GameManager extends Application {
+    //Map for controlling rounds
+    public static HashMap<Integer, SimpleBooleanProperty> ROUNDMAP;
     /**
      * Global game width, game height
      */
@@ -27,7 +41,7 @@ public class GameManager extends Application {
 
     // Stylesheet for the game menus
     public static String styleSheet;
-
+    public static MusicPlayer musicPlayer;
     public static void main(String[] args) {
         launch(args);
     }
@@ -35,8 +49,15 @@ public class GameManager extends Application {
     @Override
     public void init() throws Exception {
         super.init();
+        ROUNDMAP = new HashMap<>();
+        //populate the round map
+        for (int i=0;i<PuzzleFactory.getPuzzleNumber();++i) {
+            ROUNDMAP.put(i, new SimpleBooleanProperty(false));
+        }
         // creates the default scene
         manager = new SceneManager();
+        musicPlayer = new MusicPlayer();
+
     }
 
     /**
@@ -44,7 +65,7 @@ public class GameManager extends Application {
      * @param primaryStage -  stage for the scene to show itself
      */
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws URISyntaxException {
 
         // instantiate the gamePrimaryStage for other scenes to access
         gamePrimaryStage = primaryStage;
@@ -58,6 +79,9 @@ public class GameManager extends Application {
 
         // populate the other scenes before user clicks
         SceneManager.populateOtherScenes();
+
+        // Add background music
+        musicPlayer.play();
 
         // set scene to stage
         primaryStage.setScene(scene);

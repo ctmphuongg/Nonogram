@@ -49,7 +49,6 @@ public class NonogramView {
     private ArrayList<ImageView> livesArray;
     private HBox numbers_row;
     private VBox numbers_column;
-    private HBox choices;
     private List<Button> gridButton;
 
     private PuzzleFactory puzzleSpace;
@@ -218,10 +217,9 @@ public class NonogramView {
     }
 
     /**
-     * Create hint for the column
+     * Create hint for the column (TOP ROW HINT)
      */
     private void createColumnHint() {
-        // HINT ON TOP
         // Get the column hint data
         ArrayList<Integer>[] column_hint_data = puzzleSpace.getColumnHint();
 
@@ -303,34 +301,40 @@ public class NonogramView {
     }
 
 
+    /**
+     * Styling for the puzzle
+     */
     private void initStyling() {
         root.setAlignment(Pos.CENTER);
 
     }
 
+    /**
+     * Function for choosing the colored button
+     * @return if colored button is being chosen
+     */
     public BooleanProperty isChoose() {
         return choose.selectedProperty();
     }
 
+    /**
+     * Function for choosing the crossed button
+     * @return if colored button is being chosen
+     */
     public BooleanProperty isCross() {
         return cross.selectedProperty();
     }
 
 
+    /**
+     * init the Nonogramview
+     * @param theModel
+     */
     public NonogramView(Round theModel) {
-
-//        theModel = new Nonogram();
-//        theModel.initNewGame();
-//        puzzleSpace = new PuzzleFactory();
         this.theModel = theModel;
         puzzleSpace = theModel.getPuzzleFactory();
-//        theModel.initNewRound();
-//        theModel.displayMatrix();
-
         initScene();
         initStyling();
-//        theController.initEventHandler();
-//        initBindings();
     }
 }
     

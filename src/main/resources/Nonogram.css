@@ -3,6 +3,17 @@
     src: url("/font/Montserrat/Montserrat-Medium.ttf");
 }
 
+/** ROOT OF EVERY SCENE **/
+.root{
+    -fx-spacing : 10;
+    -fx-padding: 10;
+    -fx-alignment: center;
+    -fx-min-height: 300px;
+    -fx-min-width: 300px;
+    -fx-background-color: linear-gradient(to bottom right, #09203f, #537895);
+}
+
+/**---------------------MAIN MENU--------------------**/
 /* greeting in main menu */
 .greeting{
     -fx-font-size: 20pt;
@@ -24,16 +35,10 @@
     -fx-font-family: 'Montserrat';
 
 }
+/**---------------------MAIN MENU--------------------**/
 
-/*root is a VBOX*/
-.root{
-    -fx-spacing : 10;
-    -fx-padding: 10;
-    -fx-alignment: center;
-    -fx-min-height: 300px;
-    -fx-min-width: 300px;
-    -fx-background-color: linear-gradient(to bottom right, #e09eaa, darkgrey);
-}
+
+/**--------------------- PUZZLE --------------------**/
 
 /* live */
 .hearts{
@@ -46,6 +51,7 @@
     -fx-alignment: center;
 }
 
+/* hint in the left hand side */
 .number_box_left{
     -fx-background-color: #176285;
     -fx-border-color: #a3b8c2;
@@ -58,6 +64,7 @@
     -fx-font-family: 'Montserrat';
 }
 
+/*hint on the top*/
 .number_box_top{
     -fx-background-color: #176285;
     -fx-border-color: #a3b8c2;
@@ -70,6 +77,7 @@
     -fx-font-family: 'Montserrat';
 }
 
+/** puzzle without hint **/
 .box{
     -fx-background-color: #effaff;
     -fx-border-color: #a3b8c2;
@@ -80,11 +88,6 @@
     -fx-max-height: 31px;
 
 
-}
-
-.choices{
-    -fx-padding: 10;
-    -fx-alignment: center;
 }
 
 .choiceX{
@@ -111,11 +114,24 @@
     -fx-pref-width: 80;
     -fx-pref-height: 40;
     -fx-font-family: 'Montserrat';
-
+    -fx-background-color: grey;
 }
 
 .white-text{
     -fx-font-family: 'Montserrat';
     -fx-text-fill: white;
+}
+
+.win_lose{
+    -fx-font-family: 'Montserrat';
+    -fx-text-fill: white;
+    -fx-font-size: 20;
+}
+
+.music-slider{
+    -fx-font-family: 'Montserrat';
+    -fx-text-fill: white;
+    -fx-font-size: 12;
+
 }
 

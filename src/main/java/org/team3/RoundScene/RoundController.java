@@ -12,8 +12,11 @@ package org.team3.RoundScene;
 
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import org.team3.GameManager.GameManager;
 import org.team3.GameManager.SceneManager;
 import org.team3.model.PuzzleFactory;
+
+import java.net.URISyntaxException;
 
 public class RoundController {
     RoundView theView;
@@ -28,13 +31,19 @@ public class RoundController {
             int k = i;
             theView.buttonRoundAtIndex(i).setOnAction(event -> {
                 PuzzleFactory.setRound(k);
-                SceneManager.addNewGame();
+                try {
+                    SceneManager.addNewGame();
+                } catch (URISyntaxException e) {
+                    throw new RuntimeException(e);
+                }
                 Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_SCREEN);
                 scene.getStylesheets().add(
                         getClass().getResource("/Nonogram.css").toExternalForm());
                 theView.buttonRoundAtIndex(k).getScene().setRoot(scene);
-
             });
+            GameManager.ROUNDMAP.get(i).addListener(((observable, oldValue, newValue) -> {
+                theView.buttonRoundAtIndex(k).setStyle("-fx-background-color: white");
+            }));
         }
 
         Button getBackToMainbtn = theView.getBackToMainMenuBtn();

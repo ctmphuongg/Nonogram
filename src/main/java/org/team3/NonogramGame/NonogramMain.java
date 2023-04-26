@@ -8,6 +8,8 @@ import org.team3.NonogramGame.controller.NonogramController;
 import org.team3.model.PuzzleFactory;
 import org.team3.model.Round;
 
+import java.net.URISyntaxException;
+
 public class NonogramMain extends Application {
 
     public static void main(String[] args) {
@@ -31,7 +33,7 @@ public class NonogramMain extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws URISyntaxException {
         Scene scene = new Scene(theView.getRoot());
         scene.getStylesheets().add(
                 getClass().getResource("/Nonogram.css").toExternalForm());
@@ -45,7 +47,7 @@ public class NonogramMain extends Application {
     }
 
     //
-    public static Parent getRoot(){
+    public static Parent getRoot() throws URISyntaxException {
 
         PuzzleFactory puzzleSpace = new PuzzleFactory();
         theModel = new Round(puzzleSpace);

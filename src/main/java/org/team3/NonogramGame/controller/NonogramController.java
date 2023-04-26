@@ -21,19 +21,26 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Toggle;
 import javafx.scene.layout.GridPane;
+import org.team3.GameManager.GameManager;
 import org.team3.GameManager.SceneManager;
+import org.team3.MusicPlayer;
 import org.team3.model.Nonogram;
 import org.team3.model.PLAYING_MODE;
+import org.team3.model.PuzzleFactory;
 import org.team3.model.Round;
 import org.team3.NonogramGame.NonogramView;
+
+import java.net.URISyntaxException;
 
 public class NonogramController {
     private NonogramView theView;
     private Round theModel;
+    private MusicPlayer effectPlayer;
 
-    public NonogramController(Round theModel, NonogramView theView) {
+    public NonogramController(Round theModel, NonogramView theView) throws URISyntaxException {
         this.theModel = theModel;
         this.theView = theView;
+        this.effectPlayer = new MusicPlayer();
 
         initEventHandler();
         initBindings();
@@ -60,24 +67,28 @@ public class NonogramController {
                 theModel.setPlayingMode(PLAYING_MODE.SQUARE);
                 if (theModel.checkValidGuess(row,column)) {
                     Toggle selectedButton = theView.getPlayMode().getSelectedToggle();
+                    try {
+                        if (selectedButton == theView.getChoose()) {
+                            handleChooseMode(button, row, column);
 
+                        } else if (selectedButton == theView.getCross()) {
+                            handleCrossMode(button, row, column);
 
-                    if (selectedButton == theView.getChoose()) {
-                        handleChooseMode(button, row, column);
-
-                    } else if (selectedButton == theView.getCross()) {
-                        handleCrossMode(button, row, column);
-
-                    } else if ((selectedButton == theView.getGetHint()) && (theModel.getHints() >0)) {
-                        handleHintMode(button, row, column);
-
+                        } else if ((selectedButton == theView.getGetHint()) && (theModel.getHints() >0)) {
+                            handleHintMode(button, row, column);
+                        }
+                    } catch (URISyntaxException e) {
+                        throw new RuntimeException(e);
                     }
+
                 }
             });
         });
 
         // check if the game has been won
         theModel.isWinProperty().addListener(((observable, oldValue, newValue) ->{
+            GameManager.ROUNDMAP.get(PuzzleFactory.round).set(true);
+            System.out.println(GameManager.ROUNDMAP.get(PuzzleFactory.round).getValue());
             Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_WINNER);
             scene.getStylesheets().add(getClass().getResource("/Nonogram.css").toExternalForm());
             // uses choose to get the scene
@@ -100,7 +111,7 @@ public class NonogramController {
      * @param row x-coordinates of chosen cell
      * @param column y-coordinates of chosen cell
      */
-    private void handleHintMode(Button button, int row, int column) {
+    private void handleHintMode(Button button, int row, int column) throws URISyntaxException {
         theModel.setPlayingMode(PLAYING_MODE.HINT);
         boolean isColoredSquare = theModel.isColored(row, column);
         if (isColoredSquare){
@@ -109,6 +120,7 @@ public class NonogramController {
             button.layout();
         } else {
             button.setText("X");
+            effectPlayer.playWrong();
         }
 
 
@@ -126,7 +138,7 @@ public class NonogramController {
      * @param row x-coordinates of chosen cell
      * @param column y-coordinates of chosen cell
      */
-    private void handleCrossMode(Button button, int row, int column) {
+    private void handleCrossMode(Button button, int row, int column) throws URISyntaxException {
         theModel.setPlayingMode(PLAYING_MODE.CROSS);
         boolean correct = theModel.guessEvaluator(row, column);
 
@@ -136,6 +148,7 @@ public class NonogramController {
             button.setStyle("-fx-background-color: #185c7a;");
             button.applyCss();
             button.layout();
+            effectPlayer.playWrong();
         }
     }
 
@@ -145,7 +158,7 @@ public class NonogramController {
      * @param row x-coordinates of chosen cell
      * @param column y-coordinates of chosen cell
      */
-    private void handleChooseMode(Button button, int row, int column) {
+    private void handleChooseMode(Button button, int row, int column) throws URISyntaxException {
         theModel.setPlayingMode(PLAYING_MODE.SQUARE);
         boolean correct = theModel.guessEvaluator(row, column);
 
@@ -155,6 +168,7 @@ public class NonogramController {
             button.layout();
         } else {
             button.setText("X");
+            effectPlayer.playWrong();
         }
     }
 

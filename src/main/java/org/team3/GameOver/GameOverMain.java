@@ -38,8 +38,8 @@ public class GameOverMain extends Application {
         primaryStage.show();
     }
 
-    public static Parent getRoot(String message){
-        GameOverView theView = new GameOverView(message);
+    public static Parent getRoot(String message,boolean gameState){
+        GameOverView theView = new GameOverView(message,gameState);
         GameOverController theController = new GameOverController(theView);
         return theView.getRoot();
     }
