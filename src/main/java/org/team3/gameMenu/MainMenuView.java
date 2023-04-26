@@ -21,6 +21,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -30,7 +31,6 @@ import org.team3.model.Round;
 import org.w3c.dom.Text;
 
 import javax.swing.text.Element;
-import javax.swing.text.html.ImageView;
 import java.awt.*;
 
 import static java.awt.Color.white;
@@ -42,7 +42,6 @@ public class MainMenuView {
     }
 
     private VBox root;
-    private Button newGameButton;
     private Slider backgroundMusicVolumeSlider;
 
     private Label newGamelbl;
@@ -52,12 +51,22 @@ public class MainMenuView {
 
     private VBox options;
 
+    private Label greetinglbl;
+    private Label backgroundMusicVolumeLabel;
+
     private void initScene() {
 
         root = new VBox();
         Label greetinglbl = new Label("Welcome to Nonogram");
         StackPane greetingPane = new StackPane();
-        ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/pic/heart_mainmenu.png")));
+        Image image = new Image("/pic/heart_mainmenu.png");
+        double newWidth = 100; // desired width
+        double newHeight = 100; // desired height
+
+        Image resizedImage = new Image(image.getUrl(), newWidth, newHeight, true, true);
+
+        ImageView imageView = new ImageView(resizedImage);
+
         greetinglbl.setGraphic(imageView);
         greetinglbl.getStyleClass().add("greeting");
         greetingPane.getChildren().addAll(imageView,greetinglbl);
@@ -75,8 +84,6 @@ public class MainMenuView {
         instructionslbl.getStyleClass().add("wide-blue-text");
         exitlbl.getStyleClass().add("wide-blue-text");
 
-        // add to root
-        root.getChildren().addAll(greetingPane,options);
 
         backgroundMusicVolumeSlider = new Slider(0.0, 1.0, 0.5);
         backgroundMusicVolumeSlider.setShowTickMarks(true);
@@ -85,13 +92,16 @@ public class MainMenuView {
             GameManager.musicPlayer.setVolume(newValue.doubleValue());
         });
 
-        Label backgroundMusicVolumeLabel = new Label("Volume:");
+        backgroundMusicVolumeLabel = new Label("Volume:");
+        backgroundMusicVolumeLabel.getStyleClass().add("white-text");
 
         HBox musicSetting = new HBox();
         musicSetting.getChildren().add(backgroundMusicVolumeLabel);
         musicSetting.getChildren().add(backgroundMusicVolumeSlider);
         musicSetting.setAlignment(Pos.CENTER);
-        root.getChildren().add(musicSetting);
+
+        // add to root
+        root.getChildren().addAll(greetingPane,options,musicSetting);
 
     }
 
