@@ -17,6 +17,7 @@ package org.team3.GameOver;
 
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import org.team3.GameManager.SceneManager;
 import org.team3.model.PuzzleFactory;
 
@@ -31,10 +32,12 @@ public class GameOverController {
     }
 
     private void initEventHandler(){
-        Button btnAgain = theView.getBtnAgain();
-        Button btnNextRound = theView.getBtnNextRound();
-        Button btnRound = theView.getBtnRound();
-        btnNextRound.setOnAction(e->{
+        Label lblAgain = theView.getLblAgain();
+
+        Label lblNextRound = theView.getLblNextRound();
+        Label lblBacktoRound = theView.getLblBacktoRound();
+
+        lblNextRound.setOnMouseClicked(e->{
             PuzzleFactory.increaseRound();
             try {
                 SceneManager.addNewGame();
@@ -49,16 +52,16 @@ public class GameOverController {
             } catch (URISyntaxException ex) {
                 throw new RuntimeException(ex);
             }
-            btnNextRound.getScene().setRoot(scene);
+            lblNextRound.getScene().setRoot(scene);
             try {
                 SceneManager.addNewGame();
             } catch (URISyntaxException ex) {
                 throw new RuntimeException(ex);
             }
-            btnNextRound.getScene().setRoot(scene);
+            lblNextRound.getScene().setRoot(scene);
         });
 
-        btnAgain.setOnAction(e->{
+        lblAgain.setOnMouseClicked(e->{
             try {
                 SceneManager.addNewGame();
             } catch (URISyntaxException ex) {
@@ -67,14 +70,14 @@ public class GameOverController {
             Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_SCREEN);
             scene.getStylesheets().add(
                     getClass().getResource("/Nonogram.css").toExternalForm());
-            btnAgain.getScene().setRoot(scene);
+            lblAgain.getScene().setRoot(scene);
         });
 
-        btnRound.setOnAction(e->{
+        lblBacktoRound.setOnMouseClicked(e->{
             Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_ROUND);
             scene.getStylesheets().add(
                     getClass().getResource("/Nonogram.css").toExternalForm());
-            btnRound.getScene().setRoot(scene);
+            lblBacktoRound.getScene().setRoot(scene);
         });
     }
 }

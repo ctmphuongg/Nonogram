@@ -61,7 +61,7 @@ public class InstructionView {
         playingModelbl.getStyleClass().add("greeting");
 
 
-        // Playing mode choose
+        // Rule 1: Playing mode choose
         choosebtn = new ToggleButton();
         choosebtn.setText("  ");
         choosebtn.getStyleClass().add("choiceColor");
@@ -72,7 +72,7 @@ public class InstructionView {
         rule1.setAlignment(Pos.CENTER_LEFT);
         rule1.setSpacing(20);
 
-        // Playing mode cross
+        // Rule 2: Playing mode cross
         crossbtn = new ToggleButton();
         crossbtn.setText("X");
         crossbtn.getStyleClass().add("choiceX");
@@ -84,6 +84,7 @@ public class InstructionView {
         rule2.setAlignment(Pos.CENTER_LEFT);
         rule2.setSpacing(20);
 
+        //Rule 3: get hint
         ImageView btnGetHintImage = new ImageView(new Image(getClass().getResourceAsStream("/pic/lightbulb.png")));
         btnGetHintImage.setFitHeight(30);
         btnGetHintImage.setFitWidth(30);
@@ -96,7 +97,7 @@ public class InstructionView {
         rule3.setAlignment(Pos.CENTER_LEFT);
         rule3.setSpacing(20);
 
-
+        //Back to main menu label
         ImageView imageView = new ImageView(new Image("/pic/back.png"));
         backToMainlbl = new Label();
         // Set the size of the image view to fit within the label
