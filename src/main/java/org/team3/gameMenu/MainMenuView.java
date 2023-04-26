@@ -16,15 +16,22 @@
 package org.team3.gameMenu;
 
 import javafx.geometry.Pos;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.team3.GameManager.GameManager;
 import org.team3.model.PuzzleFactory;
 import org.team3.model.Round;
 import org.w3c.dom.Text;
+
+import javax.swing.text.Element;
+import javax.swing.text.html.ImageView;
+import java.awt.*;
 
 import static java.awt.Color.white;
 import static java.awt.SystemColor.text;
@@ -48,8 +55,12 @@ public class MainMenuView {
     private void initScene() {
 
         root = new VBox();
-        Label greeting = new Label("Welcome to Nonogram");
-        greeting.getStyleClass().add("greeting");
+        Label greetinglbl = new Label("Welcome to Nonogram");
+        StackPane greetingPane = new StackPane();
+        ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/pic/heart_mainmenu.png")));
+        greetinglbl.setGraphic(imageView);
+        greetinglbl.getStyleClass().add("greeting");
+        greetingPane.getChildren().addAll(imageView,greetinglbl);
 
 
         options = new VBox();
@@ -65,7 +76,7 @@ public class MainMenuView {
         exitlbl.getStyleClass().add("wide-blue-text");
 
         // add to root
-        root.getChildren().addAll(greeting,options);
+        root.getChildren().addAll(greetingPane,options);
 
         backgroundMusicVolumeSlider = new Slider(0.0, 1.0, 0.5);
         backgroundMusicVolumeSlider.setShowTickMarks(true);

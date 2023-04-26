@@ -42,6 +42,8 @@ public class GameOverView {
     private void initScene(String gameMessage,boolean gameStatus){
         this.root = new VBox();
         this.lblRoundState = new Label(gameMessage);
+        this.lblRoundState.getStyleClass().add("win_lose");
+
         this.btnAgain = new Button("Play Again?");
         this.btnNextRound = new Button("Play Next Round?");
         this.btnRound = new Button("Back to round list");
