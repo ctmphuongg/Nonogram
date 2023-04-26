@@ -48,7 +48,6 @@ public class NonogramView {
     private ArrayList<ImageView> livesArray;
     private HBox numbers_row;
     private VBox numbers_column;
-    private HBox choices;
     private List<Button> gridButton;
 
     private PuzzleFactory puzzleSpace;
