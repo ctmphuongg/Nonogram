@@ -10,9 +10,14 @@
  * * *****************************************/
 package org.team3.RoundScene;
 
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import org.team3.GameManager.GameManager;
 import org.team3.GameManager.SceneManager;
 import org.team3.model.PuzzleFactory;
@@ -28,7 +33,7 @@ public class RoundController {
     }
 
     private void InitEventHandler(){
-        for (int i=0;i<PuzzleFactory.getPuzzleNumber();++i){
+        for (int i=0;i<PuzzleFactory.getPuzzleNumber();++i) {
             int k = i;
             theView.buttonRoundAtIndex(i).setOnAction(event -> {
                 PuzzleFactory.setRound(k);
@@ -42,8 +47,17 @@ public class RoundController {
                         getClass().getResource("/Nonogram.css").toExternalForm());
                 theView.buttonRoundAtIndex(k).getScene().setRoot(scene);
             });
+
+            //Change the color of the button once the round is finished
             GameManager.ROUNDMAP.get(i).addListener(((observable, oldValue, newValue) -> {
-                theView.buttonRoundAtIndex(k).setStyle("-fx-background-color: white");
+                ObservableList<Node> buttonChildren = ((StackPane) theView.buttonRoundAtIndex(k).getGraphic()).getChildren();
+                for (Node node : buttonChildren) {
+                    if (node instanceof ImageView) {
+                        ImageView buttonImageView = (ImageView) node;
+                        buttonImageView.setImage(new Image("/pic/star.png"));
+                        break;
+                    }
+                }
             }));
         }
 

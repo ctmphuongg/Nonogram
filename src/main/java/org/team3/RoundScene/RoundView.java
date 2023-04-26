@@ -62,7 +62,7 @@ public class RoundView {
             roundBtnLbl.setPrefWidth(50);
             roundBtnLbl.setPrefHeight(40);
             roundBtnLbl.getStyleClass().add("white-text");
-            ImageView imageView = new ImageView(new Image("pic/star.png"));
+            ImageView imageView = new ImageView(new Image("pic/star_original.png"));
             imageView.setFitWidth(80);
             imageView.setFitHeight(80);
             roundBtnImage.getChildren().addAll(imageView,roundBtnLbl);
