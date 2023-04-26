@@ -25,6 +25,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.util.StringConverter;
 import org.team3.GameManager.GameManager;
 import org.team3.model.PuzzleFactory;
 import org.team3.model.Round;
@@ -57,7 +58,7 @@ public class MainMenuView {
     private void initScene() {
 
         root = new VBox();
-        Label greetinglbl = new Label("Welcome to Nonogram");
+        greetinglbl = new Label("Welcome to Nonogram");
         StackPane greetingPane = new StackPane();
         Image image = new Image("/pic/heart_mainmenu.png");
         double newWidth = 100; // desired width
@@ -86,8 +87,8 @@ public class MainMenuView {
 
 
         backgroundMusicVolumeSlider = new Slider(0.0, 1.0, 0.5);
-        backgroundMusicVolumeSlider.setShowTickMarks(true);
-        backgroundMusicVolumeSlider.setShowTickLabels(true);
+        backgroundMusicVolumeSlider.setShowTickMarks(false);
+        backgroundMusicVolumeSlider.setShowTickLabels(false);
         backgroundMusicVolumeSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             GameManager.musicPlayer.setVolume(newValue.doubleValue());
         });
@@ -96,6 +97,8 @@ public class MainMenuView {
         backgroundMusicVolumeLabel.getStyleClass().add("white-text");
 
         HBox musicSetting = new HBox();
+        musicSetting.getStyleClass().add("music_setting");
+
         musicSetting.getChildren().add(backgroundMusicVolumeLabel);
         musicSetting.getChildren().add(backgroundMusicVolumeSlider);
         musicSetting.setAlignment(Pos.CENTER);

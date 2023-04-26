@@ -8,8 +8,8 @@
     -fx-spacing : 10;
     -fx-padding: 10;
     -fx-alignment: center;
-    -fx-min-height: 300px;
-    -fx-min-width: 300px;
+    -fx-min-height: 400px;
+    -fx-min-width: 600px;
     -fx-background-color: linear-gradient(to bottom right, #09203f, #537895);
 }
 
@@ -33,7 +33,10 @@
     -fx-min-width: 350px;
     -fx-text-fill: white;
     -fx-font-family: 'Montserrat';
+}
 
+.music_setting{
+    -fx-padding: 50px 0px 0px 0px;
 }
 /**---------------------MAIN MENU--------------------**/
 
@@ -103,12 +106,14 @@
     -fx-background-color: black;
 }
 
+
+
 .button-group{
     -fx-spacing : 10;
     -fx-padding: 10;
 }
 
-/* button in round chosen scene*/
+/*---------------- ROUND-----------------*/
 .round_chosen_btn{
     -fx-background-color: grey;
     -fx-pref-width: 80;
