@@ -27,14 +27,9 @@ public class MusicPlayer {
     private Media background;
     private static MediaPlayer mediaPlayer;
 
-    public MusicPlayer() throws URISyntaxException {
-        // Add music
+    public void play() throws URISyntaxException {
         background = new Media(getClass().getResource("/music/Fluffing-a-Duck.mp3").toURI().toString());
         mediaPlayer = new MediaPlayer(background);
-
-    }
-
-    public void play() {
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         mediaPlayer.play();
     }
