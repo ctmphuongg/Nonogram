@@ -317,7 +317,7 @@ public class Round {
             this.getHint(column, row);
             this.hints--;
         }
-        System.out.printf("You have %d lives and %d hints left \n",this.livesValueArray, this.hints);
+//        System.out.printf("You have %d lives and %d hints left \n",this.livesValueArray, this.hints);
         return false;
     }
 

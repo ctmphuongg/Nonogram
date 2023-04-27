@@ -32,6 +32,13 @@ class RoundTest {
 
     @Test
     void getHints() {
+        // Initially, must have 3 hints
+        assertEquals(roundTest.getHints(), 3);
+
+        // Choose a box that already chosen, must return false
+        roundTest.setPlayingMode(PLAYING_MODE.HINT);
+        roundTest.guessEvaluator(2, 3);
+        assertEquals(roundTest.getHints(), 2);
     }
 
     @Test
@@ -44,13 +51,23 @@ class RoundTest {
 
     @Test
     void getLives() {
+
         assertEquals(roundTest.getLives(), 3);
     }
 
 
     @Test
     void checkValidGuess() {
+        // Row exceed puzzle size, must return false
         assertEquals(roundTest.checkValidGuess(15,3), false);
+
+        // Choose a box that already chosen, must return false
+        roundTest.setPlayingMode(PLAYING_MODE.SQUARE);
+        roundTest.guessEvaluator(2, 3);
+        assertEquals(roundTest.checkValidGuess(2, 3), false);
+
+        // Choose a valid box, must return
+        assertEquals(roundTest.checkValidGuess(3, 3), true);
 
     }
 
@@ -67,10 +84,6 @@ class RoundTest {
     }
 
     @Test
-    void displayMatrix() {
-    }
-
-    @Test
     void initNewRound() {
     }
 
@@ -78,9 +91,6 @@ class RoundTest {
     void isColored() {
     }
 
-    @Test
-    void getHint() {
-    }
 
     @Test
     void getRoundState() {
