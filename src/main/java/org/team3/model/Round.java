@@ -94,6 +94,8 @@ public class Round {
         return puzzleFactory;
     }
 
+    public PLAYING_MODE getPlayMode() {return playingMode;}
+
     public Round(PuzzleFactory puzzleFactory){
         this.hints = 3; // Max hints per round is 3
         this.lives = 3; // Max lives per round is 3

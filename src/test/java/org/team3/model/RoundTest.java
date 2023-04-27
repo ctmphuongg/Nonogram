@@ -18,16 +18,12 @@ class RoundTest {
     @Test
     void setPlayingMode() {
         roundTest.setPlayingMode(PLAYING_MODE.CROSS);
-        assertEquals(roundTest.getRoundState(), ROUND_STATE.NEW_ROUND);
+        assertEquals(roundTest.getPlayMode(), PLAYING_MODE.CROSS);
     }
 
     @Test
     void getPuzzleFactory() {
         assertEquals(roundTest.getPuzzleFactory(), puzzle);
-    }
-
-    @Test
-    void getLivesValueArray() {
     }
 
     @Test
@@ -42,17 +38,19 @@ class RoundTest {
     }
 
     @Test
-    void isIsWin() {
-    }
-
-    @Test
-    void isWinProperty() {
-    }
-
-    @Test
     void getLives() {
-
+        // Initially have 3 lives
         assertEquals(roundTest.getLives(), 3);
+
+        // Choose a box, if that box is true, lives unchanged, else, lives decrease
+        roundTest.setPlayingMode(PLAYING_MODE.CROSS);
+        boolean result = roundTest.guessEvaluator(2, 3);
+
+        if (result) {
+            assertEquals(roundTest.getLives(), 3);
+        } else {
+            assertEquals(roundTest.getLives(), 2);
+        }
     }
 
 
@@ -72,23 +70,30 @@ class RoundTest {
     }
 
     @Test
-    void isRoundOver() {
-    }
-
-    @Test
-    void isRoundWinner() {
-    }
-
-    @Test
     void guessEvaluator() {
+        // Check hint to see if a box is colored
+        roundTest.setPlayingMode(PLAYING_MODE.SQUARE);
+
+        // Compare with guess evaluator
+        Round roundCompare = new Round(puzzle);
+        roundCompare.setPlayingMode(PLAYING_MODE.HINT);
+
+        // The 2 results must be the same
+        assertEquals(roundTest.guessEvaluator(2, 2), roundCompare.isColored(2, 2));
     }
 
-    @Test
-    void initNewRound() {
-    }
 
     @Test
     void isColored() {
+        // Check hint to see if a box is colored
+        roundTest.setPlayingMode(PLAYING_MODE.HINT);
+
+        // Compare with guess evaluator
+        Round roundCompare = new Round(puzzle);
+        roundCompare.setPlayingMode(PLAYING_MODE.SQUARE);
+
+        // The 2 results must be the same
+        assertEquals(roundTest.isColored(4, 4), roundCompare.guessEvaluator(4, 4));
     }
 
 
