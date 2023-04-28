@@ -20,6 +20,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
 public class HowToPlayView {
+    public VBox getRoot() {
+        return root;
+    }
+
     private VBox root;
 
 
@@ -28,9 +32,12 @@ public class HowToPlayView {
      */
     private void initScene() {
         root = new VBox();
-
         ImageView imageView = new ImageView(new Image("/pic/Instructions1.gif"));
         root.getChildren().add(imageView);
+    }
+
+    public HowToPlayView(){
+        initScene();
     }
 
 }

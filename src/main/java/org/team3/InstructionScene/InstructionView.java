@@ -47,6 +47,7 @@ public class InstructionView {
     private Label backToMainlbl;
 
 
+
     /**
      * Initialize the entire Game Instructions scene
      */

@@ -14,5 +14,6 @@ module csci205_final_project{
     exports org.team3.GameOver;
     exports org.team3.RoundScene;
     exports org.team3.InstructionScene;
+    exports org.team3.InstructionScene.HowToPlayScene;
 
 }
