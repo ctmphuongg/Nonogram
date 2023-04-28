@@ -46,7 +46,7 @@ public class GameOverMain extends Application {
     /**
      * Gets the root and controller attachment, then return the root
      * @param - the message to be displayed and roundState - whether win or not
-     * @return - the root of the level menu
+     * @return - the root of the scene
      */
     public static Parent getRoot(String message,boolean roundState){
         GameOverView theView = new GameOverView(message,roundState);

@@ -24,7 +24,11 @@ import org.team3.model.PuzzleFactory;
 
 import java.net.URISyntaxException;
 
+/**
+ * MVC controller class for Round lists board scene
+ */
 public class RoundController {
+    /** the view of the scene */
     RoundView theView;
 
     public RoundController(RoundView theView) {
@@ -32,12 +36,14 @@ public class RoundController {
         InitEventHandler();
     }
 
+    /**
+     * An internal helper method to initialize the event handlers
+     */
     private void InitEventHandler(){
         for (int i=0;i<PuzzleFactory.getPuzzleNumber();++i) {
             int k = i;
             theView.buttonRoundAtIndex(i).setOnAction(event -> {
-                // Attention here
-                PuzzleFactory.setRound(k);
+                PuzzleFactory.setRound(k); //Set the puzzle matrix for each round
                 try {
                     SceneManager.addNewGame();
                 } catch (URISyntaxException e) {
@@ -62,6 +68,7 @@ public class RoundController {
             }));
         }
 
+        // Change the scene to main menu once the label is clicked
         Label backToMainMenuLbl = theView.getBackToMainMenuLbl();
         backToMainMenuLbl.setOnMouseClicked(event -> {
             Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_MENU);

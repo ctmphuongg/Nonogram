@@ -41,7 +41,7 @@ public class MainMenuMain extends Application {
 
     /**
      * Gets the root and controller attachment, then return the root
-     * @return - the root of the level menu
+     * @return - the root of the scene
      */
     public static Parent getRoot(){
         MainMenuView theView = new MainMenuView();

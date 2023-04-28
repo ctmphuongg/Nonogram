@@ -84,11 +84,12 @@ public class NonogramView {
     private void initScene() {
         // Set up Vbox container for root
         root = new VBox();
+        root.setAlignment(Pos.CENTER);
+
 
         // Set up the label to display round number
         HBox roundLabel = new HBox();
         lblRoundIndex = new Label("Round " + (puzzleSpace.getRound() + 1));
-        lblRoundIndex.setStyle("-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 20px; -fx-text-fill: white;");
         roundLabel.getChildren().add(lblRoundIndex);
         roundLabel.setAlignment(Pos.CENTER);
         root.getChildren().add(roundLabel);
@@ -312,14 +313,6 @@ public class NonogramView {
 
 
     /**
-     * Styling for the puzzle
-     */
-    private void initStyling() {
-        root.setAlignment(Pos.CENTER);
-
-    }
-
-    /**
      * @return the root of the scene
      */
     public VBox getRoot() { return root;}
@@ -385,7 +378,6 @@ public class NonogramView {
         this.theModel = theModel;
         puzzleSpace = theModel.getPuzzleFactory();
         initScene();
-        initStyling();
     }
 }
     

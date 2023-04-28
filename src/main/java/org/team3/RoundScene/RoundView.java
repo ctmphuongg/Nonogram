@@ -32,20 +32,32 @@ import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 
-
+/**
+ * MVC view class for Round lists board scene
+ */
 public class RoundView {
+    /** Vbox container for root */
     private VBox root;
+
+    /** Flowpane container for all round buttons */
     private FlowPane roundButtons;
+
+    /** Arraylist of buttons for each round */
     private ArrayList<Button> listRoundButtons;
 
+    /** Back to main menu label */
     private Label backToMainMenuLbl;
 
-    public VBox getRoot() { return root;}
 
     private void initScene (){
+        //Set up the Vbox container for the root
         root = new VBox();
         root.setAlignment(Pos.CENTER);
+        root.setPadding(new Insets(10));
 
+
+
+        //Set up the Flowpane wrapper for all buttons
         roundButtons = new FlowPane(80,30);
         roundButtons.setAlignment(Pos.CENTER);
         listRoundButtons = new ArrayList<>();
@@ -55,6 +67,7 @@ public class RoundView {
         for (int i = 0; i < PuzzleFactory.getPuzzleNumber(); i++){
             Button round = new Button();
             round.getStyleClass().add("round_chosen_btn");
+            this.listRoundButtons.add(round); //Add round button to the arraylist
 
             // Make the button to have star shape
             StackPane roundBtnImage = new StackPane();
@@ -69,7 +82,8 @@ public class RoundView {
 
             round.setStyle("-fx-background-color: transparent;");
             round.setGraphic(roundBtnImage);
-            this.listRoundButtons.add(round);
+
+            //Add button to the scene
             roundButtons.getChildren().add(round);
         }
 
@@ -86,28 +100,28 @@ public class RoundView {
 
     }
 
-    public Button buttonRoundAtIndex(int index){
-        return listRoundButtons.get(index);
-    }
-
-    public Label getBackToMainMenuLbl() {
-        return backToMainMenuLbl;
-    }
 
 
-    private void initStyling(){
-        root.setAlignment(Pos.TOP_LEFT);
-        root.setPadding(new Insets(10));
-    }
+    /**
+     * @return the root of the scene
+     */
+    public VBox getRoot() { return root;}
 
-    private void initEventHandler(){
+    /**
+     * @param index - the position of the round button
+     * @return the round button at position index
+     */
+    public Button buttonRoundAtIndex(int index){return listRoundButtons.get(index);}
 
-    }
+    /**
+     * @return label to back to main menu
+     */
+    public Label getBackToMainMenuLbl() {return backToMainMenuLbl;}
+
+
 
     public RoundView() {
         initScene();
-        initStyling();
-        initEventHandler();
     }
 
 

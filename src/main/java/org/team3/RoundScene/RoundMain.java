@@ -8,14 +8,19 @@ import org.team3.GameOver.GameOverController;
 import org.team3.GameOver.GameOverView;
 import org.team3.model.Round;
 
-
+/**
+ * The main program that initializes all classes for Round lists board scene
+ */
 public class RoundMain extends Application {
 
+    /** the view of the model */
     private RoundView theView;
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+    /**
+     * Our standard main program for a JavaFX application
+     * @param args
+     */
+    public static void main(String[] args) {launch(args);}
 
     @Override
     public void start(Stage primaryStage) {
@@ -34,6 +39,10 @@ public class RoundMain extends Application {
         this.theView = new RoundView();
     }
 
+    /**
+     * Gets the root and controller attachment, then return the root
+     * @return - the root of the scene
+     */
     public static Parent getRoot(){
         RoundView theView = new RoundView();
         RoundController theController = new RoundController(theView);
