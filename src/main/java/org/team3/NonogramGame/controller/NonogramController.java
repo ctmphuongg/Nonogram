@@ -103,6 +103,18 @@ public class NonogramController {
             theView.getChoose().getScene().setRoot(scene);
         } ));
 
+        Button btnRestart = theView.getBtnRestart();
+        btnRestart.setOnAction(event -> {
+            try {
+                SceneManager.addNewGame();
+            } catch (URISyntaxException ex) {
+                throw new RuntimeException(ex);
+            }
+            Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_SCREEN); // Set up new scene to play again
+            scene.getStylesheets().add(
+                    getClass().getResource("/Nonogram.css").toExternalForm());
+            btnRestart.getScene().setRoot(scene);
+        });
     }
 
     /**

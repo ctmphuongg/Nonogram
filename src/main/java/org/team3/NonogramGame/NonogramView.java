@@ -57,6 +57,13 @@ public class NonogramView {
     private ToggleButton getHint;
     private ToggleGroup playMode;
     private HBox toggleGroup;
+
+    public Button getBtnRestart() {
+        return btnRestart;
+    }
+
+    private Button btnRestart;
+
     public VBox getRoot() { return root;}
 
     public List<Button> getGridButton() {
@@ -105,6 +112,13 @@ public class NonogramView {
         initPuzzleContent();
 
         setPlayingMode();
+
+        HBox btnRestartBox = new HBox();
+        btnRestart = new Button("Restart");
+        btnRestartBox.getChildren().add(btnRestart);
+        btnRestartBox.setAlignment(Pos.BOTTOM_CENTER);
+        root.getChildren().add(btnRestartBox);
+
     }
 
     /**
