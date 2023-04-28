@@ -92,6 +92,7 @@ public class NonogramView {
         lblRoundIndex = new Label("Round " + (puzzleSpace.getRound() + 1));
         roundLabel.getChildren().add(lblRoundIndex);
         roundLabel.setAlignment(Pos.CENTER);
+        lblRoundIndex.setStyle("-fx-text-fill: white; -fx-font-size: 18px;");
         root.getChildren().add(roundLabel);
 
         // Set up view for number of lives
