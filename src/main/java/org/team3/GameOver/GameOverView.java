@@ -21,74 +21,93 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
+/**
+ * MVC view class for Game Over scene
+ */
 public class GameOverView {
-
-//    private Round theModel = new Round();
-
+    /** Vbox container for root */
     private VBox root;
 
-    private Label lblRoundState;
+    /** Labels for game result, play again, back to round list, and play next round */
+    private Label lblRoundState; Label lblAgain; Label lblBacktoRound; Label lblNextRound;
 
-    private Label lblAgain;
-    private Label lblBacktoRound;
-    private Label lblNextRound;
+    /** Image to be displayed for each game result */
+    private ImageView resultImageView;
 
-    private ImageView imageView;
-
+    /**
+     * @return the root of the scene
+     */
     public VBox getRoot() {
         return root;
     }
 
+    /**
+     * Initialize the entire Game Over scene
+     */
     private void initScene(String gameMessage,boolean gameStatus){
+        // Set up the Vbox container for the root
         this.root = new VBox();
 
-        this.imageView = new ImageView();
-        this.imageView.setFitHeight(100);
-        this.imageView.setFitWidth(100);
+        // Set up image for each game result
+        this.resultImageView = new ImageView();
+        this.resultImageView .setFitHeight(100);
+        this.resultImageView .setFitWidth(100);
 
+        // Set up game result label
         this.lblRoundState = new Label(gameMessage);
         this.lblRoundState.setStyle("-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 25px; -fx-text-fill: white;");
-
+        // Set up play again label
         this.lblAgain = new Label("Play Again");
         this.lblAgain.getStyleClass().add("small-blue-text");
-
+        // Set up play next round label
         this.lblNextRound = new Label("Play Next Round");
         this.lblNextRound.getStyleClass().add("small-blue-text");
 
-        //Back to round label
+        // Set up back to round label with an image inside
         this.lblBacktoRound = new Label();
         ImageView lblImageView = new ImageView(new Image("/pic/back.png"));
-        // Set the size of the image view to fit within the label
-        lblImageView.setFitWidth(30);
+        lblImageView.setFitWidth(30); // Set the size of the image view to fit within the label
         lblImageView.setFitHeight(30);
-        // Set the image view as the label's graphic
-        this.lblBacktoRound.setGraphic(lblImageView);
+        this.lblBacktoRound.setGraphic(lblImageView); // Set the image view as the label's graphic
 
-        // Display message corresponding to each game state
+
+        // Display message and image according to each game state
         if (gameStatus==true){
             //the game state is win
-            this.imageView.setImage(new Image("/pic/happy.png"));
-            this.root.getChildren().addAll(this.imageView, this.lblRoundState,this.lblAgain, this.lblNextRound,this.lblBacktoRound);
+            this.resultImageView .setImage(new Image("/pic/happy.png"));
+            this.root.getChildren().addAll(this.resultImageView , this.lblRoundState,this.lblAgain, this.lblNextRound,this.lblBacktoRound);
         }
         else{
-            this.imageView.setImage(new Image("/pic/sad.png"));
-            this.root.getChildren().addAll(this.imageView, this.lblRoundState,this.lblAgain,this.lblBacktoRound);
+            this.resultImageView .setImage(new Image("/pic/sad.png"));
+            this.root.getChildren().addAll(this.resultImageView , this.lblRoundState,this.lblAgain,this.lblBacktoRound);
 
         }
 
     }
 
+
+    /**
+     * @return play again label
+     */
     public Label getLblAgain() {
         return lblAgain;
     }
 
+    /**
+     * @return play next round label
+     */
     public Label getLblNextRound() {
         return lblNextRound;
     }
 
+    /**
+     * @return play back to round list label
+     */
     public Label getLblBacktoRound() {
         return lblBacktoRound;
     }
+
+
 
     public GameOverView(String gameMessage,boolean gameStatus){
         this.initScene(gameMessage,gameStatus);
