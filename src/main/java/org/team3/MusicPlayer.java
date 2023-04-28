@@ -22,11 +22,19 @@ import javafx.scene.media.MediaPlayer;
 
 import java.net.URISyntaxException;
 
+/** A class for music background */
 public class MusicPlayer {
 
+    /** Media stores the music */
     private Media background;
+
+    /** Media player to control the music background */
     private static MediaPlayer mediaPlayer;
 
+    /**
+     * Play music
+     * @throws URISyntaxException
+     */
     public void play() throws URISyntaxException {
         background = new Media(getClass().getResource("/music/Fluffing-a-Duck.mp3").toURI().toString());
         mediaPlayer = new MediaPlayer(background);
@@ -34,6 +42,10 @@ public class MusicPlayer {
         mediaPlayer.play();
     }
 
+    /**
+     * Play this music when player chooses incorrect square
+     * @throws URISyntaxException
+     */
     public void playWrong() throws URISyntaxException {
         Media wrongEffect = new Media(getClass().getResource("/music/error.mp3").toURI().toString());
         MediaPlayer playWrong = new MediaPlayer(wrongEffect);
@@ -42,6 +54,10 @@ public class MusicPlayer {
         playWrong.play();
     }
 
+    /**
+     * Set the volume of the music
+     * @param volume - volume ranging from 0 to 1
+     */
     public static void setVolume(double volume) {
         mediaPlayer.setVolume(volume);
     }

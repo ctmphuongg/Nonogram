@@ -21,7 +21,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 /**
- * A class that generates a random puzzle
+ * A class that stores and generates a puzzle matrix
  */
 public class PuzzleFactory {
     /**The current game round*/
@@ -29,11 +29,13 @@ public class PuzzleFactory {
 
     /**The matrix puzzle*/
     private int [][] matrix;
+
     /**Row puzzle hint*/
     private ArrayList<Integer> [] rowHint;
 
     /**Column puzzle hint*/
     private ArrayList<Integer> [] columnHint;
+
 
     public PuzzleFactory() {
         this.matrix = convertCSVtoArray(getPuzzleFileName());
@@ -42,21 +44,6 @@ public class PuzzleFactory {
         generateHint();
     }
 
-    public int[][] getMatrix() {
-        return matrix;
-    }
-
-    public static int getRound() {
-        return round;
-    }
-
-    public ArrayList<Integer>[] getRowHint() {
-        return rowHint;
-    }
-
-    public ArrayList<Integer>[] getColumnHint() {
-        return columnHint;
-    }
 
     /**
      * generate the hints for the users
@@ -117,7 +104,7 @@ public class PuzzleFactory {
     }
 
     /**
-     * print the puzzle matrix
+     * Print the puzzle matrix - mainly for test
      */
     public void displayMatrix(){
         //count the column and row with most hint segment
@@ -243,13 +230,49 @@ public class PuzzleFactory {
         return numPuzzle;
     }
 
+    /**
+     * Get the puzzle matrix for the round set
+     * @param round the round number
+     */
     public static void setRound(int round) {
         if (round>=getPuzzleNumber())round = 0;
         PuzzleFactory.round = round;
     }
 
+    /**
+     * Increase the number of round every time create a new Round object
+     * and get the puzzle matrix for that round
+     */
     public static void increaseRound() {
         PuzzleFactory.round+=1;
         PuzzleFactory.round%=getPuzzleNumber();
+    }
+
+    /**
+     * @return the puzzle matrix
+     */
+    public int[][] getMatrix() {
+        return matrix;
+    }
+
+    /**
+     * @return current round number
+     */
+    public static int getRound() {
+        return round;
+    }
+
+    /**
+     * @return the row hint
+     */
+    public ArrayList<Integer>[] getRowHint() {
+        return rowHint;
+    }
+
+    /**
+     * @return the column hint
+     */
+    public ArrayList<Integer>[] getColumnHint() {
+        return columnHint;
     }
 }
