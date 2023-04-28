@@ -23,6 +23,7 @@ import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
 
+/** Round state */
 enum ROUND_STATE{
     NEW_ROUND,
     ROUND_IN_PROGRESS,
@@ -30,8 +31,7 @@ enum ROUND_STATE{
     ROUND_OVER
 }
 
-
-
+/** State of each square in the matrix */
 enum SQUARE_STATE{
     CORRECTLY_CHOSEN,
     WRONGLY_CHOSEN,
@@ -70,31 +70,23 @@ public class Round {
     private final SQUARE_STATE[][] currentPuzzle;
 
     /** User's last guess*/
-    private String guessRow;
-    private String guessCol;
+    private String guessRow; String guessCol;
 
     /** The playing mode player chooses to play (choose a square, cross a square or quit) */
     private PLAYING_MODE playingMode;
-
 
     /** Current game state */
     private ROUND_STATE roundState;
 
     /** Scanner to read player's guess */
     private Scanner scnr = new Scanner(System.in);
+
+    /** PuzzleFactory object to store all the puzzles*/
     private PuzzleFactory puzzleFactory;
+
+    /** Simple Boolean Property for the state of the game */
     private SimpleBooleanProperty isWin;
 
-
-    public void setPlayingMode(PLAYING_MODE playingMode) {
-        this.playingMode = playingMode;
-    }
-
-    public PuzzleFactory getPuzzleFactory() {
-        return puzzleFactory;
-    }
-
-    public PLAYING_MODE getPlayMode() {return playingMode;}
 
     public Round(PuzzleFactory puzzleFactory){
         this.hints = 3; // Max hints per round is 3
@@ -111,12 +103,9 @@ public class Round {
         this.roundState = ROUND_STATE.NEW_ROUND;
         this.paintedSquareNotGuessed = puzzleFactory.getColoredBox();
         this.puzzleFactory = puzzleFactory;
-        this.isWin = new SimpleBooleanProperty(false);
+        this.isWin = new SimpleBooleanProperty(false); //Initial boolean property of the game is false
     }
 
-    public SimpleBooleanProperty getLivesValueArray(int i) {
-        return this.livesValueArray.get(i);
-    }
 
     /**
      * Decrease the current lives and set the value property of the lives box at that position to false
@@ -326,7 +315,7 @@ public class Round {
 
 
     /**
-     * Display current matrix after each turn
+     * Display current matrix after each turn - mainly for testing
      */
     public void displayMatrix() {
         int col_hint_max = -1,row_hint_max=-1;
@@ -475,11 +464,31 @@ public class Round {
     }
 
     /**
-     *
      * @return current Round state
      */
-    public ROUND_STATE getRoundState() {
-        return roundState;
-    }
+    public ROUND_STATE getRoundState() {return roundState;}
+
+    /**
+     * set the current playing mode
+     * @param playingMode
+     */
+    public void setPlayingMode(PLAYING_MODE playingMode) {this.playingMode = playingMode;}
+
+    /**
+     * @return the current playing mode
+     */
+    public PLAYING_MODE getPlayMode() {return playingMode;}
+
+    /**
+     * @return PuzzleFactory that stores the matrix
+     */
+    public PuzzleFactory getPuzzleFactory() {return puzzleFactory;}
+
+    /**
+     * Return the boolean property value for each life
+     * @param i - the index of the lives
+     * @return
+     */
+    public SimpleBooleanProperty getLivesValueArray(int i) {return this.livesValueArray.get(i);}
 
 }

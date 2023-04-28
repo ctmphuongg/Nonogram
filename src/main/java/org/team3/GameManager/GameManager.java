@@ -39,8 +39,6 @@ public class GameManager extends Application {
     // scene for different roots to access
     public static Scene scene;
 
-    // Stylesheet for the game menus
-    public static String styleSheet;
     public static MusicPlayer musicPlayer;
     public static void main(String[] args) {
         launch(args);
