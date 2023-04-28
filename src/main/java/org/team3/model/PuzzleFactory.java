@@ -259,6 +259,7 @@ public class PuzzleFactory {
      * @return current round number
      */
     public static int getRound() {
+        System.out.println(round);
         return round;
     }
 

@@ -16,7 +16,6 @@
 package org.team3.model;
 
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -41,7 +40,7 @@ enum SQUARE_STATE{
 }
 
 /** A class for a Round in a Monogram game */
-public class Round {
+public class RoundFactory {
     /** Puzzle dimension */
     private final int PUZZLE_ROW = 5;
     private final int PUZZLE_COL = 5;
@@ -88,7 +87,7 @@ public class Round {
     private SimpleBooleanProperty isWin;
 
 
-    public Round(PuzzleFactory puzzleFactory){
+    public RoundFactory(PuzzleFactory puzzleFactory){
         this.hints = 3; // Max hints per round is 3
         this.lives = 3; // Max lives per round is 3
         this.livesValueArray = new ArrayList<>();

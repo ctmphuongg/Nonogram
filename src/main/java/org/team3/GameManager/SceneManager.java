@@ -13,11 +13,11 @@ package org.team3.GameManager;
 
 
 import javafx.scene.Parent;
-import org.team3.GameOver.GameOverMain;
+import org.team3.GameResultScene.GameResultMain;
 import org.team3.InstructionScene.InstructionMain;
-import org.team3.NonogramGame.NonogramMain;
+import org.team3.NonogramScene.NonogramMain;
 import org.team3.RoundScene.RoundMain;
-import org.team3.gameMenu.MainMenuMain;
+import org.team3.MainMenuScene.MainMenuMain;
 
 import java.net.URISyntaxException;
 import java.util.HashMap;
@@ -52,9 +52,9 @@ public class SceneManager {
      */
     public static void populateOtherScenes() throws URISyntaxException {
         addNewGame();
-        Parent gameOverRoot = GameOverMain.getRoot("You Lost",false);
+        Parent gameOverRoot = GameResultMain.getRoot("You Lost",false);
         addSceneRoots(GAME_LOSER, gameOverRoot);
-        gameOverRoot = GameOverMain.getRoot("You Win",true);
+        gameOverRoot = GameResultMain.getRoot("You Win",true);
         addSceneRoots(GAME_WINNER, gameOverRoot);
         Parent roundRoot = RoundMain.getRoot();
         addSceneRoots(GAME_ROUND, roundRoot);

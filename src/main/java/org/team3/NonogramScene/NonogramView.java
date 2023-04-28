@@ -15,7 +15,7 @@
  *
  * *****************************************/
 
-package org.team3.NonogramGame;
+package org.team3.NonogramScene;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.geometry.Insets;
@@ -32,7 +32,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import org.team3.model.PuzzleFactory;
-import org.team3.model.Round;
+import org.team3.model.RoundFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +44,7 @@ public class NonogramView {
     private VBox root;
 
     /** Round model */
-    private Round theModel;
+    private RoundFactory theModel;
 
     /** Puzzle factory to get row and column hints*/
     private PuzzleFactory puzzleSpace;
@@ -89,7 +89,8 @@ public class NonogramView {
 
         // Set up the label to display round number
         HBox roundLabel = new HBox();
-        lblRoundIndex = new Label("Round " + (puzzleSpace.getRound() + 1));
+        lblRoundIndex = new Label("Round " + (PuzzleFactory.getRound() + 1));
+        lblRoundIndex.setStyle("-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 25px; -fx-text-fill: white;");
         roundLabel.getChildren().add(lblRoundIndex);
         roundLabel.setAlignment(Pos.CENTER);
         lblRoundIndex.setStyle("-fx-text-fill: white; -fx-font-size: 18px;");
@@ -375,7 +376,7 @@ public class NonogramView {
      * init the Nonogramview
      * @param theModel
      */
-    public NonogramView(Round theModel) {
+    public NonogramView(RoundFactory theModel) {
         this.theModel = theModel;
         puzzleSpace = theModel.getPuzzleFactory();
         initScene();

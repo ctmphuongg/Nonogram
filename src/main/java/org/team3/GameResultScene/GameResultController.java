@@ -13,10 +13,9 @@
  * Description:
  *
  * *****************************************/
-package org.team3.GameOver;
+package org.team3.GameResultScene;
 
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import org.team3.GameManager.SceneManager;
 import org.team3.model.PuzzleFactory;
@@ -26,15 +25,15 @@ import java.net.URISyntaxException;
 /**
  * MVC controller class for Game Over scene
  */
-public class GameOverController {
+public class GameResultController {
     /** the view of the scene */
-    GameOverView theView;
+    GameResultView theView;
 
     /**
      * Construct a controller that handles events for Game Over scene
      * @param theView
      */
-    public GameOverController(GameOverView theView) {
+    public GameResultController(GameResultView theView) {
         this.theView = theView;
         initEventHandler();
     }

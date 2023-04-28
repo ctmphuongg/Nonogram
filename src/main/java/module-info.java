@@ -8,10 +8,10 @@ module csci205_final_project{
     requires javafx.media;
 
     exports org.team3.model;
-    exports org.team3.gameMenu;
-    exports org.team3.NonogramGame;
+    exports org.team3.MainMenuScene;
+    exports org.team3.NonogramScene;
     exports org.team3.GameManager;
-    exports org.team3.GameOver;
+    exports org.team3.GameResultScene;
     exports org.team3.RoundScene;
     exports org.team3.InstructionScene;
 

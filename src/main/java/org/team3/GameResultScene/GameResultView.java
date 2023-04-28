@@ -13,9 +13,8 @@
  * Description:
  *
  * *****************************************/
-package org.team3.GameOver;
+package org.team3.GameResultScene;
 
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -24,7 +23,7 @@ import javafx.scene.layout.VBox;
 /**
  * MVC view class for Game Over scene
  */
-public class GameOverView {
+public class GameResultView {
     /** Vbox container for root */
     private VBox root;
 
@@ -109,7 +108,7 @@ public class GameOverView {
 
 
 
-    public GameOverView(String gameMessage,boolean gameStatus){
+    public GameResultView(String gameMessage, boolean gameStatus){
         this.initScene(gameMessage,gameStatus);
     }
 

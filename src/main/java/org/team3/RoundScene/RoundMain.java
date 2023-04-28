@@ -4,9 +4,6 @@ import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.team3.GameOver.GameOverController;
-import org.team3.GameOver.GameOverView;
-import org.team3.model.Round;
 
 /**
  * The main program that initializes all classes for Round lists board scene

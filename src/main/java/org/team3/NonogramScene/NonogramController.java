@@ -15,7 +15,7 @@
  *
  * *****************************************/
 
-package org.team3.NonogramGame.controller;
+package org.team3.NonogramScene;
 
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -26,8 +26,8 @@ import org.team3.GameManager.SceneManager;
 import org.team3.MusicPlayer;
 import org.team3.model.PLAYING_MODE;
 import org.team3.model.PuzzleFactory;
-import org.team3.model.Round;
-import org.team3.NonogramGame.NonogramView;
+import org.team3.model.RoundFactory;
+import org.team3.NonogramScene.NonogramView;
 
 import java.net.URISyntaxException;
 
@@ -38,11 +38,11 @@ public class NonogramController {
     /** the view of the scene */
     private NonogramView theView;
     /** the model of the scene */
-    private Round theModel;
+    private RoundFactory theModel;
     /** music player model */
     private MusicPlayer effectPlayer;
 
-    public NonogramController(Round theModel, NonogramView theView) throws URISyntaxException {
+    public NonogramController(RoundFactory theModel, NonogramView theView) throws URISyntaxException {
         this.theModel = theModel;
         this.theView = theView;
         this.effectPlayer = new MusicPlayer();

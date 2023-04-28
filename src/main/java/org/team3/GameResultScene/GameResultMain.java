@@ -1,25 +1,23 @@
-package org.team3.GameOver;
+package org.team3.GameResultScene;
 
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.team3.gameMenu.MainMenuController;
-import org.team3.gameMenu.MainMenuView;
-import org.team3.model.Round;
+import org.team3.model.RoundFactory;
 
 /**
  * The main program that initializes all classes for Game Over scene
  */
-public class GameOverMain extends Application {
+public class GameResultMain extends Application {
     /** the view of the scene */
-    private GameOverView theView;
+    private GameResultView theView;
 
     /** the controller of the scene */
-    private GameOverController theController;
+    private GameResultController theController;
 
     /** the model of the scene */
-    private Round theModel;
+    private RoundFactory theModel;
 
     @Override
     public void init() throws Exception {
@@ -49,8 +47,8 @@ public class GameOverMain extends Application {
      * @return - the root of the scene
      */
     public static Parent getRoot(String message,boolean roundState){
-        GameOverView theView = new GameOverView(message,roundState);
-        GameOverController theController = new GameOverController(theView);
+        GameResultView theView = new GameResultView(message,roundState);
+        GameResultController theController = new GameResultController(theView);
         return theView.getRoot();
     }
 }

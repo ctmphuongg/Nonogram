@@ -8,7 +8,7 @@
  * Lab / Assignment: lab
  * Description:
  * * *****************************************/
-package org.team3.gameMenu;
+package org.team3.MainMenuScene;
 
 import javafx.application.Platform;
 import javafx.scene.control.Label;

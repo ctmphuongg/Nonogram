@@ -3,11 +3,7 @@ package org.team3.InstructionScene;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import org.team3.GameOver.GameOverController;
-import org.team3.GameOver.GameOverView;
-import org.team3.gameMenu.MainMenuView;
 
 /**
  * The main program that initializes all classes for Instructions scene

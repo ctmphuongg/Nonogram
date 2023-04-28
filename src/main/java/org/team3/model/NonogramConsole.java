@@ -16,8 +16,6 @@
 package org.team3.model;
 
 
-import java.util.Scanner;
-
 import static java.lang.Integer.parseInt;
 import static java.lang.Integer.parseUnsignedInt;
 
@@ -32,15 +30,15 @@ enum GAME_STATE {
 
 
 /** The main class for a Monogram game - Mainly for testing on console */
-public class Nonogram {
+public class NonogramConsole {
 
     private GAME_STATE gameState;
-    private Round newRound;
+    private RoundFactory newRound;
     /** Number of rounds has been played */
     private int round;
 
 
-    public Nonogram(){
+    public NonogramConsole(){
         this.gameState = GAME_STATE.NEW_GAME;
         this.round = 1;
     }
@@ -58,7 +56,7 @@ public class Nonogram {
                 puzzleFactory = new PuzzleFactory();
                 System.out.println("Puzzle to be guessed (demo)");
                 puzzleFactory.displayMatrix();
-                this.newRound = new Round(puzzleFactory);
+                this.newRound = new RoundFactory(puzzleFactory);
                 System.out.printf("ROUND %d \n", this.round);
                 newRound.initNewRound();
                 this.round ++;

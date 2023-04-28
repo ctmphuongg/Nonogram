@@ -1,12 +1,11 @@
-package org.team3.NonogramGame;
+package org.team3.NonogramScene;
 
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.team3.NonogramGame.controller.NonogramController;
 import org.team3.model.PuzzleFactory;
-import org.team3.model.Round;
+import org.team3.model.RoundFactory;
 
 import java.net.URISyntaxException;
 
@@ -24,7 +23,7 @@ public class NonogramMain extends Application {
     }
 
     /** MVC classes for the scene */
-    private static Round theModel;
+    private static RoundFactory theModel;
     private static NonogramView theView;
     private static NonogramController theController;
 
@@ -32,7 +31,7 @@ public class NonogramMain extends Application {
     public void init() throws Exception{
         super.init();
         PuzzleFactory puzzleSpace = new PuzzleFactory();
-        theModel = new Round(puzzleSpace);
+        theModel = new RoundFactory(puzzleSpace);
         theModel.initNewRound();
         theModel.displayMatrix();
 
@@ -61,7 +60,7 @@ public class NonogramMain extends Application {
     public static Parent getRoot() throws URISyntaxException {
 
         PuzzleFactory puzzleSpace = new PuzzleFactory();
-        theModel = new Round(puzzleSpace);
+        theModel = new RoundFactory(puzzleSpace);
         theModel.initNewRound(); // create new round
 
         theView = new NonogramView(theModel);

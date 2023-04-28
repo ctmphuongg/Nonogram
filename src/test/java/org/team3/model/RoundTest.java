@@ -3,16 +3,14 @@ package org.team3.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Scanner;
-
 import static org.junit.jupiter.api.Assertions.*;
 class RoundTest {
-    private Round roundTest;
+    private RoundFactory roundTest;
     private PuzzleFactory puzzle;
     @BeforeEach
     void setUp() {
         puzzle = new PuzzleFactory();
-        roundTest = new Round(puzzle);
+        roundTest = new RoundFactory(puzzle);
     }
 
     @Test
@@ -75,7 +73,7 @@ class RoundTest {
         roundTest.setPlayingMode(PLAYING_MODE.SQUARE);
 
         // Compare with guess evaluator
-        Round roundCompare = new Round(puzzle);
+        RoundFactory roundCompare = new RoundFactory(puzzle);
         roundCompare.setPlayingMode(PLAYING_MODE.HINT);
 
         // The 2 results must be the same
@@ -89,7 +87,7 @@ class RoundTest {
         roundTest.setPlayingMode(PLAYING_MODE.HINT);
 
         // Compare with guess evaluator
-        Round roundCompare = new Round(puzzle);
+        RoundFactory roundCompare = new RoundFactory(puzzle);
         roundCompare.setPlayingMode(PLAYING_MODE.SQUARE);
 
         // The 2 results must be the same
