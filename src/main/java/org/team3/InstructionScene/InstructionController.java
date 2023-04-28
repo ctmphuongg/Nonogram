@@ -18,7 +18,11 @@ package org.team3.InstructionScene;
 import javafx.scene.control.Label;
 import org.team3.GameManager.SceneManager;
 
+/**
+ * MVC controller class for Instructions scene
+ */
 public class InstructionController {
+    /** the view of the scene */
     private InstructionView theView;
 
     public InstructionController(InstructionView theView) {
@@ -26,6 +30,9 @@ public class InstructionController {
         initEventHandler();
     }
 
+    /**
+     * An internal helper method to initialize the event handlers
+     */
     public void initEventHandler(){
         // get back to main label and attach root transition event
         Label backToMainlbl = this.theView.getBackToMainlbl();

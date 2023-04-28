@@ -80,8 +80,8 @@
     -fx-font-family: 'Montserrat';
 }
 
-/** puzzle without hint **/
-.box{
+/** each square in puzzle matrix **/
+.square{
     -fx-background-color: #effaff;
     -fx-border-color: #a3b8c2;
     -fx-border-width: 1px;

@@ -9,7 +9,11 @@ import org.team3.GameOver.GameOverController;
 import org.team3.GameOver.GameOverView;
 import org.team3.gameMenu.MainMenuView;
 
+/**
+ * The main program that initializes all classes for Instructions scene
+ */
 public class InstructionMain extends Application {
+    /** the view of the scene */
     private InstructionView theView;
 
     public void init() throws Exception{
@@ -17,9 +21,15 @@ public class InstructionMain extends Application {
         this.theView = new InstructionView();
     }
 
+
+    /**
+     * Our standard main program for a JavaFX application
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }
+
 
     @Override
     public void start(Stage primaryStage) {
@@ -34,9 +44,16 @@ public class InstructionMain extends Application {
 
     }
 
+
+    /**
+     * Gets the root and controller attachment, then return the root
+     * @return - the root of the level menu
+     */
     public static Parent getRoot(){
         InstructionView theView = new InstructionView();
         InstructionController theController = new InstructionController(theView);
         return theView.getRoot();
     }
+
+
 }

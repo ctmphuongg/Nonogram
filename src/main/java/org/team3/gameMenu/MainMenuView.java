@@ -41,9 +41,6 @@ public class MainMenuView {
     /** Labels for new game, instructions, and exit */
     private Label lblStartGame; Label lblInstructions; Label lblExit;
 
-    /** Vbox container for main menu options */
-    private VBox options;
-
     /** Label for name game */
     private Label greetinglbl;
 
@@ -69,7 +66,7 @@ public class MainMenuView {
         greetingPane.getChildren().addAll(imageView,greetinglbl);
 
         // Set up Vbox container for main menu options and lebels for each option
-        options = new VBox();
+        VBox options = new VBox();
         lblStartGame = new Label("PLAY");
         lblInstructions = new Label("HOW TO PLAY");
         lblExit = new Label("EXIT");

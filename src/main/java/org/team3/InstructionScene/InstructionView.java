@@ -26,37 +26,44 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import org.w3c.dom.Text;
 
+/**
+ * MVC view class for Instructions scene
+ */
 public class InstructionView {
-    public VBox getRoot() {
-        return root;
-    }
 
+    /** Vbox container for root */
     private VBox root;
 
+    /** Labels for instructions on each playing mode */
     private Label colorModeText, crossModeText, getHintText;
 
-    private HBox rule1, rule2, rule3;
-
+    /** Label for instructions on playing mode */
     private Label playingModelbl;
 
+    /** Demo buttons of playing modes to be displayed */
     private ToggleButton getHintbtn, crossbtn, choosebtn;
 
+    /** Label for back to main menu */
     private Label backToMainlbl;
 
 
-
+    /**
+     * Initialize the entire Game Instructions scene
+     */
     private void initScene() {
+        // Set up containers for each rule
         root = new VBox();
-        rule1 = new HBox();
+        HBox rule1 = new HBox();
         rule1.setPrefSize(100,50);
         rule1.setMaxSize(500,50);
-        rule2 = new HBox();
+        HBox rule2 = new HBox();
         rule2.setPrefSize(100,50);
         rule2.setMaxSize(500,50);
-        rule3 = new HBox();
+        HBox rule3 = new HBox();
         rule3.setPrefSize(100,50);
         rule3.setMaxSize(500,50);
 
+        // Set up heading label for the scene
         playingModelbl = new Label("Playing Mode");
         playingModelbl.getStyleClass().add("greeting");
 
@@ -100,21 +107,32 @@ public class InstructionView {
         //Back to main menu label
         ImageView imageView = new ImageView(new Image("/pic/back.png"));
         backToMainlbl = new Label();
-        // Set the size of the image view to fit within the label
-        imageView.setFitWidth(30);
+        imageView.setFitWidth(30); // Set the size of the image view to fit within the label
         imageView.setFitHeight(30);
-        // Set the image view as the label's graphic
-        backToMainlbl.setGraphic(imageView);
+        backToMainlbl.setGraphic(imageView); // Set the image view as the label's graphic
 
         root.getChildren().addAll(playingModelbl,rule1,rule2,rule3,backToMainlbl);
 
     }
 
+    /**
+     * @return the root of the scene
+     */
+    public VBox getRoot() {
+        return root;
+    }
+
+    /**
+     * @return back to main menu label
+     */
+    public Label getBackToMainlbl() {
+        return backToMainlbl;
+    }
+
+
+
     public InstructionView(){
         initScene();
     }
 
-    public Label getBackToMainlbl() {
-        return backToMainlbl;
-    }
 }

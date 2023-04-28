@@ -10,15 +10,23 @@ import org.team3.model.Round;
 
 import java.net.URISyntaxException;
 
+/**
+ * The main program that initializes all classes for Nonogram mane game scene
+ */
 public class NonogramMain extends Application {
 
+    /**
+     * Our standard main program for a JavaFX application
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }
+
+    /** MVC classes for the scene */
     private static Round theModel;
     private static NonogramView theView;
     private static NonogramController theController;
-    private PuzzleFactory puzzleSpace;
 
     @Override
     public void init() throws Exception{
@@ -46,13 +54,15 @@ public class NonogramMain extends Application {
         primaryStage.show();
     }
 
-    //
+    /**
+     * Gets the root and controller attachment, then return the root
+     * @return - the root of the level menu
+     */
     public static Parent getRoot() throws URISyntaxException {
 
         PuzzleFactory puzzleSpace = new PuzzleFactory();
         theModel = new Round(puzzleSpace);
-        theModel.initNewRound();
-        theModel.displayMatrix();
+        theModel.initNewRound(); // create new round
 
         theView = new NonogramView(theModel);
         theController = new NonogramController(theModel, theView);

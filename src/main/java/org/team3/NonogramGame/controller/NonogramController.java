@@ -24,7 +24,6 @@ import javafx.scene.layout.GridPane;
 import org.team3.GameManager.GameManager;
 import org.team3.GameManager.SceneManager;
 import org.team3.MusicPlayer;
-import org.team3.model.Nonogram;
 import org.team3.model.PLAYING_MODE;
 import org.team3.model.PuzzleFactory;
 import org.team3.model.Round;
@@ -32,9 +31,15 @@ import org.team3.NonogramGame.NonogramView;
 
 import java.net.URISyntaxException;
 
+/**
+ * MVC controller class for Nonogram main game scene
+ */
 public class NonogramController {
+    /** the view of the scene */
     private NonogramView theView;
+    /** the model of the scene */
     private Round theModel;
+    /** music player model */
     private MusicPlayer effectPlayer;
 
     public NonogramController(Round theModel, NonogramView theView) throws URISyntaxException {
@@ -57,25 +62,33 @@ public class NonogramController {
 
     }
 
+    /**
+     * An internal helper method to initialize the event handlers
+     */
     private void initEventHandler() {
+        //Get the playing mode selected before setting action
         selectPlayingMode();
 
+        //Set on action for each square clicked
         theView.getGridButton().stream().forEach(button -> {
             button.setOnMouseClicked(event -> {
+                // Get the position of the square clicked
                 int row = GridPane.getRowIndex(button);
                 int column = GridPane.getColumnIndex(button);
-                theModel.setPlayingMode(PLAYING_MODE.SQUARE);
+                theModel.setPlayingMode(PLAYING_MODE.SQUARE); //Update the model according to the selected playing mode
+
                 if (theModel.checkValidGuess(row,column)) {
-                    Toggle selectedButton = theView.getPlayMode().getSelectedToggle();
+                    Toggle selectedButton = theView.getBtnPlayMode().getSelectedToggle(); //get the currently selected playing mode
+                    //Handle each action based on the currently selected playing mode
                     try {
-                        if (selectedButton == theView.getChoose()) {
+                        if (selectedButton == theView.getBtnChoose()) {
                             handleChooseMode(button, row, column);
 
-                        } else if (selectedButton == theView.getCross()) {
+                        } else if (selectedButton == theView.getBtnCross()) {
                             handleCrossMode(button, row, column);
 
-                        } else if ((selectedButton == theView.getGetHint()) && (theModel.getHints() >0)) {
-                            handleHintMode(button, row, column);
+                        } else if ((selectedButton == theView.getBtnGetHint()) && (theModel.getHints() >0)) {
+                            handleHintMode(button, row, column); //Can only select get hint mode if number of hints left > 0
                         }
                     } catch (URISyntaxException e) {
                         throw new RuntimeException(e);
@@ -87,12 +100,12 @@ public class NonogramController {
 
         // check if the game has been won
         theModel.isWinProperty().addListener(((observable, oldValue, newValue) ->{
-            GameManager.ROUNDMAP.get(PuzzleFactory.round).set(true);
-            System.out.println(GameManager.ROUNDMAP.get(PuzzleFactory.round).getValue());
+            GameManager.ROUNDMAP.get(PuzzleFactory.round).set(true); //update the ROUNDMAP if the round has been won
+            // Change to game over scene with game winner message
             Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_WINNER);
             scene.getStylesheets().add(getClass().getResource("/Nonogram.css").toExternalForm());
             // uses choose to get the scene
-            theView.getChoose().getScene().setRoot(scene);
+            theView.getBtnChoose().getScene().setRoot(scene);
         } ));
 
         // check if the game has been lost (the live value at index 0 = false)
@@ -100,9 +113,10 @@ public class NonogramController {
             Parent scene = SceneManager.getSceneRoot(SceneManager.GAME_LOSER);
             scene.getStylesheets().add(getClass().getResource("/Nonogram.css").toExternalForm());
             // uses choose to get the scene
-            theView.getChoose().getScene().setRoot(scene);
+            theView.getBtnChoose().getScene().setRoot(scene);
         } ));
 
+        // Get restart button and set on action to restart the game
         Button btnRestart = theView.getBtnRestart();
         btnRestart.setOnAction(event -> {
             try {
@@ -126,21 +140,21 @@ public class NonogramController {
     private void handleHintMode(Button button, int row, int column) throws URISyntaxException {
         theModel.setPlayingMode(PLAYING_MODE.HINT);
         boolean isColoredSquare = theModel.isColored(row, column);
+        //If the selected square is a colored square, then update GUI accordingly
         if (isColoredSquare){
             button.setStyle("-fx-background-color: #185c7a;");
             button.applyCss();
             button.layout();
         } else {
             button.setText("X");
-            effectPlayer.playWrong();
         }
 
-
+        //Disable get hint button if there are no hints left
         if (theModel.getHints() < 0) {
-            theView.getGetHint().setSelected(false);
-            theView.getGetHint().disabledProperty();
+            theView.getBtnGetHint().setSelected(false);
+            theView.getBtnGetHint().disabledProperty();
         } else {
-            theView.getGetHint().setText(Integer.toString(theModel.getHints()));
+            theView.getBtnGetHint().setText(Integer.toString(theModel.getHints())); //update the number of hints left
         }
     }
 
@@ -152,6 +166,7 @@ public class NonogramController {
      */
     private void handleCrossMode(Button button, int row, int column) throws URISyntaxException {
         theModel.setPlayingMode(PLAYING_MODE.CROSS);
+        //Check if correctly choose the square
         boolean correct = theModel.guessEvaluator(row, column);
 
         if (correct) {
@@ -160,7 +175,7 @@ public class NonogramController {
             button.setStyle("-fx-background-color: #185c7a;");
             button.applyCss();
             button.layout();
-            effectPlayer.playWrong();
+            effectPlayer.playWrong(); //set up the music effect if player chooses wrong square
         }
     }
 
@@ -172,15 +187,15 @@ public class NonogramController {
      */
     private void handleChooseMode(Button button, int row, int column) throws URISyntaxException {
         theModel.setPlayingMode(PLAYING_MODE.SQUARE);
+        //Check if correctly choose the square
         boolean correct = theModel.guessEvaluator(row, column);
-
         if (correct) {
             button.setStyle("-fx-background-color: #185c7a;");
             button.applyCss();
             button.layout();
         } else {
             button.setText("X");
-            effectPlayer.playWrong();
+            effectPlayer.playWrong(); //set up the music effect if player chooses wrong square
         }
     }
 
@@ -189,14 +204,14 @@ public class NonogramController {
      */
     private void selectPlayingMode() {
         theView.isCross().addListener(event -> {
-                    theView.getCross().setStyle("-fx-background-color: #95abc4; -fx-border-color: #185c7a");
-                    theView.getChoose().setStyle(null);
+                    theView.getBtnCross().setStyle("-fx-background-color: #95abc4; -fx-border-color: #185c7a");
+                    theView.getBtnChoose().setStyle(null);
                 }
         );
 
         theView.isChoose().addListener(event -> {
-                    theView.getChoose().setStyle("-fx-background-color: #95abc4; -fx-border-color: #185c7a");
-                    theView.getCross().setStyle(null);
+                    theView.getBtnChoose().setStyle("-fx-background-color: #95abc4; -fx-border-color: #185c7a");
+                    theView.getBtnCross().setStyle(null);
                 }
         );
     }

@@ -31,88 +31,92 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import org.team3.NonogramGame.controller.NonogramController;
 import org.team3.model.PuzzleFactory;
 import org.team3.model.Round;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * MVC view class for Nonogram main game scene
+ */
 public class NonogramView {
-
-    private Round theModel;
-    private NonogramController theController;
+    /** Vbox container for root */
     private VBox root;
-    private BorderPane puzzle;
+
+    /** Round model */
+    private Round theModel;
+
+    /** Puzzle factory to get row and column hints*/
+    private PuzzleFactory puzzleSpace;
+
+    /** Gridepane container for game matrix */
     private GridPane matrix;
+
+    /** Hbox container for lives */
     private HBox livesBox;
+
+    /** Array list of all image views for number of  lives*/
     private ArrayList<ImageView> livesArray;
-    private HBox numbers_row;
-    private VBox numbers_column;
+
+    /** Buttons for each square in the matrix */
     private List<Button> gridButton;
 
-    private PuzzleFactory puzzleSpace;
-    private ToggleButton cross;
-    private ToggleButton choose;
-    private ToggleButton getHint;
-    private ToggleGroup playMode;
-    private HBox toggleGroup;
-
-    public Button getBtnRestart() {
-        return btnRestart;
-    }
-
+    /** Restart the game button */
     private Button btnRestart;
 
-    public VBox getRoot() { return root;}
+    /** Round number label */
+    private Label lblRoundIndex;
 
-    public List<Button> getGridButton() {
-        return gridButton;
-    }
+    /** Button for each playing mode */
+    private ToggleButton btnCross; ToggleButton btnChoose; ToggleButton btnGetHint; ToggleGroup btnPlayMode;
 
-    public ToggleButton getCross() {
-        return cross;
-    }
+    /** Hbox container for all buttons */
+    private HBox toggleGroup;
 
-    public ToggleButton getChoose() {
-        return choose;
-    }
+    /** Borderpane container for puzzle matrix, row and column hints*/
+    private BorderPane puzzle;
 
-    public ToggleButton getGetHint() {
-        return getHint;
-    }
 
-    public ToggleGroup getPlayMode() {
-        return playMode;
-    }
 
-    public ArrayList<ImageView> getLivesArray() {
-        return livesArray;
-    }
+    /**
+     * Initialize the entire Game Instructions scene
+     */
     private void initScene() {
-
-
+        // Set up Vbox container for root
         root = new VBox();
 
+        // Set up the label to display round number
         HBox roundLabel = new HBox();
-        Label roundIndex = new Label("Round " + (puzzleSpace.getRound() + 1));
-        roundIndex.setStyle("-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 20px; -fx-text-fill: white;");
-        roundLabel.getChildren().add(roundIndex);
+        lblRoundIndex = new Label("Round " + (puzzleSpace.getRound() + 1));
+        lblRoundIndex.setStyle("-fx-font-family: 'Montserrat'; -fx-font-weight: bold; -fx-font-size: 20px; -fx-text-fill: white;");
+        roundLabel.getChildren().add(lblRoundIndex);
         roundLabel.setAlignment(Pos.CENTER);
         root.getChildren().add(roundLabel);
 
+        // Set up view for number of lives
         initLives();
 
-        initPuzzle();
+        // Set up view for puzzle matrix
+        HBox center = new HBox();
+        puzzle = new BorderPane(); //Main puzzle matrix
+        VBox center2 = new VBox();
+        center.getChildren().add(center2);
+        center2.getChildren().add(puzzle); //Wrap the puzzle in a Vbox container
+        center2.getStyleClass().add("puzzle");
+        center.getStyleClass().add("puzzle");
+        root.getChildren().add(center);
 
+        // Set up view for row and column hints
         createColumnHint();
-
         createRowHint();
 
+        // Set up the view for puzzle game (including main matrix, row and column hints)
         initPuzzleContent();
 
+        // Set up the playing mode when clicked to each square
         setPlayingMode();
 
+        // Set up the restart button
         HBox btnRestartBox = new HBox();
         btnRestart = new Button("Restart");
         btnRestartBox.getChildren().add(btnRestart);
@@ -122,38 +126,36 @@ public class NonogramView {
     }
 
     /**
-     * Set Playing mode when click to each cell
+     * Set playing mode when click to each square
      */
     private void setPlayingMode() {
-        // Playing mode cross
-        cross = new ToggleButton();
-        cross.setText("X");
-        cross.getStyleClass().add("choiceX");
+        // Playing mode btnCross
+        btnCross = new ToggleButton();
+        btnCross.setText("X");
+        btnCross.getStyleClass().add("choiceX");
 
-        // Playing mode choose
-        choose = new ToggleButton();
-        choose.setText("  ");
-        choose.getStyleClass().add("choiceColor");
+        // Playing mode btnChoose
+        btnChoose = new ToggleButton();
+        btnChoose.setText("  ");
+        btnChoose.getStyleClass().add("choiceColor");
 
         // Mode get hint
         ImageView btnGetHintImage = new ImageView(new Image(getClass().getResourceAsStream("/pic/lightbulb.png")));
         btnGetHintImage.setFitHeight(30);
         btnGetHintImage.setFitWidth(30);
-        getHint = new ToggleButton(Integer.toString(theModel.getHints()),btnGetHintImage);
+        btnGetHint = new ToggleButton(Integer.toString(theModel.getHints()),btnGetHintImage);
 
         // Add all to toggle group
-        playMode = new ToggleGroup();
-        cross.setToggleGroup(playMode);
-        choose.setToggleGroup(playMode);
-        getHint.setToggleGroup(playMode);
+        btnPlayMode = new ToggleGroup();
+        btnCross.setToggleGroup(btnPlayMode);
+        btnChoose.setToggleGroup(btnPlayMode);
+        btnGetHint.setToggleGroup(btnPlayMode);
 
         // Add Toggle group to scene
         toggleGroup = new HBox();
         toggleGroup.setAlignment(Pos.CENTER);
         toggleGroup.getStyleClass().add("button-group");
-
-
-        toggleGroup.getChildren().addAll(cross, choose, getHint);
+        toggleGroup.getChildren().addAll(btnCross, btnChoose, btnGetHint);
         root.getChildren().add(toggleGroup);
     }
 
@@ -167,13 +169,13 @@ public class NonogramView {
 
         gridButton = new ArrayList<>();
 
+        // Create a button for each square
         for (int row=0; row < 5; row++) {
             for (int col=0; col < 5; col++) {
                 Button box = new Button();
-                box.getStyleClass().add("box");
+                box.getStyleClass().add("square");
                 matrix.add(box, row, col);
-
-                gridButton.add(box);
+                gridButton.add(box); // add the button to the array list
             }
         }
     }
@@ -187,7 +189,7 @@ public class NonogramView {
         ArrayList<Integer>[] row_hint_data = puzzleSpace.getRowHint();
 
         // Create a column contain numbers that represent number of boxes being colored (HINT
-        numbers_column = new VBox();
+        VBox numbers_column = new VBox();
         puzzle.setLeft(numbers_column);
 
         for (int i = 0; i < 5; i++){
@@ -245,7 +247,8 @@ public class NonogramView {
         ArrayList<Integer>[] column_hint_data = puzzleSpace.getColumnHint();
 
         // Create a row contain numbers that represent number of boxes being colored (HINT ON TOP)
-        numbers_row = new HBox();
+        /** */
+        HBox numbers_row = new HBox();
         puzzle.setTop(numbers_row);
 
         for (int i = 0; i < 6; i++){
@@ -280,20 +283,6 @@ public class NonogramView {
         }
     }
 
-    /**
-     * Initiate the wrapper of puzzle
-     */
-    private void initPuzzle() {
-        // Create all the puzzle math
-        puzzle = new BorderPane();
-        HBox center = new HBox();
-        VBox center2 = new VBox();
-        center.getChildren().add(center2);
-        center2.getChildren().add(puzzle);
-        center2.getStyleClass().add("puzzle");
-        center.getStyleClass().add("puzzle");
-        root.getChildren().add(center);
-    }
 
     /**
      * Initiate 3 lives for the round
@@ -331,11 +320,52 @@ public class NonogramView {
     }
 
     /**
+     * @return the root of the scene
+     */
+    public VBox getRoot() { return root;}
+
+    /**
+     * @return restart button
+     */
+    public Button getBtnRestart() {return btnRestart;}
+
+    /**
+     * @return the list of all buttons for squares in matrix
+     */
+    public List<Button> getGridButton() {return gridButton;}
+
+    /**
+     * @return cross playing mode button
+     */
+    public ToggleButton getBtnCross() {return btnCross;}
+
+    /**
+     * @return color playing mode button
+     */
+    public ToggleButton getBtnChoose() {return btnChoose;}
+
+    /**
+     * @return get hint playing mode button
+     */
+    public ToggleButton getBtnGetHint() {return btnGetHint;}
+
+    /**
+     * @return Togglegroup for all playing mode buttons
+     */
+    public ToggleGroup getBtnPlayMode() {return btnPlayMode;}
+
+    /**
+     * @return array list of all image views of number of lives
+     */
+    public ArrayList<ImageView> getLivesArray() {return livesArray;}
+
+
+    /**
      * Function for choosing the colored button
      * @return if colored button is being chosen
      */
     public BooleanProperty isChoose() {
-        return choose.selectedProperty();
+        return btnChoose.selectedProperty();
     }
 
     /**
@@ -343,7 +373,7 @@ public class NonogramView {
      * @return if colored button is being chosen
      */
     public BooleanProperty isCross() {
-        return cross.selectedProperty();
+        return btnCross.selectedProperty();
     }
 
 

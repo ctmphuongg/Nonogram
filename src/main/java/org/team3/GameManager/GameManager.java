@@ -49,7 +49,7 @@ public class GameManager extends Application {
     @Override
     public void init() throws Exception {
         super.init();
-        ROUNDMAP = new HashMap<>();
+        ROUNDMAP = new HashMap<>(); //round map that store simple boolean property whether each round has been won
         //populate the round map
         for (int i=0;i<PuzzleFactory.getPuzzleNumber();++i) {
             ROUNDMAP.put(i, new SimpleBooleanProperty(false));
