@@ -189,12 +189,13 @@ public class PuzzleFactory {
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String line;
             while ((line = br.readLine()) != null) {
-                List<Integer> values = Arrays.stream(line.split(",")).map(x->Integer.parseInt(x)).toList();
+                List<Integer> values = Arrays.stream(line.split(",")).sorted().map(x->Integer.parseInt(x)).toList();
                 records.add(values);
             }
         }catch (Exception e){
 
         }
+        records.sort();
         int [][] puzzle = new int [records.size()][records.size()];
         for (int i = 0;i<records.size();++i)
             for (int j = 0;j<records.size();++j)
