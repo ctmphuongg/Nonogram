@@ -118,7 +118,7 @@ class PuzzleFactoryTest {
     void getPuzzleNumber() {
         //the number of puzzle in the database should be equal to the number of files in the folder path
         File directory = new File("src/main/resources/datasets/");
-        assertEquals(PuzzleFactory.getPuzzleNumber(),directory.listFiles());
+        assertEquals(PuzzleFactory.getPuzzleNumber(),directory.listFiles().length);
     }
 
 
@@ -128,12 +128,12 @@ class PuzzleFactoryTest {
      */
     @Test
     void increaseRound() {
-        // initially the round is 0
+        // initially the round is 1
         PuzzleFactory.increaseRound();
-        assertEquals(1,PuzzleFactory.round);
+        assertEquals(2,PuzzleFactory.round);
 
         // increase another time
         PuzzleFactory.increaseRound();
-        assertEquals(2,PuzzleFactory.round);
+        assertEquals(3,PuzzleFactory.round);
     }
 }

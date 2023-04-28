@@ -31,7 +31,9 @@ enum GAME_STATE {
 }
 
 
-/** The main class for a Monogram game */
+/** The main class for a Monogram game
+ *
+ */
 public class Nonogram {
 
     private GAME_STATE gameState;
