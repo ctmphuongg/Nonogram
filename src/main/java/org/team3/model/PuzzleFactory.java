@@ -208,7 +208,6 @@ public class PuzzleFactory {
         }catch (Exception e){
 
         }
-        records.sort();
         int [][] puzzle = new int [records.size()][records.size()];
         for (int i = 0;i<records.size();++i)
             for (int j = 0;j<records.size();++j)
