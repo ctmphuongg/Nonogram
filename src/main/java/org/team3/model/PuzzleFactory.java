@@ -202,7 +202,7 @@ public class PuzzleFactory {
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String line;
             while ((line = br.readLine()) != null) {
-                List<Integer> values = Arrays.stream(line.split(",")).sorted().map(x->Integer.parseInt(x)).toList();
+                List<Integer> values = Arrays.stream(line.split(",")).map(x->Integer.parseInt(x)).toList();
                 records.add(values);
             }
         }catch (Exception e){
@@ -223,7 +223,7 @@ public class PuzzleFactory {
         String fileName="";
         try{
             List<String> puzzleFileNameList = Files.list(Paths.get("src/main/resources/datasets/")).
-                    map(Path::getFileName).map(Path::toString).toList();
+                    map(Path::getFileName).map(Path::toString).sorted().toList();
             fileName = "src/main/resources/datasets/"+ puzzleFileNameList.get((round) % puzzleFileNameList.size());
         }catch (Exception e){}
         return fileName;
