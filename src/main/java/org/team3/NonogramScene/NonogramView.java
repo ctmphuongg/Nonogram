@@ -100,14 +100,14 @@ public class NonogramView {
         initLives();
 
         // Set up view for puzzle matrix
-        HBox center = new HBox();
+        HBox puzzleHBoxContainer = new HBox();
         puzzle = new BorderPane(); //Main puzzle matrix
-        VBox center2 = new VBox();
-        center.getChildren().add(center2);
-        center2.getChildren().add(puzzle); //Wrap the puzzle in a Vbox container
-        center2.getStyleClass().add("puzzle");
-        center.getStyleClass().add("puzzle");
-        root.getChildren().add(center);
+        VBox puzzleVBoxContainer = new VBox();
+        puzzleHBoxContainer.getChildren().add(puzzleVBoxContainer);
+        puzzleVBoxContainer.getChildren().add(puzzle); //Wrap the puzzle in a Vbox container
+        puzzleVBoxContainer.getStyleClass().add("puzzle");
+        puzzleHBoxContainer.getStyleClass().add("puzzle");
+        root.getChildren().add(puzzleHBoxContainer);
 
         // Set up view for row and column hints
         createColumnHint();
@@ -250,7 +250,6 @@ public class NonogramView {
         ArrayList<Integer>[] column_hint_data = puzzleSpace.getColumnHint();
 
         // Create a row contain numbers that represent number of boxes being colored (HINT ON TOP)
-        /** */
         HBox numbers_row = new HBox();
         puzzle.setTop(numbers_row);
 
