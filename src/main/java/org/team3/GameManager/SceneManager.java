@@ -14,12 +14,12 @@ package org.team3.GameManager;
 
 import javafx.scene.Parent;
 import org.team3.GameResultScene.GameResultMain;
-import org.team3.InstructionScene.InstructionMain;
+import org.team3.InstructionScene.PlayingModeScene.PlayingModeMain;
 import org.team3.NonogramScene.NonogramMain;
-import org.team3.GameOver.GameOverMain;
+import org.team3.GameResultScene.GameResultMain;
 import org.team3.InstructionScene.GameDemoScene.GameDemoMain;
 import org.team3.InstructionScene.PlayingModeScene.PlayingModeMain;
-import org.team3.NonogramGame.NonogramMain;
+import org.team3.NonogramScene.NonogramMain;
 import org.team3.RoundScene.RoundMain;
 import org.team3.MainMenuScene.MainMenuMain;
 
