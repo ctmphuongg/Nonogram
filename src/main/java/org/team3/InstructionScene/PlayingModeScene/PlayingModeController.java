@@ -13,7 +13,7 @@
  * Description:
  *
  * *****************************************/
-package org.team3.InstructionScene;
+package org.team3.InstructionScene.PlayingModeScene;
 
 import javafx.scene.control.Label;
 import org.team3.GameManager.SceneManager;
@@ -21,11 +21,11 @@ import org.team3.GameManager.SceneManager;
 /**
  * MVC controller class for Instructions scene
  */
-public class InstructionController {
+public class PlayingModeController {
     /** the view of the scene */
-    private InstructionView theView;
+    private PlayingModeView theView;
 
-    public InstructionController(InstructionView theView) {
+    public PlayingModeController(PlayingModeView theView) {
         this.theView = theView;
         initEventHandler();
     }
@@ -40,5 +40,14 @@ public class InstructionController {
             backToMainlbl.getScene().setRoot(SceneManager.getSceneRoot(SceneManager.GAME_MENU));
 
         });
+
+        // get next instruction label and attach root transition event
+        Label nextInstructionslbl = this.theView.getNextInstructionslbl();
+        nextInstructionslbl.setOnMouseClicked(event -> {
+            nextInstructionslbl.getScene().setRoot(SceneManager.getSceneRoot(SceneManager.GAME_DEMO));
+
+        });
+
+
     }
 }

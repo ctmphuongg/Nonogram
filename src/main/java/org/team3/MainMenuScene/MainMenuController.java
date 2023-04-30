@@ -44,7 +44,7 @@ public class MainMenuController {
         // Get view label and attach root transition event
         Label instructionlbl = theView.getLblInstructions();
         instructionlbl.setOnMouseClicked(e->{
-            instructionlbl.getScene().setRoot(SceneManager.getSceneRoot(SceneManager.GAME_RULE));
+            instructionlbl.getScene().setRoot(SceneManager.getSceneRoot(SceneManager.GAME_PlAYING_MODE_RULE));
         });
 
         // Get exit label , and exit when clicked

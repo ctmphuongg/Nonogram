@@ -21,25 +21,21 @@ import java.net.URISyntaxException;
  * loads the user in the way the game is intended to be played.
  */
 public class GameManager extends Application {
-    //Map for controlling rounds
+    /** Map for controlling rounds */
     public static HashMap<Integer, SimpleBooleanProperty> ROUNDMAP;
-    /**
-     * Global game width, game height
-     */
-    public static final int GAME_WIDTH = 800;
-    public static final int GAME_HEIGHT = 600;
 
-    // Scene manager that instantiates all possible scenes beforehand for
-    // performance
+    /** Scene manager that instantiates all possible scenes beforehand for performance */
     private SceneManager manager;
 
-    // stage for different scenes to access
+    /** stage for different scenes to access */
     public static Stage gamePrimaryStage;
 
-    // scene for different roots to access
+    /** scene for different roots to access */
     public static Scene scene;
 
+    /** background music for game */
     public static MusicPlayer musicPlayer;
+
     public static void main(String[] args) {
         launch(args);
     }

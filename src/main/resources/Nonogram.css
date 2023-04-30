@@ -8,15 +8,15 @@
     -fx-spacing : 10;
     -fx-padding: 10;
     -fx-alignment: center;
-    -fx-min-height: 400px;
-    -fx-min-width: 600px;
+    -fx-min-height: 800px;
+    -fx-min-width: 1200px;
     -fx-background-color: linear-gradient(to bottom right, #09203f, #537895);
 }
 
 /**---------------------MAIN MENU--------------------**/
 /* greeting in main menu */
 .greeting{
-    -fx-font-size: 20pt;
+    -fx-font-size: 30pt;
     -fx-font-family: 'Montserrat';
     -fx-text-fill: white;
     -fx-padding: 50px 20px 20px 20px;
@@ -32,17 +32,16 @@
     -fx-padding: 1px 0 1px 0;
     -fx-min-width: 350px;
     -fx-text-fill: white;
+    -fx-font-size: 24px;
     -fx-font-family: 'Montserrat';
 }
 
 .music_setting{
     -fx-padding: 50px 0px 0px 0px;
 }
-/**---------------------MAIN MENU--------------------**/
 
 
 /**--------------------- PUZZLE --------------------**/
-
 /* live */
 .hearts{
     -fx-padding: 10,10,10,10;
@@ -89,8 +88,6 @@
     -fx-min-height: 31px;
     -fx-max-width: 31px;
     -fx-max-height: 31px;
-
-
 }
 
 .choiceX{
@@ -107,26 +104,28 @@
 }
 
 
-
 .button-group{
     -fx-spacing : 10;
     -fx-padding: 10;
 }
 
 /*---------------- ROUND-----------------*/
-.round_chosen_btn{
-    -fx-background-color: grey;
-    -fx-pref-width: 80;
-    -fx-pref-height: 40;
-    -fx-font-family: 'Montserrat';
-    -fx-background-color: grey;
-}
 
 .white-text{
     -fx-font-family: 'Montserrat';
     -fx-text-fill: white;
+    -fx-font-size: 22px;
 }
 
+.round-btn-lbl{
+    -fx-font-family: 'Montserrat';
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+}
+
+.round-chosen-btn{
+    -fx-alignment: center;
+}
 
 /**--------------------- GAME OVER --------------------**/
 .small-blue-text{
@@ -138,5 +137,49 @@
     -fx-padding: 1px 0 1px 0;
     -fx-min-width: 150px;
     -fx-text-fill: white;
+    -fx-font-size: 24px;
     -fx-font-family: 'Montserrat';
+}
+
+/**--------------------- GAME DEMO --------------------**/
+/* play label */
+.play-label{
+    -fx-background-color: rgba(59,130,240,0.6);
+    -fx-accent: rgba(96,165,250,0.6);
+    -fx-border-radius: 0;
+    -fx-border-color: rgba(147,197,253,1);
+    -fx-alignment: center;
+    -fx-padding: 1px 0 1px 0;
+    -fx-min-width: 50px;
+    -fx-text-fill: white;
+    -fx-font-size: 24px;
+    -fx-font-family: 'Montserrat';
+}
+
+/* container for each instruction */
+.instructions-container{
+    -fx-background-color: white;
+    -fx-accent: white;
+    -fx-border-radius: 0.5;
+    -fx-border-color: #09203f;
+    -fx-alignment: center;
+    -fx-padding: 1px 0 1px 0;
+    -fx-min-width: 350px;
+}
+
+/* text in instruction */
+.instruction-lbl{
+    -fx-text-fill: #09203f;
+    -fx-font-family: 'Montserrat';
+    -fx-font-size: 24px;
+
+}
+
+/* header for each instruction */
+.instruction-header-lbl{
+    -fx-text-fill: #09203f;
+    -fx-font-family: 'Montserrat';
+    -fx-font-weight: bold;
+    -fx-font-size: 28px;
+
 }

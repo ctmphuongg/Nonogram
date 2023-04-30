@@ -66,18 +66,18 @@ public class RoundView {
 
         for (int i = 0; i < PuzzleFactory.getPuzzleNumber(); i++){
             Button round = new Button();
-            round.getStyleClass().add("round_chosen_btn");
+            round.getStyleClass().add("round-chosen-btn");
             this.listRoundButtons.add(round); //Add round button to the arraylist
 
             // Make the button to have star shape
             StackPane roundBtnImage = new StackPane();
             Label roundBtnLbl = new Label("Round " + (i+1));
-            roundBtnLbl.setPrefWidth(50);
-            roundBtnLbl.setPrefHeight(40);
-            roundBtnLbl.getStyleClass().add("white-text");
+            roundBtnLbl.setPrefWidth(93);
+            roundBtnLbl.setPrefHeight(93);
+            roundBtnLbl.getStyleClass().add("round-btn-lbl");
             ImageView imageView = new ImageView(new Image("pic/star_original.png"));
-            imageView.setFitWidth(80);
-            imageView.setFitHeight(80);
+            imageView.setFitWidth(130);
+            imageView.setFitHeight(130);
             roundBtnImage.getChildren().addAll(imageView,roundBtnLbl);
 
             round.setStyle("-fx-background-color: transparent;");

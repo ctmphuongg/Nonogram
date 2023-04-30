@@ -86,7 +86,6 @@ public class NonogramView {
         root = new VBox();
         root.setAlignment(Pos.CENTER);
 
-
         // Set up the label to display round number
         HBox roundLabel = new HBox();
         lblRoundIndex = new Label("Round " + (PuzzleFactory.getRound() + 1));
@@ -124,7 +123,9 @@ public class NonogramView {
         btnRestart = new Button("Restart");
         btnRestartBox.getChildren().add(btnRestart);
         btnRestartBox.setAlignment(Pos.BOTTOM_CENTER);
-        root.getChildren().add(btnRestartBox);
+        root.getChildren().addAll(btnRestartBox);
+
+
 
     }
 
@@ -168,6 +169,7 @@ public class NonogramView {
     private void initPuzzleContent() {
         // Real puzzle matrix
         matrix = new GridPane();
+
         puzzle.setCenter(matrix);
 
         gridButton = new ArrayList<>();
