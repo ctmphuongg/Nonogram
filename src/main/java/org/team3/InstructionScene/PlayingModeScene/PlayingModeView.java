@@ -13,10 +13,9 @@
  * Description:
  *
  * *****************************************/
-package org.team3.InstructionScene;
+package org.team3.InstructionScene.PlayingModeScene;
 
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
@@ -24,12 +23,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import org.w3c.dom.Text;
 
 /**
  * MVC view class for Instructions scene
  */
-public class InstructionView {
+public class PlayingModeView {
 
     /** Vbox container for root */
     private VBox root;
@@ -45,6 +43,9 @@ public class InstructionView {
 
     /** Label for back to main menu */
     private Label backToMainlbl;
+
+    /** Label for next instructions */
+    private Label nextInstructionslbl;
 
 
 
@@ -65,7 +66,7 @@ public class InstructionView {
         rule3.setMaxSize(500,50);
 
         // Set up heading label for the scene
-        playingModelbl = new Label("Playing Mode");
+        playingModelbl = new Label("Playing Mode Instructions");
         playingModelbl.getStyleClass().add("greeting");
 
 
@@ -97,7 +98,7 @@ public class InstructionView {
         btnGetHintImage.setFitHeight(30);
         btnGetHintImage.setFitWidth(30);
         getHintbtn = new ToggleButton("3",btnGetHintImage);
-        getHintText = new Label("Select this button and a square to get a hint. You have 3 hints each round");
+        getHintText = new Label("Select this button and a square to get a hint");
         getHintText.getStyleClass().add("white-text");
         rule3.getStyleClass().add("wide-blue-text");
         rule3.setHgrow(getHintText, Priority.ALWAYS);
@@ -105,14 +106,28 @@ public class InstructionView {
         rule3.setAlignment(Pos.CENTER_LEFT);
         rule3.setSpacing(20);
 
-        //Back to main menu label
-        ImageView imageView = new ImageView(new Image("/pic/back.png"));
-        backToMainlbl = new Label();
-        imageView.setFitWidth(30); // Set the size of the image view to fit within the label
-        imageView.setFitHeight(30);
-        backToMainlbl.setGraphic(imageView); // Set the image view as the label's graphic
+        //Container for next and back label
+        HBox lblContainer = new HBox();
+        lblContainer.setAlignment(Pos.BOTTOM_CENTER);
+        lblContainer.setSpacing(15);
 
-        root.getChildren().addAll(playingModelbl,rule1,rule2,rule3,backToMainlbl);
+        //Back to main menu label
+        ImageView backImageView = new ImageView(new Image("/pic/back.png"));
+        backToMainlbl = new Label();
+        backImageView.setFitWidth(30); // Set the size of the image view to fit within the label
+        backImageView.setFitHeight(30);
+        backToMainlbl.setGraphic(backImageView); // Set the image view as the label's graphic
+
+        //Next to next instructions
+        ImageView nextImageView = new ImageView(new Image("/pic/next.png"));
+        nextInstructionslbl = new Label();
+        nextImageView.setFitWidth(30); // Set the size of the image view to fit within the label
+        nextImageView.setFitHeight(30);
+        nextInstructionslbl.setGraphic(nextImageView); // Set the image view as the label's graphic
+
+        lblContainer.getChildren().addAll(backToMainlbl,nextInstructionslbl);
+
+        root.getChildren().addAll(playingModelbl,rule1,rule2,rule3,lblContainer);
 
     }
 
@@ -130,9 +145,14 @@ public class InstructionView {
         return backToMainlbl;
     }
 
+    /**
+     * @return next instructions label
+     */
+    public Label getNextInstructionslbl() {return nextInstructionslbl;}
 
 
-    public InstructionView(){
+
+    public PlayingModeView(){
         initScene();
     }
 

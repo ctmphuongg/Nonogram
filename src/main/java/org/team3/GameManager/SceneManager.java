@@ -14,7 +14,8 @@ package org.team3.GameManager;
 
 import javafx.scene.Parent;
 import org.team3.GameOver.GameOverMain;
-import org.team3.InstructionScene.InstructionMain;
+import org.team3.InstructionScene.GameDemoScene.GameDemoMain;
+import org.team3.InstructionScene.PlayingModeScene.PlayingModeMain;
 import org.team3.NonogramGame.NonogramMain;
 import org.team3.RoundScene.RoundMain;
 import org.team3.gameMenu.MainMenuMain;
@@ -29,7 +30,8 @@ import java.util.HashMap;
 public class SceneManager {
     // holds the names of the Roots that will be put onto the GameManager scene
     public static final String GAME_MENU = "game menu";
-    public static final String GAME_RULE = "game rule";
+    public static final String GAME_PlAYING_MODE_RULE = "game playing mode rule";
+    public static final String GAME_DEMO = "game demo";
     public static final String GAME_SCREEN = "game screen";
     public static final String GAME_LOSER = "game loser screen";
     public static final String GAME_WINNER= "game winner screen";
@@ -58,8 +60,10 @@ public class SceneManager {
         addSceneRoots(GAME_WINNER, gameOverRoot);
         Parent roundRoot = RoundMain.getRoot();
         addSceneRoots(GAME_ROUND, roundRoot);
-        Parent ruleRoot = InstructionMain.getRoot();
-        addSceneRoots(GAME_RULE, ruleRoot);
+        Parent playingModeRuleRoot = PlayingModeMain.getRoot();
+        addSceneRoots(GAME_PlAYING_MODE_RULE, playingModeRuleRoot);
+        Parent demoRoot = GameDemoMain.getRoot();
+        addSceneRoots(GAME_DEMO, demoRoot);
     }
 
     /**
@@ -80,7 +84,6 @@ public class SceneManager {
         return roots.get(rootName);
     }
 
-//    public static void addNewGame() throws URISyntaxException {
 
     public static void addNewGame() throws URISyntaxException {
         Parent LevelMenuRoot = NonogramMain.getRoot();

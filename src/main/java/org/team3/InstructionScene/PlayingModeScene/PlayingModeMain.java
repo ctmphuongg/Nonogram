@@ -1,24 +1,20 @@
-package org.team3.InstructionScene;
+package org.team3.InstructionScene.PlayingModeScene;
 
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import org.team3.GameOver.GameOverController;
-import org.team3.GameOver.GameOverView;
-import org.team3.gameMenu.MainMenuView;
 
 /**
  * The main program that initializes all classes for Instructions scene
  */
-public class InstructionMain extends Application {
+public class PlayingModeMain extends Application {
     /** the view of the scene */
-    private InstructionView theView;
+    private PlayingModeView theView;
 
     public void init() throws Exception{
         super.init();
-        this.theView = new InstructionView();
+        this.theView = new PlayingModeView();
     }
 
 
@@ -41,7 +37,6 @@ public class InstructionMain extends Application {
         primaryStage.setScene(scene);
         primaryStage.sizeToScene();
         primaryStage.show();
-
     }
 
 
@@ -50,8 +45,8 @@ public class InstructionMain extends Application {
      * @return - the root of the scene
      */
     public static Parent getRoot(){
-        InstructionView theView = new InstructionView();
-        InstructionController theController = new InstructionController(theView);
+        PlayingModeView theView = new PlayingModeView();
+        PlayingModeController theController = new PlayingModeController(theView);
         return theView.getRoot();
     }
 
