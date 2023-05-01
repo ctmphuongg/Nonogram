@@ -15,7 +15,7 @@
  *
  * *****************************************/
 
-package org.team3;
+package org.team3.model;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;

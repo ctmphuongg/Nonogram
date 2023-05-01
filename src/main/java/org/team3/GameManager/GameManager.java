@@ -3,16 +3,12 @@ package org.team3.GameManager;
 import javafx.application.Application;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.Scene;
-import javafx.scene.control.Slider;
 import javafx.stage.Stage;
 import org.team3.model.PuzzleFactory;
 
 import java.util.HashMap;
-import java.util.Map;
 
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import org.team3.MusicPlayer;
+import org.team3.model.MusicPlayer;
 
 import java.net.URISyntaxException;
 

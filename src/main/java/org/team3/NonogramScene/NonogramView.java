@@ -86,6 +86,7 @@ public class NonogramView {
         root = new VBox();
         root.setAlignment(Pos.CENTER);
 
+
         // Set up the label to display round number
         HBox roundLabel = new HBox();
         lblRoundIndex = new Label("Round " + (PuzzleFactory.getRound() + 1));
@@ -99,14 +100,20 @@ public class NonogramView {
         initLives();
 
         // Set up view for puzzle matrix
-        HBox puzzleHBoxContainer = new HBox();
-        puzzle = new BorderPane(); //Main puzzle matrix
-        VBox puzzleVBoxContainer = new VBox();
-        puzzleHBoxContainer.getChildren().add(puzzleVBoxContainer);
-        puzzleVBoxContainer.getChildren().add(puzzle); //Wrap the puzzle in a Vbox container
-        puzzleVBoxContainer.getStyleClass().add("puzzle");
-        puzzleHBoxContainer.getStyleClass().add("puzzle");
-        root.getChildren().add(puzzleHBoxContainer);
+
+        // Create an HBox and VBox wrap around the BorderPane to move it to the middle
+        HBox centerAlignH = new HBox();
+        VBox centerAlignV = new VBox();
+
+        // Main puzzle matrix
+        puzzle = new BorderPane();
+        centerAlignH.getChildren().add(centerAlignV);
+        centerAlignV.getChildren().add(puzzle); //Wrap the puzzle in a Vbox container
+
+        //Assign ID for styling
+        centerAlignV.getStyleClass().add("puzzle");
+        centerAlignH.getStyleClass().add("puzzle");
+        root.getChildren().add(centerAlignH);
 
         // Set up view for row and column hints
         createColumnHint();
@@ -145,8 +152,8 @@ public class NonogramView {
 
         // Mode get hint
         ImageView btnGetHintImage = new ImageView(new Image(getClass().getResourceAsStream("/pic/lightbulb.png")));
-        btnGetHintImage.setFitHeight(30);
-        btnGetHintImage.setFitWidth(30);
+        btnGetHintImage.setFitHeight(45);
+        btnGetHintImage.setFitWidth(45);
         btnGetHint = new ToggleButton(Integer.toString(theModel.getHints()),btnGetHintImage);
 
         // Add all to toggle group
@@ -167,7 +174,9 @@ public class NonogramView {
      * Initiate the content of the puzzle space
      */
     private void initPuzzleContent() {
-        // Real puzzle matrix
+
+
+        // Real puzzle matrix ()
         matrix = new GridPane();
 
         puzzle.setCenter(matrix);
@@ -193,35 +202,35 @@ public class NonogramView {
         // Get the row_hint_data
         ArrayList<Integer>[] row_hint_data = puzzleSpace.getRowHint();
 
-        // Create a column contain numbers that represent number of boxes being colored (HINT
-        VBox numbers_column = new VBox();
-        puzzle.setLeft(numbers_column);
+        // Create a column contain numbers that represent number of boxes being colored (HINT ON LEFT)
+        VBox leftHintsContainer = new VBox();
+        puzzle.setLeft(leftHintsContainer);
 
         for (int i = 0; i < 5; i++){
             // Create HBox covering each square of hints
-            HBox hintContainerHBox = new HBox();
-            hintContainerHBox.setPrefSize(31, 31);
-            hintContainerHBox.setStyle("-fx-background-color: LIGHTSTEELBLUE; -fx-border-color: ALICEBLUE");
-            hintContainerHBox.getStyleClass().add("number_box_left");
+            HBox leftHintSquare = new HBox();
+            leftHintSquare.setPrefSize(46, 46);
+            leftHintSquare.setStyle("-fx-background-color: LIGHTSTEELBLUE; -fx-border-color: ALICEBLUE");
+            leftHintSquare.getStyleClass().add("number_box_left");
 
             // Take row hint data for the row we are dealing with at index i
-            ArrayList<Integer> text_content = row_hint_data[i];
+            ArrayList<Integer> textContent = row_hint_data[i];
 
             // Add a hintBox including each number of a hint data
-            for (Integer num : text_content) {
+            for (Integer num : textContent) {
                 // Set text to hint data
                 Text text = new Text(num.toString());
                 text.setFill(Color.WHITE);
 
                 // Format the square
-                Rectangle smallHint = new Rectangle(10, 29);
+                Rectangle smallHint = new Rectangle(15, 44);
                 StackPane hintBox = getHintBox(text, smallHint);
-                hintContainerHBox.getChildren().add(hintBox);
+                leftHintSquare.getChildren().add(hintBox);
 
             }
 
             // Add whole hint container to puzzle
-            numbers_column.getChildren().add(hintContainerHBox);
+            leftHintsContainer.getChildren().add(leftHintSquare);
         }
     }
 
@@ -252,37 +261,37 @@ public class NonogramView {
         ArrayList<Integer>[] column_hint_data = puzzleSpace.getColumnHint();
 
         // Create a row contain numbers that represent number of boxes being colored (HINT ON TOP)
-        HBox numbers_row = new HBox();
-        puzzle.setTop(numbers_row);
+        HBox topHintsContainer = new HBox();
+        puzzle.setTop(topHintsContainer);
 
         for (int i = 0; i < 6; i++){
-            // Create VBox covering each square of hints
-            VBox hintContainerVBox = new VBox();
-            hintContainerVBox.setPrefSize(30, 30);
-            hintContainerVBox.setStyle("-fx-background-color: LIGHTSTEELBLUE; -fx-border-color: ALICEBLUE");
-            hintContainerVBox.getStyleClass().add("number_box_top");
-            hintContainerVBox.setSpacing(-3);
-            hintContainerVBox.setPadding(new Insets(0, 0, 0, 0));
-            hintContainerVBox.setAlignment(Pos.CENTER);
+            // Create VBox covering each square of hints number
+            VBox topHintSquare = new VBox();
+            topHintSquare.setPrefSize(45, 45);
+            topHintSquare.setStyle("-fx-background-color: LIGHTSTEELBLUE; -fx-border-color: ALICEBLUE");
+            topHintSquare.getStyleClass().add("number_box_top");
+            topHintSquare.setSpacing(-3);
+            topHintSquare.setPadding(new Insets(0, 0, 0, 0));
+            topHintSquare.setAlignment(Pos.CENTER);
 
             // Starting from the second rectangle
             if (i>0){
-                ArrayList<Integer> text_content = column_hint_data[i-1];
-                for (Integer num : text_content) {
+                ArrayList<Integer> textContent = column_hint_data[i-1];
+                for (Integer num : textContent) {
                     // Set text to hint data
                     Text text = new Text(num.toString());
                     text.setFill(Color.WHITE);
 
                     // Format the square
-                    Rectangle smallHint = new Rectangle(29,10);
+                    Rectangle smallHint = new Rectangle(44,15);
                     StackPane hintBox = getHintBox(text, smallHint);
                     hintBox.setAlignment(Pos.BOTTOM_CENTER);
-                    hintContainerVBox.getChildren().add(hintBox);
+                    topHintSquare.getChildren().add(hintBox);
 
                 }
 
             }
-            numbers_row.getChildren().add(hintContainerVBox);
+            topHintsContainer.getChildren().add(topHintSquare);
 
         }
     }
@@ -307,8 +316,8 @@ public class NonogramView {
             this.livesArray.add(imageView);
 
             // Cannot change to css
-            imageView.setFitHeight(30);
-            imageView.setFitWidth(30);
+            imageView.setFitHeight(45);
+            imageView.setFitWidth(45);
         }
 
         livesBox.getChildren().addAll(livesArray);

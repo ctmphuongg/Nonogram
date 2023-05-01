@@ -62,12 +62,14 @@ public class GameDemoView {
         Label lblClue = new Label("CLUES");
         lblClue.getStyleClass().add("instructions-header-lbl");
 
-        Label lblTextClue = new Label("The numbers on the left row and top column of the grid are clues. " +
-                "These numbers indicate the length and position of consecutive blocks of filled-in squares. \n" +
-                "For example, if a column has the clue “2 1”,  there are two consecutive filled-in squares followed by at least one blank square " +
-                "and then one more filled-in squares.\n");
+        Label lblTextClue = new Label("The numbers on the left row and top column of the grid are clues. " );
+        Label lblTextClue2 = new Label(     "These numbers indicate the length and position of consecutive blocks of filled-in squares.");
+//        Label lblTextClue2 = new Label("For example, if a column has the clue “2 1”,  there are two consecutive filled-in squares followed by at least one blank square " +
+//                "and then one more filled-in squares");
+//        lblTextClue2.setPrefWidth(200);
+
         lblTextClue.getStyleClass().add("instructions-lbl");
-        clueContainer.getChildren().addAll(lblClue,lblTextClue);
+        clueContainer.getChildren().addAll(lblClue,lblTextClue, lblTextClue2);
 
         // Hint text
         VBox hintContainer = new VBox();
@@ -97,9 +99,13 @@ public class GameDemoView {
 
 
         //VBox Container for back and next scene labels
-        VBox lblContainer = new VBox();
+        HBox lblContainer = new HBox();
         lblContainer.setAlignment(Pos.BOTTOM_CENTER);
-        lblContainer.setSpacing(10);
+        lblContainer.setSpacing(30);
+
+        // HBox for back to main menu and play
+//        HBox buttonContainer = new HBox();
+
 
         //Back to main menu label
         ImageView backImageView = new ImageView(new Image("/pic/back.png"));
@@ -113,6 +119,8 @@ public class GameDemoView {
         lblPlay.getStyleClass().add("play-label");
 
         lblContainer.getChildren().addAll(lblBack,lblPlay);
+
+//        buttonContainer.getChildren().addAll(lblLives,lblTextLives);
 
         // Add to the root
         root.getChildren().addAll(howToPlaylbl, imageView, clueContainer, hintContainer, livesContainer, lblContainer);

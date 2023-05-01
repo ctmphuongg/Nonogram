@@ -23,7 +23,7 @@ import javafx.scene.control.Toggle;
 import javafx.scene.layout.GridPane;
 import org.team3.GameManager.GameManager;
 import org.team3.GameManager.SceneManager;
-import org.team3.MusicPlayer;
+import org.team3.model.MusicPlayer;
 import org.team3.model.PLAYING_MODE;
 import org.team3.model.PuzzleFactory;
 import org.team3.model.RoundFactory;

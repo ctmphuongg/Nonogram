@@ -137,4 +137,8 @@ public class MainMenuView {
 
     }
 
+    private void initStyling(){
+
+    }
+
 }

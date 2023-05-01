@@ -8,8 +8,8 @@
     -fx-spacing : 10;
     -fx-padding: 10;
     -fx-alignment: center;
-    -fx-min-height: 800px;
-    -fx-min-width: 1200px;
+    -fx-min-height: 600px;
+    -fx-min-width: 600px;
     -fx-background-color: linear-gradient(to bottom right, #09203f, #537895);
 }
 
@@ -19,7 +19,7 @@
     -fx-font-size: 30pt;
     -fx-font-family: 'Montserrat';
     -fx-text-fill: white;
-    -fx-padding: 50px 20px 20px 20px;
+    -fx-padding: 5px 5px 5px 5px;
 }
 
 /* options in main menu */
@@ -42,6 +42,7 @@
 
 
 /**--------------------- PUZZLE --------------------**/
+
 /* live */
 .hearts{
     -fx-padding: 10,10,10,10;
@@ -58,10 +59,10 @@
     -fx-background-color: #176285;
     -fx-border-color: #a3b8c2;
     -fx-border-width: 1px;
-    -fx-min-width: 31px;
-    -fx-min-height: 31px;
-    -fx-max-width: 31px;
-    -fx-max-height: 31px;
+    -fx-min-width: 46px;
+    -fx-min-height: 46px;
+    -fx-max-width: 46px;
+    -fx-max-height: 46px;
     -fx-alignment: TOP_RIGHT;
     -fx-font-family: 'Montserrat';
 }
@@ -71,10 +72,10 @@
     -fx-background-color: #176285;
     -fx-border-color: #a3b8c2;
     -fx-border-width: 1px;
-    -fx-min-width: 31px;
-    -fx-min-height: 31px;
-    -fx-max-width: 31px;
-    -fx-max-height: 31px;
+    -fx-min-width: 46px;
+    -fx-min-height: 46px;
+    -fx-max-width: 46px;
+    -fx-max-height: 46px;
     -fx-alignment: BOTTOM_RIGHT;
     -fx-font-family: 'Montserrat';
 }
@@ -84,23 +85,31 @@
     -fx-background-color: #effaff;
     -fx-border-color: #a3b8c2;
     -fx-border-width: 1px;
-    -fx-min-width: 31px;
-    -fx-min-height: 31px;
-    -fx-max-width: 31px;
-    -fx-max-height: 31px;
+    -fx-min-width: 46px;
+    -fx-min-height: 46px;
+    -fx-max-width: 46px;
+    -fx-max-height: 46px;
+
+
 }
 
 .choiceX{
     -fx-background-radius: 50%;
+    -fx-pref-width: 50px;
+    -fx-pref-height: 50px;
 }
 
 .choiceGetHint{
     -fx-background-radius: 50%;
+    -fx-pref-width: 50px;
+    -fx-pref-height: 50px;
 }
 
 .choiceColor{
     -fx-background-radius: 50%;
     -fx-background-color: black;
+    -fx-pref-width: 50px;
+    -fx-pref-height: 50px;
 }
 
 
@@ -111,16 +120,27 @@
 
 /*---------------- ROUND-----------------*/
 
-.white-text{
+.round_chosen_btn{
+    -fx-background-color: grey;
+    -fx-pref-width: 120;
+    -fx-pref-height: 60;
     -fx-font-family: 'Montserrat';
     -fx-text-fill: white;
     -fx-font-size: 22px;
+}
+
+.white-text{
+    -fx-font-family: 'Montserrat';
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
 }
 
 .round-btn-lbl{
     -fx-font-family: 'Montserrat';
     -fx-text-fill: white;
     -fx-font-size: 20px;
+    -fx-alignment: center;
+
 }
 
 .round-chosen-btn{
@@ -164,7 +184,8 @@
     -fx-border-color: #09203f;
     -fx-alignment: center;
     -fx-padding: 1px 0 1px 0;
-    -fx-min-width: 350px;
+    -fx-max-width: 550px;
+    /*-fx-pref-width: 300px;*/
 }
 
 /* text in instruction */
@@ -172,14 +193,14 @@
     -fx-text-fill: #09203f;
     -fx-font-family: 'Montserrat';
     -fx-font-size: 24px;
-
+    -fx-alignment: center;
 }
 
 /* header for each instruction */
 .instruction-header-lbl{
     -fx-text-fill: #09203f;
     -fx-font-family: 'Montserrat';
-    -fx-font-weight: bold;
+    -fx-font-weight: BOLD;
     -fx-font-size: 28px;
 
 }
