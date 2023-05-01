@@ -5,25 +5,39 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 class RoundTest {
+    /** New RoundFactory to conduct tests*/
     private RoundFactory roundTest;
+    /** New PuzzleFactory for the round*/
     private PuzzleFactory puzzle;
+    /** Initiate new Round and Puzzle before each test*/
     @BeforeEach
     void setUp() {
         puzzle = new PuzzleFactory();
         roundTest = new RoundFactory(puzzle);
     }
 
+    /** Test if the program can activate each playing mode*/
     @Test
     void setPlayingMode() {
         roundTest.setPlayingMode(PLAYING_MODE.CROSS);
         assertEquals(roundTest.getPlayMode(), PLAYING_MODE.CROSS);
+            roundTest.setPlayingMode(PLAYING_MODE.SQUARE);
+        assertEquals(roundTest.getPlayMode(), PLAYING_MODE.SQUARE);
+        roundTest.setPlayingMode(PLAYING_MODE.HINT);
+        assertEquals(roundTest.getPlayMode(), PLAYING_MODE.HINT);
     }
 
+    /**
+     * Check if the puzzle generated is fit with the initial one
+     */
     @Test
     void getPuzzleFactory() {
         assertEquals(roundTest.getPuzzleFactory(), puzzle);
     }
 
+    /**
+     * Test if the hints are consistent with results when user choose each square
+     */
     @Test
     void getHints() {
         // Initially, must have 3 hints
@@ -35,6 +49,9 @@ class RoundTest {
         assertEquals(roundTest.getHints(), 2);
     }
 
+    /**
+     * Test if the remaining lives are modified correctly according to users' choice
+     */
     @Test
     void getLives() {
         // Initially have 3 lives
@@ -52,6 +69,9 @@ class RoundTest {
     }
 
 
+    /**
+     * Test checkValidGuess with cases of indexes out of range and chosen box
+     */
     @Test
     void checkValidGuess() {
         // Row exceed puzzle size, must return false
@@ -67,6 +87,9 @@ class RoundTest {
 
     }
 
+    /**
+     * Test if the guessEvaluator return the same as real result, got from getHints
+     */
     @Test
     void guessEvaluator() {
         // Check hint to see if a box is colored
@@ -81,6 +104,9 @@ class RoundTest {
     }
 
 
+    /**
+     * Test if the function correctly return the square answer from inner nonogram matrix
+     */
     @Test
     void isColored() {
         // Check hint to see if a box is colored
@@ -95,6 +121,9 @@ class RoundTest {
     }
 
 
+    /**
+     * Test the get current round state
+     */
     @Test
     void getRoundState() {
         assertEquals(roundTest.getRoundState(), ROUND_STATE.NEW_ROUND);
